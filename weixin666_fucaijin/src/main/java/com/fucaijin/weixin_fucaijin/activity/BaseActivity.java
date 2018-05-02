@@ -2,7 +2,7 @@ package com.fucaijin.weixin_fucaijin.activity;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,9 +12,10 @@ import android.view.WindowManager;
  */
 
 public class BaseActivity extends AppCompatActivity {
+
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setStatusBarColor();
     }
 

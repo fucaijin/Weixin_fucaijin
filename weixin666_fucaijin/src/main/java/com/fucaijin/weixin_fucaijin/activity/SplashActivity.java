@@ -44,7 +44,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initUI() {
         fl_splash_bt = (FrameLayout) findViewById(R.id.fl_splash_bt);
-        tv_language = (TextView) findViewById(R.id.tv_language);
+        tv_language = (TextView) findViewById(R.id.tv_titile);
         bt_sign_in = (Button) findViewById(R.id.bt_sign_in);
         bt_sign_up = (Button) findViewById(R.id.bt_sign_up);
 
@@ -67,7 +67,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.tv_language:
+            case R.id.tv_titile:
                 startActivity(new Intent(this,SelectLanguageActivity.class));
                 break;
             case R.id.bt_sign_in:
