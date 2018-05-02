@@ -1,5 +1,6 @@
 package com.fucaijin.weixin_fucaijin.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,8 +28,8 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
         setStatusBarColor(); //设置沉浸式状态栏
+        setContentView(R.layout.activity_splash);
         if(WeixinApplication.isSignIn()){
 //            TODO 已经登录，正常运行（闪屏页面3秒过后进入主页面）
         }else if(!WeixinApplication.isSignIn() && !WeixinApplication.isFirstRun()){
@@ -60,15 +61,14 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(0xff000000);
+        window.setStatusBarColor(0xFF000000);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_language:
-//                TODO 选择语言界面
-//                startActivity(new Intent(this,SelectLanguageActivity.class));
+                startActivity(new Intent(this,SelectLanguageActivity.class));
                 break;
             case R.id.bt_sign_in:
 //                TODO 登录界面
