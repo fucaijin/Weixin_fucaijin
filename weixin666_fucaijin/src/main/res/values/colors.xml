@@ -6,11 +6,13 @@
 
     <!--以下颜色是我定义的-->
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorTextSignInPress">#A2D7A2</color>
     <color name="colorTextSignUpNormal">#353535</color>
     <color name="colorTextSignUpPress">#888888</color>//首次运行的SplashActivity的注册按钮按下去的背景色
     <color name="colorMainBackGroundLightGray">#EBEBEB</color>//背景颜色-浅灰色
     <color name="colorTabTopDarkGray">#393A3F</color>//标题栏的背景色-深灰色
     <color name="colorLineDarkGray">#2E2E32</color>//竖线(标题栏返回键右边/)-更深灰色
+    <color name="colorDividerLineLightGray">#D9D9D9</color>//分割线(ListView的)-浅灰色
 
 </resources>

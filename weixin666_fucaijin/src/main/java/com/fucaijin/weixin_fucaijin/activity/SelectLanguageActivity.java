@@ -2,24 +2,29 @@ package com.fucaijin.weixin_fucaijin.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.fucaijin.weixin_fucaijin.R;
+import com.fucaijin.weixin_fucaijin.adapter.LanguageListAdapter;
+import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 
-public class SelectLanguageActivity extends BaseActivity implements View.OnClickListener {
+public class SelectLanguageActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private ListView lv_selectLanguage;
+    private String[] language = {"跟随系统", "简体中文", "繁體中文（台灣）", "繁體中文（香港）", "English",
+            "Bahasa Indonesia", "Bahasa Melayu", "Español", "중국어", "Italiano", "日本語", "Português", "русский",
+            "Tiếng Việt", "Türkçe", "Deutsch", "Français"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_language);
         initUI();
-        lv_selectLanguage.setAdapter( new LanguageListAdapter());
+        lv_selectLanguage.setAdapter(new LanguageListAdapter(WeixinApplication.getmContext(),language));
     }
 
     private void initUI() {
@@ -34,6 +39,7 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            //        TODO 返回按钮的selector未完成
             case R.id.rl_bt_back:
                 finish();
                 break;
@@ -43,28 +49,11 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
         }
     }
 
-    private class LanguageListAdapter extends BaseAdapter {
-        @Override
-        public int getCount() {
-            return 0;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            return null;
-        }
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        ImageView radio_button = view.findViewById(R.id.iv_select_language_radio_button);
+        radio_button.setImageResource(R.drawable.radio_button_pressed);
     }
-
 }
 
 
