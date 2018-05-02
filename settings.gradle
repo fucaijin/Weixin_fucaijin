@@ -1,1 +1,1 @@
-include ':weixin666_fucaijin'
+include ':weixin666_fucaijin', ':demo'

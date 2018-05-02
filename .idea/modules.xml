@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Weixin_fucaijin.iml" filepath="$PROJECT_DIR$/Weixin_fucaijin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/weixin666_fucaijin/weixin666_fucaijin.iml" filepath="$PROJECT_DIR$/weixin666_fucaijin/weixin666_fucaijin.iml" />
     </modules>
   </component>
