@@ -20,6 +20,7 @@ public class WeixinApplication extends Application {
     private static int mainThreadId;
     private static boolean signIn = true;       //设定默认是已登录状态
     private static boolean firstRun = false;    //设定默认不是第一次登录
+    private static SharedPreferences info;
 
     @Override
     public void onCreate() {
@@ -27,15 +28,15 @@ public class WeixinApplication extends Application {
         mContext = getApplicationContext();
         mHandler = new Handler();
         mainThreadId = android.os.Process.myTid();
+        info = mContext.getSharedPreferences("info", MODE_PRIVATE);
         LoginStatus();
     }
 
     private void LoginStatus() {
         //获取账号、登录状态、首次使用(未登录过)
-        SharedPreferences user_info = mContext.getSharedPreferences("user_info", MODE_PRIVATE);
-        String id = user_info.getString("id", "");
-        String login = user_info.getString("login", "");
-        String first_run = user_info.getString("first_run", "");
+        String id = info.getString("id", "");
+        String login = info.getString("login", "");
+        String first_run = info.getString("first_run", "");
 
         if(first_run.equals("")){
 //            判断是否是首次运行
@@ -70,5 +71,22 @@ public class WeixinApplication extends Application {
 
     public static boolean isFirstRun() {
         return firstRun;
+    }
+
+    /**
+     * @param key 要查询配置的条目
+     * @return 返回查询的结果
+     */
+    public static String getConfig(String key) {
+        return info.getString(key, "");
+    }
+
+    /**
+     * @param key 要存储到配置文件中的项目
+     * @param value 要存储到配置文件中的值
+     * @return 返回是否存储成功的结果，如果不需要结果，可以改用apply()代替commit(),前者是异步，不占用主线程资源
+     */
+    public static boolean setConfig(String key,String value) {
+        return info.edit().putString(key,value).commit();
     }
 }

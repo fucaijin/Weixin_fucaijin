@@ -1,12 +1,8 @@
 package com.fucaijin.weixin_fucaijin.activity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -14,7 +10,7 @@ import android.widget.TextView;
 import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 
-public class SplashActivity extends AppCompatActivity implements View.OnClickListener{
+public class SplashActivity extends BaseActivity implements View.OnClickListener{
     //    Sign up   注册
     //    Sign in   登录
     //    Sign out  退出
@@ -23,12 +19,15 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     private Button bt_sign_in;
     private Button bt_sign_up;
     private TextView tv_language;
+    private String[] languageList = {"跟随系统", "简体中文", "繁體中文（台灣）", "繁體中文（香港）", "English",
+            "Bahasa Indonesia", "Bahasa Melayu", "Español", "중국어", "Italiano", "日本語", "Português", "Pусский",
+            "Tiếng Việt", "Türkçe", "Deutsch", "Français"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStatusBarColor(); //设置沉浸式状态栏
+        setStatusBarColor(0xFF000000); //设置沉浸式状态栏
         setContentView(R.layout.activity_splash);
         if(WeixinApplication.isSignIn()){
 //            TODO 已经登录，正常运行（闪屏页面3秒过后进入主页面）
@@ -53,17 +52,6 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         bt_sign_up.setOnClickListener(this);
     }
 
-    /**
-     * 沉浸式状态栏;设置状态栏颜色为黑色:0xff000000 前两位0x是固定，ff是透明度，后6位是RGB
-     */
-    private void setStatusBarColor() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return;
-        Window window = this.getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(0xFF000000);
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -77,5 +65,26 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 //                TODO 注册界面
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(WeixinApplication.isFirstRun()){
+            //刷新当前的选择语言
+            String language = WeixinApplication.getConfig("language");
+            if(!language.equals("") && !language.equals("-1")){
+                int index = Integer.parseInt(language);
+                String str = languageList[index];
+                tv_language.setText(str);
+
+                //如果是
+                if(language.equals("0")){
+                    tv_language.setText("语言");
+                }
+            }
+        }
+
     }
 }

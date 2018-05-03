@@ -2,19 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/lv_item"
     android:paddingEnd="14dp"
     android:paddingStart="14dp">
 
     <TextView
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:id="@+id/tv_"
+        android:id="@+id/tv_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="跟随系统"
-        android:textColor="@color/colorBlack"
-        android:textSize="15sp"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="16sp"
         android:layout_centerVertical="true"/>
     
     <ImageView
@@ -28,7 +28,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/colorDividerLineLightGray"
+        android:background="@color/colorLightGray"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
