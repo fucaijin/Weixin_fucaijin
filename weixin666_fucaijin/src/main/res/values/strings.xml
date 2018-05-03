@@ -5,4 +5,5 @@
     <string name="sign_up">注册</string>
     <string name="selectLanguage">多语言</string>
     <string name="save_select_language">保存</string>
+    <string name="use_phone_sign_in">手机号登录</string>
 </resources>

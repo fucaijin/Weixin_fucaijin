@@ -59,7 +59,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
                 startActivity(new Intent(this,SelectLanguageActivity.class));
                 break;
             case R.id.bt_sign_in:
-//                TODO 登录界面
+                startActivity(new Intent(this,SignInActivity.class));
                 break;
             case R.id.bt_sign_up:
 //                TODO 注册界面
