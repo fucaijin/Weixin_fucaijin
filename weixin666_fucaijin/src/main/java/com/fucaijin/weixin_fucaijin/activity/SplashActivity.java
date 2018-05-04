@@ -44,7 +44,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
     private void initUI() {
         fl_splash_bt = (FrameLayout) findViewById(R.id.fl_splash_bt);
         tv_language = (TextView) findViewById(R.id.tv_titile);
-        bt_sign_in = (Button) findViewById(R.id.bt_sign_in);
+        bt_sign_in = (Button) findViewById(R.id.bt_sign_in_splash_activity);
         bt_sign_up = (Button) findViewById(R.id.bt_sign_up);
 
         tv_language.setOnClickListener(this);
@@ -58,7 +58,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
             case R.id.tv_titile:
                 startActivity(new Intent(this,SelectLanguageActivity.class));
                 break;
-            case R.id.bt_sign_in:
+            case R.id.bt_sign_in_splash_activity:
                 startActivity(new Intent(this,SignInActivity.class));
                 break;
             case R.id.bt_sign_up:

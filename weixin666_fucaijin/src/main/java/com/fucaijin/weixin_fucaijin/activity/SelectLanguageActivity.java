@@ -12,7 +12,8 @@ import com.fucaijin.weixin_fucaijin.adapter.LanguageListAdapter;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 
 public class SelectLanguageActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
-
+//    TODO 真正更改语言的逻辑未完成
+//    TODO 进来界面，根据历史记录自动选择到相应条目未实现
     private ListView lv_selectLanguage;
     private String[] languageList = {"跟随系统", "简体中文", "繁體中文（台灣）", "繁體中文（香港）", "English",
             "Bahasa Indonesia", "Bahasa Melayu", "Español", "중국어", "Italiano", "日本語", "Português", "Pусский",
