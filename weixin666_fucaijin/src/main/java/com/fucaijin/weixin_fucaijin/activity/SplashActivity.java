@@ -16,8 +16,6 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
     //    Sign out  退出
 
     private FrameLayout fl_splash_bt;
-    private Button bt_sign_in;
-    private Button bt_sign_up;
     private TextView tv_language;
     private String[] languageList = {"跟随系统", "简体中文", "繁體中文（台灣）", "繁體中文（香港）", "English",
             "Bahasa Indonesia", "Bahasa Melayu", "Español", "중국어", "Italiano", "日本語", "Português", "Pусский",
@@ -44,8 +42,8 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
     private void initUI() {
         fl_splash_bt = (FrameLayout) findViewById(R.id.fl_splash_bt);
         tv_language = (TextView) findViewById(R.id.tv_titile);
-        bt_sign_in = (Button) findViewById(R.id.bt_sign_in_splash_activity);
-        bt_sign_up = (Button) findViewById(R.id.bt_sign_up);
+        Button bt_sign_in = (Button) findViewById(R.id.bt_sign_in_splash_activity);
+        Button bt_sign_up = (Button) findViewById(R.id.bt_sign_up);
 
         tv_language.setOnClickListener(this);
         bt_sign_in.setOnClickListener(this);
@@ -62,7 +60,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
                 startActivity(new Intent(this,SignInActivity.class));
                 break;
             case R.id.bt_sign_up:
-//                TODO 注册界面
+                startActivity(new Intent(this,SignUpActivity.class));
                 break;
         }
     }

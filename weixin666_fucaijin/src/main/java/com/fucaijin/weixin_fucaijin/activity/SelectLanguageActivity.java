@@ -12,7 +12,7 @@ import com.fucaijin.weixin_fucaijin.adapter.LanguageListAdapter;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 
 public class SelectLanguageActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
-//    TODO 真正更改语言的逻辑未完成
+//    TODO 真正更改语言的逻辑未完成(更改后微信的所有文字都变成相应的语言)
 //    TODO 进来界面，根据历史记录自动选择到相应条目未实现
     private ListView lv_selectLanguage;
     private String[] languageList = {"跟随系统", "简体中文", "繁體中文（台灣）", "繁體中文（香港）", "English",
@@ -26,9 +26,12 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_language);
         initUI();
+
+//        ListView数据的填充
         languageListAdapter = new LanguageListAdapter(WeixinApplication.getmContext(), languageList);
         lv_selectLanguage.setAdapter(languageListAdapter);
-//        TODO 根据配置文件，看需要选择哪个选项
+
+//        TODO 根据配置文件，开启的时候自动选择选项未完成
         WeixinApplication.getConfig("languageList");
     }
 
@@ -42,11 +45,14 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
         lv_selectLanguage.setOnItemClickListener(this);
     }
 
+    /**
+     * 顶部关闭按钮、保存按钮事件的监听
+     */
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            //        TODO 返回按钮的selector未完成
             case R.id.rl_bt_back:
+//                TODO 返回按钮的selector遮罩效果(前景变灰)未完成
                 finish();
                 break;
             case R.id.bt_save_select_language:
@@ -56,12 +62,16 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
         }
     }
 
+    /**
+     * ListView条目点击事件的监听
+     */
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        //设置当前选中的条目，并刷新数据
+//        设置当前选中的条目，并刷新数据
         languageListAdapter.setSelectItem(i);
         languageListAdapter.notifyDataSetInvalidated();
-//        记录选择的语言的索引
+
+//        记录选择的语言的索引，用于保存到配置文件中
         nowSelectLanguageIndex = i;
     }
 }

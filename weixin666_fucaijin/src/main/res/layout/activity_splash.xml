@@ -1,51 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/w_h_double_match_parent"
     android:background="@mipmap/splash_bg"
     tools:context="com.fucaijin.weixin_fucaijin.activity.SplashActivity">
 
     <FrameLayout
         android:id="@+id/fl_splash_bt"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/w_h_double_match_parent"
         android:visibility="invisible">
 
+        <!--语言-->
         <TextView
             android:id="@+id/tv_titile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/w_h_double_wrap_content"
             android:text="@string/language"
             android:textColor="@color/colorWhite"
             android:layout_gravity="end"
             android:layout_margin="13dp"
             android:clickable="true"/>
 
+        <!--底部的登录、注册按钮-->
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/w_match_h_wrap"
             android:layout_gravity="bottom"
             android:layout_margin="20dp">
 
             <Button
                 android:id="@+id/bt_sign_in_splash_activity"
-                android:layout_width="123dp"
-                android:layout_height="48dp"
                 android:text="@string/sign_in"
-                android:textSize="18sp"
-                android:textColor="@drawable/bt_sl_tx_sign_in_splash"
-                android:background="@drawable/bt_sl_bg_sign_in_splash"/>
+                style="@style/bt_green"/>
 
             <Button
                 android:id="@+id/bt_sign_up"
-                android:layout_width="123dp"
-                android:layout_height="48dp"
-                android:layout_alignParentEnd="true"
                 android:text="@string/sign_up"
-                android:textSize="18sp"
-                android:textColor="@drawable/bt_sl_tx_sign_up_splash"
-                android:background="@drawable/bt_sl_bg_sign_up_splash" />
+                android:layout_alignParentEnd="true"
+                style="@style/bt_light_gray"/>
 
         </RelativeLayout>
 

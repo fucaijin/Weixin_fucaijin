@@ -8,4 +8,196 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--带有圆角的绿色背景按钮，白色字体，字体和按钮都带有selector-->
+    <style name="bt_green">
+        <item name="android:layout_width">123dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@drawable/bt_sl_tx_sign_in_splash</item>
+        <item name="android:background">@drawable/bt_sl_bg_sign_in_splash</item>
+    </style>
+
+    <!--带有圆角的浅灰色背景按钮，黑色字体，字体和按钮都带有selector-->
+    <style name="bt_light_gray">
+        <item name="android:layout_width">123dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@drawable/bt_sl_tx_sign_up_splash</item>
+        <item name="android:background">@drawable/bt_sl_bg_sign_up_splash</item>
+    </style>
+
+    <!--width和height都是match_parent-->
+    <style name="w_h_double_match_parent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <!--width和height都是wrap_content-->
+    <style name="w_h_double_wrap_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!--width是match_parent，height是wrap_content-->
+    <style name="w_match_h_wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!--顶部标题栏的关闭/回退按钮样式-->
+    <style name="rl_top_bar_close_back">
+        <item name="android:layout_width">@dimen/top_bar_height</item>
+        <item name="android:layout_height">@dimen/top_bar_height</item>
+        <item name="android:layout_marginEnd">19dp</item>
+        <item name="android:background">@drawable/bt_sl_bg_top_tab_back</item>
+    </style>
+
+    <!--顶部标题栏的回退按钮的图案样式-->
+    <style name="iv_top_bar_go_back">
+        <item name="android:layout_width">@dimen/top_bar_height</item>
+        <item name="android:layout_height">@dimen/top_bar_height</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <!--顶部标题栏的关闭按钮的图案样式-->
+    <style name="iv_top_bar_close">
+        <item name="android:layout_width">@dimen/top_bar_height</item>
+        <item name="android:layout_height">@dimen/top_bar_height</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/bt_sl_bg_close</item>
+    </style>
+
+    <!--顶部标题栏的深灰色竖分割线样式，用于ImageView的-->
+    <style name="top_bar_divider">
+        <item name="android:layout_width">0.5dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/colorDarkGray</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:layout_alignParentEnd">true</item>
+    </style>
+
+    <!--2px的浅灰色竖分割线样式，用于ImageView的-->
+    <style name="light_gray_vertical_divider">
+        <item name="android:layout_width">2px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginEnd">13dp</item>
+        <item name="android:layout_marginStart">13dp</item>
+        <item name="android:background">@color/colorLightGray</item>
+    </style>
+
+    <!--顶部标题栏的标题文字样式-->
+    <style name="top_bar_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <!--顶部标题栏的绿色小按钮-->
+    <style name="top_bar_green_small_button">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@drawable/bt_sl_bg_sign_in_splash</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
+
+    <!--listView的样式，应用于:语言选择SelectLanguageActivity的列表/-->
+    <style name="list_view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:divider">@null</item>
+    </style>
+
+    <!--微信以LinearLayout作为根目录的样式:填充界面，浅色背景，竖直排列/-->
+    <style name="ll_base_root_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/colorMainBackGroundLightGray</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!--登录页面顶部的大标题:手机号登录、微信号/QQ/邮箱登录的样式-->
+    <style name="text_sign_in_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:textColor">@color/colorTextDarkGray</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <!--输入框左侧文字的样式(除了国家/地区要用纯黑色)-->
+    <style name="edit_text_left_text">
+        <item name="android:layout_width">96dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">9dp</item>
+        <item name="android:textColor">@color/colorTextDarkGray</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--高度为2像素的浅灰色横线-->
+    <style name="h_line_light_gray">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2px</item>
+        <item name="android:background">@color/colorLightGray</item>
+    </style>
+
+    <!--输入框的样式:取消下划线，hint字号、hint颜色、文字大小、光标样式为1px的黑色-->
+    <style name="edit_text_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColorHint">@color/colorTextHintLightGray</item>
+        <item name="android:background">@null</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_cursor_img</item>
+        <item name="android:textColor">@color/colorTextDarkGray</item>
+        <item name="android:textSize">@dimen/text_size</item>
+    </style>
+
+    <!--输入框的清除按钮样式(实际是ImgView)-->
+    <style name="edit_text_clear_bt_style">
+        <item name="android:layout_width">@dimen/item_height</item>
+        <item name="android:layout_height">@dimen/item_height</item>
+        <item name="android:padding">17dp</item>
+        <item name="android:src">@drawable/clean_num</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!--可点击的蓝色文字样式-->
+    <style name="text_blue_can_clickable" parent="w_h_double_wrap_content">
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@color/colorTextBlue</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <!--可点击的蓝色文字样式(小字)，用于"底部的找回密码、紧急冻结、微信安全中心等"-->
+    <style name="text_blue_small_can_clickable" parent="w_h_double_wrap_content">
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@color/colorTextBlue</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!--绿色大按钮样式:默认不可单击-按钮灰色、可点击-绿色、点击-深绿色。(如果要取消阴影效果，在给按钮添加属性style="?android:attr/borderlessButtonStyle")-->
+    <style name="bt_green_can_enable" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:background">@drawable/bt_sl_bg_green_can_enable</item>
+        <item name="android:textColor">@drawable/bt_sl_tx_green_can_enable</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:enabled">false</item>
+    </style>
+
+    <!--输入框根布局样式/水平布局横向排列，子控件位于中心-->
+    <style name="ll_edit_text_root">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/item_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
 </resources>

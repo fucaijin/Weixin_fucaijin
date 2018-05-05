@@ -11,6 +11,8 @@ import android.view.WindowManager;
  * Created by fucaijin on 2018/5/2.
  */
 public class BaseActivity extends AppCompatActivity {
+//    TODO 侧滑关闭，以及打开/关闭的过渡动画做改变，效果未完成
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

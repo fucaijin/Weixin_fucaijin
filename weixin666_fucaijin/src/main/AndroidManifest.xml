@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SelectLanguageActivity" />
-        <activity android:name=".activity.SignInActivity"></activity>
+        <activity android:name=".activity.SignInActivity" />
+        <activity android:name=".activity.SignUpActivity"></activity>
     </application>
 
 </manifest>

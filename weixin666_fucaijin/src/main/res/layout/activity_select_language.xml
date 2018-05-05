@@ -1,71 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_select_language"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorMainBackGroundLightGray"
-    android:orientation="vertical"
+    style="@style/ll_base_root_style"
     tools:context="com.fucaijin.weixin_fucaijin.activity.SelectLanguageActivity">
 
+    <!--顶部标题栏-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_height"
         android:background="@color/colorTabTopDarkGray">
 
+        <!--回退/关闭按钮-->
         <RelativeLayout
             android:id="@+id/rl_bt_back"
-            android:layout_width="@dimen/top_bar_height"
-            android:layout_height="@dimen/top_bar_height"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/bt_sl_bg_top_tab_back">
+            style="@style/rl_top_bar_close_back">
 
+            <!--图片-->
             <ImageView
-                android:layout_width="@dimen/top_bar_height"
-                android:layout_height="@dimen/top_bar_height"
-                android:src="@drawable/img_back"
-                android:padding="16dp"/>
+                style="@style/iv_top_bar_go_back"
+                android:src="@drawable/img_back"/>
 
+            <!--深灰色竖直分割线-->
             <ImageView
-                android:layout_width="0.5dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorDarkGray"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:layout_alignParentEnd="true"/>
+                style="@style/top_bar_divider"/>
+
         </RelativeLayout>
 
+        <!--标题-->
         <TextView
-            android:layout_toEndOf="@id/rl_bt_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/selectLanguage"
-            android:textColor="@color/colorWhite"
-            android:layout_centerVertical="true"
-            android:textSize="17sp"/>
+            android:layout_toEndOf="@id/rl_bt_back"
+            style="@style/top_bar_text"/>
 
+        <!--保存按钮-->
         <Button
             android:id="@+id/bt_save_select_language"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
             android:text="@string/save_select_language"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/bt_sl_bg_sign_in_splash"
-            android:layout_marginEnd="8dp"
-            android:layout_centerVertical="true"/>
+            style="@style/top_bar_green_small_button"/>
 
     </RelativeLayout>
 
+    <!--语言列表-->
     <ListView
         android:id="@+id/lv_selectLanguage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:paddingTop="20dp"
         android:paddingBottom="30dp"
-        android:scrollbars="none"
-        android:divider="@null"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        style="@style/list_view_style">
     </ListView>
-
 
 </LinearLayout>
