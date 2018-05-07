@@ -20,7 +20,7 @@ public class SignUpActivity extends BaseActivity {
     }
 
     private void initUI() {
-//        设置底部的部分文字添加链接，可以直接转跳到浏览器打开页面
+//        设置底部的部分文字添加链接，实现直接转跳到浏览器打开页面
         agreementTextBindUrl();
     }
 
