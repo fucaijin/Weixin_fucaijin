@@ -20,6 +20,14 @@ public class SignUpActivity extends BaseActivity {
     }
 
     private void initUI() {
+//        设置底部的部分文字添加链接，可以直接转跳到浏览器打开页面
+        agreementTextBindUrl();
+    }
+
+    /**
+     * 设置注册页面底部的协议部分文字添加链接，可以直接转跳到浏览器打开页面
+     */
+    private void agreementTextBindUrl() {
         TextView tv_agreement = (TextView) findViewById(R.id.sign_up_tv_agreement);
 //        拼接html = （指定颜色）普通文字 + (指定颜色)链接文字
 
