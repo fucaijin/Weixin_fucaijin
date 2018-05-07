@@ -50,6 +50,7 @@
         <item name="android:layout_height">@dimen/top_bar_height</item>
         <item name="android:layout_marginEnd">19dp</item>
         <item name="android:background">@drawable/bt_sl_bg_top_tab_back</item>
+        <item name="android:clickable">true</item>
     </style>
 
     <!--顶部标题栏的回退按钮的图案样式-->
@@ -135,7 +136,6 @@
     <style name="edit_text_left_text">
         <item name="android:layout_width">96dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">9dp</item>
         <item name="android:textColor">@color/colorTextDarkGray</item>
         <item name="android:textSize">16sp</item>
     </style>
@@ -198,6 +198,8 @@
         <item name="android:layout_height">@dimen/item_height</item>
         <item name="android:gravity">center</item>
         <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginStart">9dp</item>
+        <item name="android:layout_marginEnd">9dp</item>
     </style>
 
 </resources>

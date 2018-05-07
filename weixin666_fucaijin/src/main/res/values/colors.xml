@@ -20,6 +20,7 @@
     <color name="colorTextHintLightGray">#DDDDDD</color>//灰色 - 字体
     <color name="colorMiddleGray">#CCCCCC</color>//中灰色 - 按钮按下去时候的背景色
     <color name="colorTransparent">#00000000</color>//透明色
+    <color name="colorLittleTransparent">#33000000</color>//半透明
     <color name="colorTextGreenButtonEnable">#BEE8BE</color>//绿色按钮的文字在不可点击时候的颜色
 
 </resources>

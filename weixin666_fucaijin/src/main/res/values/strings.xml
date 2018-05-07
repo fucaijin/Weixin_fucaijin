@@ -16,4 +16,6 @@
     <string name="emergency_freezing">紧急冻结</string>
     <string name="forgot_password">找回密码</string>
     <string name="nick_name">昵称</string>
+    <string name="input_password">填写密码</string>
+    <string name="password">密码</string>
 </resources>

@@ -18,11 +18,12 @@ import com.fucaijin.weixin_fucaijin.R;
 /**
  * 登录页面：1.手机号登录 2.账号密码登录 3.已注销重新登录
  * 可侧滑关闭（在BaseActivity实现），输入框得获取焦点，且不为空时才显示清除输入框按钮，输入框得填完了，按钮才可点击
+ * 登录了之后，要带着ip/IMEI码、请求类型码去请求服务器（ip用于判断用户的位置，给其分配给相应地区的服务器，分流减小服务器的压力），
  */
 public class SignInActivity extends BaseActivity implements View.OnClickListener {
 //    TODO 手机号、账号、密码这三个输入框的数字字体的更改
 //    TODO 底部找回密码、紧急冻结、微信安全中心的点击逻辑的实现
-//    TODO 尚未完成注销之后的老账户登录界面（语音登录界面）
+//    TODO 尚未完成注销之后的使用之前账户登录的界面（语音登录界面）
 
     private LinearLayout ll_use_phone_sign_in_ui;
     private LinearLayout ll_use_other_way_sign_in_ui;

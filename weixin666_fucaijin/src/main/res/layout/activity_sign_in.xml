@@ -40,7 +40,8 @@
                 android:text="@string/country_or_area"
                 android:textColor="@color/colorBlack"
                 android:layout_centerVertical="true"
-                style="@style/edit_text_left_text"/>
+                style="@style/edit_text_left_text"
+                android:layout_marginStart="9dp"/>
 
             <TextView
                 style="@style/w_h_double_wrap_content"
@@ -88,7 +89,7 @@
         <TextView
             android:id="@+id/tv_others_way_sign_in"
             android:text="用微信号/QQ号/邮箱登录"
-            android:paddingLeft="9dp"
+            android:layout_marginStart="9dp"
             android:layout_marginBottom="39dp"
             android:layout_marginTop="23dp"
             style="@style/text_blue_can_clickable"/>

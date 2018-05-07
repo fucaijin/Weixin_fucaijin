@@ -34,41 +34,152 @@
             style="@style/top_bar_text"/>
 
     </RelativeLayout>
-    
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="76dp"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp">
+
+    <LinearLayout
+        style="@style/w_h_double_match_parent"
+        android:padding="12dp"
+        android:orientation="vertical">
+
+        <!--昵称、头像-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp">
+
+            <TextView
+                android:id="@+id/sign_up_tv_nick_name"
+                android:text="@string/nick_name"
+                style="@style/edit_text_left_text"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="17dp"
+                android:layout_marginStart="9dp"/>
+
+            <EditText
+                android:id="@+id/sign_up_et_nick_name"
+                android:hint="例如：陈晨"
+                android:layout_toEndOf="@id/sign_up_tv_nick_name"
+                android:layout_alignBottom="@id/sign_up_tv_nick_name"
+                style="@style/edit_text_style"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/sign_up_nickname_divider"
+                style="@style/h_line_light_gray"
+                android:layout_alignParentBottom="true"
+                android:layout_width="262dp"/>
+
+            <ImageButton
+                android:id="@+id/sign_up_ib_select_head_sculpture"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/sign_up_bt_bg_head_sculpture"/>
+
+        </RelativeLayout>
+
+        <!--选择国家/地区条目，内含下划线-->
+        <LinearLayout
+            android:id="@+id/sign_up_rl_select_country"
+            style="@style/ll_edit_text_root"
+            android:clickable="true"
+            android:background="@drawable/item_bg_selector"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:paddingStart="9dp"
+            android:paddingEnd="9dp">
+
+            <TextView
+                android:text="@string/country_or_area"
+                android:textColor="@color/colorBlack"
+                android:layout_centerVertical="true"
+                style="@style/edit_text_left_text"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <TextView
+                style="@style/w_h_double_wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:text="中国（+86）"
+                android:textColor="@color/colorTextGreen"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <!--国家地区的下划线-->
+        <ImageView
+            android:layout_height="1px"
+            style="@style/h_line_light_gray"/>
+
+        <LinearLayout
+            style="@style/ll_edit_text_root">
+
+            <TextView
+                android:text="@string/phone"
+                style="@style/edit_text_left_text"/>
+
+            <!--手机号输入框-->
+            <EditText
+                android:id="@+id/sign_up_et_phone"
+                android:hint="@string/please_input_phone_number"
+                style="@style/edit_text_style"/>
+
+        </LinearLayout>
+
+        <!--手机号的下划线-->
+        <ImageView
+            android:id="@+id/sign_up_phone_divider"
+            style="@style/h_line_light_gray"/>
+
+
+        <LinearLayout
+            style="@style/ll_edit_text_root">
+
+            <TextView
+                android:text="@string/password"
+                style="@style/edit_text_left_text"/>
+
+            <!--手机号输入框-->
+            <EditText
+                android:id="@+id/sign_up_et_password"
+                android:hint="@string/input_password"
+                style="@style/edit_text_style"
+                android:inputType="textPassword"/>
+
+            <ImageView
+                android:id="@+id/sign_up_iv_password_visibility_mode"
+                android:clickable="true"
+                android:layout_width="23dp"
+                android:layout_height="@dimen/item_height"
+                android:src="@drawable/hide_password"/>
+
+        </LinearLayout>
+
+        <!--密码的下划线-->
+        <ImageView
+            android:id="@+id/sign_up_password_divider"
+            style="@style/h_line_light_gray"/>
+
+        <Button
+            android:id="@+id/sign_up_bt_sign_up"
+            android:layout_marginTop="22dp"
+            style="@style/bt_green_can_enable"
+            android:text="@string/sign_up"
+            android:layout_width="match_parent"/>
 
         <TextView
-            android:id="@+id/tv_nick_name"
-            android:text="@string/nick_name"
-            style="@style/edit_text_left_text"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="17dp"/>
-
-        <EditText
-            android:hint="例如：陈晨"
-            android:layout_toRightOf="@id/tv_nick_name"
-            android:layout_alignBottom="@id/tv_nick_name"
-            style="@style/edit_text_style"
+            android:id="@+id/sign_up_tv_agreement"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"/>
+            android:layout_marginTop="7dp"
+            android:textSize="12sp"/>
 
-        <ImageView
-            style="@style/h_line_light_gray"
-            android:layout_alignParentBottom="true"
-            android:layout_width="262dp"/>
-        
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorLightGray"/>
 
-    </RelativeLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>
