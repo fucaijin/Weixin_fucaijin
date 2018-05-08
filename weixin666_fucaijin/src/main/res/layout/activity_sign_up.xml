@@ -13,7 +13,7 @@
 
         <!--回退/关闭按钮-->
         <RelativeLayout
-            android:id="@+id/rl_bt_back"
+            android:id="@+id/sign_up_rl_bt_back"
             style="@style/rl_top_bar_close_back">
 
             <!--图片-->
@@ -30,7 +30,7 @@
         <!--标题-->
         <TextView
             android:text="@string/input_phone_number"
-            android:layout_toEndOf="@id/rl_bt_back"
+            android:layout_toEndOf="@id/sign_up_rl_bt_back"
             style="@style/top_bar_text"/>
 
     </RelativeLayout>
@@ -80,7 +80,7 @@
 
         <!--选择国家/地区条目，内含下划线-->
         <LinearLayout
-            android:id="@+id/sign_up_rl_select_country"
+            android:id="@+id/sign_up_ll_select_country"
             style="@style/ll_edit_text_root"
             android:clickable="true"
             android:background="@drawable/item_bg_selector"
@@ -154,7 +154,7 @@
                 android:clickable="true"
                 android:layout_width="23dp"
                 android:layout_height="@dimen/item_height"
-                android:src="@drawable/hide_password"/>
+                android:src="@drawable/sign_up_iv_bg_hide_password"/>
 
         </LinearLayout>
 

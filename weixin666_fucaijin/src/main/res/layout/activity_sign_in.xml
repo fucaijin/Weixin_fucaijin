@@ -7,13 +7,13 @@
 
     <!--顶部状态栏的关闭页面按钮-->
     <ImageView
-        android:id="@+id/iv_close_bt_sign_in_activity"
+        android:id="@+id/sign_in_iv_finish"
         style="@style/iv_top_bar_close"
         android:src="@drawable/top_bar_close_bt"/>
 
     <!--手机号登录页面-->
     <LinearLayout
-        android:id="@+id/ll_use_phone_sign_in_ui"
+        android:id="@+id/sign_in_ll_use_phone_ui"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -28,7 +28,7 @@
 
         <!--选择国家/地区条目，内含下划线-->
         <RelativeLayout
-            android:id="@+id/rl_select_country"
+            android:id="@+id/sign_in_rl_select_country"
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height"
             android:layout_marginTop="33dp"
@@ -69,13 +69,13 @@
 
             <!--手机号输入框-->
             <EditText
-                android:id="@+id/et_phone"
+                android:id="@+id/sign_in_et_phone"
                 android:hint="@string/please_input_phone_number"
                 style="@style/edit_text_style"/>
 
             <!--清除手机号输入框的按钮-->
             <ImageView
-                android:id="@+id/iv_clean_phone_number"
+                android:id="@+id/sign_in_iv_clean_phone_number"
                 style="@style/edit_text_clear_bt_style"/>
 
         </LinearLayout>
@@ -87,8 +87,8 @@
 
         <!--点击切换登录方式（手机/账号 登录）的文字-->
         <TextView
-            android:id="@+id/tv_others_way_sign_in"
-            android:text="用微信号/QQ号/邮箱登录"
+            android:id="@+id/sign_in_tv_others_way_sign_in"
+            android:text="@string/use_wechat_id_or_qq_or_email_sign_in"
             android:layout_marginStart="9dp"
             android:layout_marginBottom="39dp"
             android:layout_marginTop="23dp"
@@ -96,7 +96,7 @@
 
         <!--下一步按钮-->
         <Button
-            android:id="@+id/bt_sign_in_next"
+            android:id="@+id/sign_in_bt_next_step"
             android:text="下一步"
             style="@style/bt_green_can_enable"/>
 
@@ -104,7 +104,7 @@
 
     <!--微信/QQ/邮箱登录页面-->
     <LinearLayout
-        android:id="@+id/ll_use_other_way_sign_in_ui"
+        android:id="@+id/sign_in_ll_use_other_way_ui"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -130,20 +130,20 @@
 
             <!--账号输入框-->
             <EditText
-                android:id="@+id/et_account"
+                android:id="@+id/sign_in_et_account"
                 android:hint="请填写微信号/QQ号/邮箱"
                 style="@style/edit_text_style"/>
 
             <!--清除账号输入框按钮-->
             <ImageView
-                android:id="@+id/iv_clean_account"
+                android:id="@+id/sign_in_iv_clean_account"
                 style="@style/edit_text_clear_bt_style"/>
 
         </LinearLayout>
 
         <!--账号输入框下方下划线/分割线-->
         <ImageView
-            android:id="@+id/divider_account_editor"
+            android:id="@+id/sign_in_iv_account_editor_divider"
             style="@style/h_line_light_gray"/>
 
         <!--密码输入框根布局，内含文字、输入框、清除输入框的按钮-->
@@ -156,24 +156,24 @@
                 style="@style/edit_text_left_text"/>
 
             <EditText
-                android:id="@+id/et_password"
+                android:id="@+id/sign_in_et_password"
                 android:hint="请填写密码"
                 style="@style/edit_text_style"
                 android:inputType="textPassword" />
 
             <ImageView
-                android:id="@+id/iv_clean_password"
+                android:id="@+id/sign_in_iv_clean_password"
                 style="@style/edit_text_clear_bt_style"/>
         </LinearLayout>
 
         <!--密码输入框下方下划线/分割线-->
         <ImageView
-            android:id="@+id/divider_password_editor"
+            android:id="@+id/sign_in_iv_password_editor_divider"
             style="@style/h_line_light_gray"/>
 
         <!--切换登录方式的可点击的文字-->
         <TextView
-            android:id="@+id/tv_phone_sign_in"
+            android:id="@+id/sign_in_tv_phone"
             android:text="用手机号登录"
             android:layout_marginBottom="39dp"
             android:layout_marginTop="23dp"
@@ -182,7 +182,7 @@
 
         <!--登录按钮-->
         <Button
-            android:id="@+id/bt_sign_in_sign_in_activity"
+            android:id="@+id/sign_in_bt_sign_in"
             android:text="登录"
             style="@style/bt_green_can_enable"/>
 
@@ -199,7 +199,8 @@
 
         <!--找回密码-->
         <TextView
-            android:text="@string/forgot_password"
+            android:id="@+id/sign_in_tv_get_back_password"
+            android:text="@string/get_back_password"
             style="@style/text_blue_small_can_clickable"/>
 
         <ImageView
@@ -207,6 +208,7 @@
 
         <!--紧急冻结-->
         <TextView
+            android:id="@+id/sign_in_tv_emergency_freezing"
             android:text="@string/emergency_freezing"
             style="@style/text_blue_small_can_clickable"/>
 
@@ -215,6 +217,7 @@
 
         <!--微信安全中心-->
         <TextView
+            android:id="@+id/sign_in_tv_security_center"
             android:text="@string/security_center"
             style="@style/text_blue_small_can_clickable"/>
 

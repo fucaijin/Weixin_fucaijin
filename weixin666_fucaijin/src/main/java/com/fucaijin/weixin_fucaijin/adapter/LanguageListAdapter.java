@@ -17,11 +17,15 @@ public class LanguageListAdapter extends BaseAdapter {
     private Context context;
     private String[] languages;
     private int selectItem = -1;
+    private int defaultIndex;
+    private boolean showDefaultItem = false;
 
-    public LanguageListAdapter(Context context, String[] language) {
+    public LanguageListAdapter(Context context, String[] language, int index) {
         this.context = context;
         this.languages = language;
 
+        defaultIndex = index;
+        showDefaultItem = true;
     }
 
     @Override
@@ -58,6 +62,12 @@ public class LanguageListAdapter extends BaseAdapter {
             viewHolder.iv_radio_button.setImageResource(R.drawable.radio_button_normal);
         }else {
             viewHolder.iv_radio_button.setImageResource(R.drawable.radio_button_pressed);
+        }
+
+//        如果是刚打开页面，而且当前View是之前选择语言的Index，就设置为选中
+        if(showDefaultItem && i == defaultIndex){
+            viewHolder.iv_radio_button.setImageResource(R.drawable.radio_button_pressed);
+            showDefaultItem = false;
         }
 
         return convertView;

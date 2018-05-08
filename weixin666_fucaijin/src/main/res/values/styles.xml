@@ -171,14 +171,14 @@
     <!--可点击的蓝色文字样式-->
     <style name="text_blue_can_clickable" parent="w_h_double_wrap_content">
         <item name="android:clickable">true</item>
-        <item name="android:textColor">@color/colorTextBlue</item>
+        <item name="android:textColor">@drawable/sign_in_text_blue</item>
         <item name="android:textSize">17sp</item>
     </style>
 
     <!--可点击的蓝色文字样式(小字)，用于"底部的找回密码、紧急冻结、微信安全中心等"-->
     <style name="text_blue_small_can_clickable" parent="w_h_double_wrap_content">
         <item name="android:clickable">true</item>
-        <item name="android:textColor">@color/colorTextBlue</item>
+        <item name="android:textColor">@drawable/sign_in_text_blue</item>
         <item name="android:textSize">14sp</item>
     </style>
 

@@ -27,16 +27,22 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
         setContentView(R.layout.activity_select_language);
         initUI();
 
-//        ListView数据的填充
-        languageListAdapter = new LanguageListAdapter(WeixinApplication.getmContext(), languageList);
+//        根据配置文件中记录的选择的语言位置，在开启选择语言节目的时候自动选择选项
+        int index = 0;
+        String languageIndex = WeixinApplication.getConfig("language");
+        if (!languageIndex.equals("")){
+            index = Integer.parseInt(languageIndex);
+        }
+
+//        ListView数据的填充,传入要显示的列表，以及之前保存在xml文件中的语言选择的设置
+        languageListAdapter = new LanguageListAdapter(WeixinApplication.getmContext(), languageList,index);
         lv_selectLanguage.setAdapter(languageListAdapter);
 
-//        TODO 根据配置文件，开启的时候自动选择选项未完成
-        WeixinApplication.getConfig("languageList");
+
     }
 
     private void initUI() {
-        RelativeLayout rl_bt_back = (RelativeLayout) findViewById(R.id.rl_bt_back);
+        RelativeLayout rl_bt_back = (RelativeLayout) findViewById(R.id.sign_up_rl_bt_back);
         Button bt_save_select_language = (Button) findViewById(R.id.bt_save_select_language);
         lv_selectLanguage = (ListView) findViewById(R.id.lv_selectLanguage);
 
@@ -51,7 +57,7 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.rl_bt_back:
+            case R.id.sign_up_rl_bt_back:
 //                TODO 返回按钮的selector遮罩效果(前景变灰)未完成
                 finish();
                 break;

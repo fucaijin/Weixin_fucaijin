@@ -14,8 +14,9 @@
     <string name="account">账号</string>
     <string name="security_center">微信安全中心</string>
     <string name="emergency_freezing">紧急冻结</string>
-    <string name="forgot_password">找回密码</string>
+    <string name="get_back_password">找回密码</string>
     <string name="nick_name">昵称</string>
     <string name="input_password">填写密码</string>
     <string name="password">密码</string>
+    <string name="use_wechat_id_or_qq_or_email_sign_in">用微信号/QQ号/邮箱登录</string>
 </resources>

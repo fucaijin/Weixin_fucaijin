@@ -15,6 +15,7 @@
     <color name="colorDarkGray">#2E2E32</color>//竖线(标题栏返回键右边/)-更深灰色
     <color name="colorLightGray">#D9D9D9</color>//浅灰色 - ListView的分割线、ListView按下的背景、竖分割线
     <color name="colorTextBlue">#576B95</color>//蓝色 - 找回密码、登录界面的字体颜色
+    <color name="colorTextBluePressed">#7A93AF</color>//蓝色 - 找回密码、登录界面的字体颜色
     <color name="colorLineGreen">#45C01A</color>//绿色 - 分割线
     <color name="colorTextGreen">#1AAD19</color>//绿色 - 字体
     <color name="colorTextHintLightGray">#DDDDDD</color>//灰色 - 字体

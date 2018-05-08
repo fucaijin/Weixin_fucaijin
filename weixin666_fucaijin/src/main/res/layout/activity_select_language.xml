@@ -12,7 +12,7 @@
 
         <!--回退/关闭按钮-->
         <RelativeLayout
-            android:id="@+id/rl_bt_back"
+            android:id="@+id/sign_up_rl_bt_back"
             style="@style/rl_top_bar_close_back">
 
             <!--图片-->
@@ -29,7 +29,7 @@
         <!--标题-->
         <TextView
             android:text="@string/selectLanguage"
-            android:layout_toEndOf="@id/rl_bt_back"
+            android:layout_toEndOf="@id/sign_up_rl_bt_back"
             style="@style/top_bar_text"/>
 
         <!--保存按钮-->

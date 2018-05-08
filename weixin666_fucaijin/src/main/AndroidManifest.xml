@@ -3,6 +3,7 @@
     package="com.fucaijin.weixin_fucaijin">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.Read_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
@@ -22,7 +23,8 @@
         </activity>
         <activity android:name=".activity.SelectLanguageActivity" />
         <activity android:name=".activity.SignInActivity" />
-        <activity android:name=".activity.SignUpActivity"></activity>
+        <activity android:name=".activity.SignUpActivity" />
+        <activity android:name=".activity.HomeActivity"></activity>
     </application>
 
 </manifest>
