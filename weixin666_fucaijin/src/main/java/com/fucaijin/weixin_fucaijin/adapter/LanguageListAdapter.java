@@ -49,7 +49,7 @@ public class LanguageListAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null){
             viewHolder = new ViewHolder();
-            convertView = View.inflate(context,R.layout.item_language,null);
+            convertView = View.inflate(context,R.layout.select_language_list_view_item,null);
             viewHolder.tv_language = convertView.findViewById(R.id.tv_language);
             viewHolder.iv_radio_button = convertView.findViewById(R.id.iv_select_language_radio_button);
             convertView.setTag(viewHolder);

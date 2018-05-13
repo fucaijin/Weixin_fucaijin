@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
+import com.fucaijin.weixin_fucaijin.utils.JudgementUtils;
 import com.fucaijin.weixin_fucaijin.utils.Md5;
 
 
@@ -133,7 +134,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                 } else {
 //                    如果账号的输入框不为空：设置清除账号按钮可见，且如果密码不为空就登录按钮可用
                     sign_in_iv_clean_account.setVisibility(View.VISIBLE);
-                    if (!TextUtils.isEmpty(sign_in_et_password.getText().toString().trim())) {
+                    if (!JudgementUtils.editTextEmpty(sign_in_et_password)) {
                         sign_in_bt_sign_in.setEnabled(true);
                     } else {
                         sign_in_bt_sign_in.setEnabled(false);
@@ -160,7 +161,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                     sign_in_bt_sign_in.setEnabled(false);
                 } else {
                     sign_in_iv_clean_password.setVisibility(View.VISIBLE);
-                    if (!TextUtils.isEmpty(sign_in_et_account.getText().toString().trim())) {
+                    if (!JudgementUtils.editTextEmpty(sign_in_et_account)) {
                         sign_in_bt_sign_in.setEnabled(true);
                     } else {
                         sign_in_bt_sign_in.setEnabled(false);
@@ -176,7 +177,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                 if (getFocus) {
 //                    注意:用代码设置颜色一定要用8位的颜色，否则会显示透明或不显示
                     sign_in_iv_account_editor_divider.setBackgroundColor(0xFF45C01A);
-                    if (!TextUtils.isEmpty(sign_in_et_account.getText().toString().trim())) {
+                    if (!JudgementUtils.editTextEmpty(sign_in_et_account)) {
                         sign_in_iv_clean_account.setVisibility(View.VISIBLE);
                     }
                 } else {
@@ -193,7 +194,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                 if (getFocus) {
 //                    注意:用代码设置颜色一定要用8位的颜色，否则会显示透明或不显示
                     sign_in_iv_password_editor_divider.setBackgroundColor(0xFF45C01A);
-                    if (!TextUtils.isEmpty(sign_in_et_password.getText().toString().trim())) {
+                    if (!JudgementUtils.editTextEmpty(sign_in_et_password)) {
                         sign_in_iv_clean_password.setVisibility(View.VISIBLE);
                     }
                 } else {

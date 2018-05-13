@@ -27,16 +27,20 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setStatusBarColor(0xFF000000); //设置沉浸式状态栏
         setContentView(R.layout.activity_splash);
-        if(WeixinApplication.isSignIn()){
-//            TODO 已经登录，正常运行（闪屏页面3秒过后进入主页面）
-        }else if(!WeixinApplication.isSignIn() && !WeixinApplication.isFirstRun()){
-//            TODO 曾经登录过，但已经退出，需要登录 (不是登录状态，而且也不是第一次登录)
 
-        }else if(WeixinApplication.isFirstRun()){
-//            首次登录，进入登录/注册页面
-            initUI();
-            fl_splash_bt.setVisibility(View.VISIBLE);
-        }
+//        为了调试方便，暂时注销以下代码
+//        if(WeixinApplication.isSignIn()){
+////            TODO 已经登录，正常运行（闪屏页面3秒过后进入主页面）
+//        }else if(!WeixinApplication.isSignIn() && !WeixinApplication.isFirstRun()){
+////            TODO 曾经登录过，但已经退出，需要登录 (不是登录状态，而且也不是第一次登录)
+//
+//        }else if(WeixinApplication.isFirstRun()){
+////            首次登录，进入登录/注册页面
+//            initUI();
+//            fl_splash_bt.setVisibility(View.VISIBLE);
+//        }
+
+        startActivity(new Intent(this,HomeActivity.class));
     }
 
     private void initUI() {

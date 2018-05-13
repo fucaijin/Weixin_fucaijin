@@ -23,5 +23,7 @@
     <color name="colorTransparent">#00000000</color>//透明色
     <color name="colorLittleTransparent">#33000000</color>//半透明
     <color name="colorTextGreenButtonEnable">#BEE8BE</color>//绿色按钮的文字在不可点击时候的颜色
+    <color name="colorHomeBottomTab">#FCFCFC</color>//主界面底部的背景颜色
+    <color name="colorHomeBottomTabTopDivider">#D6D6D6</color>//主界面底部的上面的分割线颜色
 
 </resources>

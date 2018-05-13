@@ -19,4 +19,11 @@
     <string name="input_password">填写密码</string>
     <string name="password">密码</string>
     <string name="use_wechat_id_or_qq_or_email_sign_in">用微信号/QQ号/邮箱登录</string>
+
+    <string name="action_bar_search">搜索</string>
+    <string name="action_bar_new_group_chat">发起群聊</string>
+    <string name="action_bar_add_new_friend">添加朋友</string>
+    <string name="action_bar_scan">扫一扫</string>
+    <string name="help_or_feedback">帮助与反馈</string>
+    <string name="action_bar_pay">收付款</string>
 </resources>
