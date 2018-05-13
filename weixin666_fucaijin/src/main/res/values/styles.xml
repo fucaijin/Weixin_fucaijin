@@ -206,10 +206,11 @@
     <style name="home_bottom_tab_unit_root_ll">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:gravity">center_horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
     </style>
 
     <!--主界面的底部导航栏的一个单元的图标-->
