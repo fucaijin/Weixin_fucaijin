@@ -26,4 +26,8 @@
     <string name="action_bar_scan">扫一扫</string>
     <string name="help_or_feedback">帮助与反馈</string>
     <string name="action_bar_pay">收付款</string>
+    <string name="found">发现</string>
+    <string name="me">我</string>
+    <string name="wechat">微信</string>
+    <string name="address_list">通讯录</string>
 </resources>

@@ -70,15 +70,32 @@
             android:id="@+id/home_bottom_tab_ll_wechat"
             style="@style/home_bottom_tab_unit_root_ll">
 
-            <ImageView
-                android:id="@+id/home_bottom_tab_iv_wechat"
-                style="@style/home_bottom_tab_unit_iv"
-                android:src="@drawable/home_bottom_tab_wechat_selector" />
+            <!--微信图片层-->
+            <FrameLayout
+                style="@style/home_bottom_tab_unit_fl">
+                <ImageView
+                    android:id="@+id/home_bottom_tab_iv_wechat_normal"
+                    style="@style/w_h_double_match_parent"
+                    android:src="@drawable/home_bottom_tab_wechat_normal"/>
+                <ImageView
+                    android:id="@+id/home_bottom_tab_iv_wechat_pressed"
+                    style="@style/home_bottom_tab_iv_pressed"
+                    android:src="@drawable/home_bottom_tab_wechat_pressed" />
+            </FrameLayout>
 
-            <TextView
-                android:id="@+id/home_bottom_tab_tv_wechat"
-                android:text="微信"
-                style="@style/home_bottom_tab_unit_text"/>
+            <!--微信文字层-->
+            <FrameLayout
+                style="@style/w_h_double_wrap_content"
+                android:layout_marginTop="2dp">
+                <TextView
+                    android:id="@+id/home_bottom_tab_tv_wechat_normal"
+                    android:text="@string/wechat"
+                    style="@style/home_bottom_tab_unit_text_normal"/>
+                <TextView
+                    android:id="@+id/home_bottom_tab_tv_wechat_pressed"
+                    android:text="@string/wechat"
+                    style="@style/home_bottom_tab_unit_text_pressed"/>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -87,15 +104,32 @@
             android:id="@+id/home_bottom_tab_ll_address_list"
             style="@style/home_bottom_tab_unit_root_ll">
 
-            <ImageView
-                android:id="@+id/home_bottom_tab_iv_address_list"
-                style="@style/home_bottom_tab_unit_iv"
-                android:src="@drawable/home_bottom_tab_address_list_selector" />
+            <!--通讯录图片层-->
+            <FrameLayout
+                style="@style/home_bottom_tab_unit_fl">
+                <ImageView
+                    android:id="@+id/home_bottom_tab_iv_address_list_normal"
+                    style="@style/home_bottom_tab_unit_fl"
+                    android:src="@drawable/home_bottom_tab_address_list_normal" />
+                <ImageView
+                    android:id="@+id/home_bottom_tab_iv_address_list_pressed"
+                    style="@style/home_bottom_tab_iv_pressed"
+                    android:src="@drawable/home_bottom_tab_address_list_pressed" />
+            </FrameLayout>
 
-            <TextView
-                android:id="@+id/home_bottom_tab_tv_address_list"
-                android:text="通讯录"
-                style="@style/home_bottom_tab_unit_text"/>
+            <!--通讯录文字层-->
+            <FrameLayout
+                style="@style/w_h_double_wrap_content"
+                android:layout_marginTop="2dp">
+                <TextView
+                    android:id="@+id/home_bottom_tab_tv_address_list_normal"
+                    android:text="@string/address_list"
+                    style="@style/home_bottom_tab_unit_text_normal"/>
+                <TextView
+                    android:id="@+id/home_bottom_tab_tv_address_list_pressed"
+                    android:text="@string/address_list"
+                    style="@style/home_bottom_tab_unit_text_pressed"/>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -104,15 +138,32 @@
             android:id="@+id/home_bottom_tab_ll_found"
             style="@style/home_bottom_tab_unit_root_ll">
 
-            <ImageView
-                android:id="@+id/home_bottom_tab_iv_found"
-                style="@style/home_bottom_tab_unit_iv"
-                android:src="@drawable/home_bottom_tab_found_selector" />
+            <!--发现图片层-->
+            <FrameLayout
+                style="@style/home_bottom_tab_unit_fl">
+                <ImageView
+                    android:id="@+id/home_bottom_tab_iv_found_normal"
+                    style="@style/home_bottom_tab_unit_fl"
+                    android:src="@drawable/home_bottom_tab_found_normal" />
+                <ImageView
+                    android:id="@+id/home_bottom_tab_iv_found_pressed"
+                    style="@style/home_bottom_tab_iv_pressed"
+                    android:src="@drawable/home_bottom_tab_found_pressed" />
+            </FrameLayout>
 
-            <TextView
-                android:id="@+id/home_bottom_tab_tv_found"
-                android:text="发现"
-                style="@style/home_bottom_tab_unit_text"/>
+            <!--发现文字层-->
+            <FrameLayout
+                style="@style/w_h_double_wrap_content"
+                android:layout_marginTop="2dp">
+                <TextView
+                    android:id="@+id/home_bottom_tab_tv_found_normal"
+                    android:text="@string/found"
+                    style="@style/home_bottom_tab_unit_text_normal"/>
+                <TextView
+                    android:id="@+id/home_bottom_tab_tv_found_pressed"
+                    android:text="@string/found"
+                    style="@style/home_bottom_tab_unit_text_pressed"/>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -121,15 +172,32 @@
             android:id="@+id/home_bottom_tab_ll_me"
             style="@style/home_bottom_tab_unit_root_ll">
 
-            <ImageView
-                android:id="@+id/home_bottom_tab_iv_me"
-                style="@style/home_bottom_tab_unit_iv"
-                android:src="@drawable/home_bottom_tab_me_selector" />
+            <!--我icon层-->
+            <FrameLayout
+                style="@style/home_bottom_tab_unit_fl">
+                <ImageView
+                    android:id="@+id/home_bottom_tab_iv_me_normal"
+                    style="@style/home_bottom_tab_unit_fl"
+                    android:src="@drawable/home_bottom_tab_me_normal" />
+                <ImageView
+                    android:id="@+id/home_bottom_tab_iv_me_pressed"
+                    style="@style/home_bottom_tab_iv_pressed"
+                    android:src="@drawable/home_bottom_tab_me_pressed" />
+            </FrameLayout>
 
-            <TextView
-                android:id="@+id/home_bottom_tab_tv_me"
-                android:text="我"
-                style="@style/home_bottom_tab_unit_text"/>
+            <!--我文字层-->
+            <FrameLayout
+                style="@style/w_h_double_wrap_content"
+                android:layout_marginTop="2dp">
+                <TextView
+                    android:id="@+id/home_bottom_tab_tv_me_normal"
+                    android:text="@string/me"
+                    style="@style/home_bottom_tab_unit_text_normal"/>
+                <TextView
+                    android:id="@+id/home_bottom_tab_tv_me_pressed"
+                    android:text="@string/me"
+                    style="@style/home_bottom_tab_unit_text_pressed"/>
+            </FrameLayout>
 
         </LinearLayout>
 
