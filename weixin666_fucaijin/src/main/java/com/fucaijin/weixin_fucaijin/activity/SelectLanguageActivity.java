@@ -37,8 +37,6 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
 //        ListView数据的填充,传入要显示的列表，以及之前保存在xml文件中的语言选择的设置
         languageListAdapter = new LanguageListAdapter(WeixinApplication.getmContext(), languageList,index);
         lv_selectLanguage.setAdapter(languageListAdapter);
-
-
     }
 
     private void initUI() {

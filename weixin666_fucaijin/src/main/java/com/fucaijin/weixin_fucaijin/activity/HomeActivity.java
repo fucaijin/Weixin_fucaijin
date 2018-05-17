@@ -1,27 +1,46 @@
 package com.fucaijin.weixin_fucaijin.activity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.adapter.HomeFragmentAdapter;
+import com.fucaijin.weixin_fucaijin.adapter.HomeNewTaskPopupWindowAdapter;
+import com.fucaijin.weixin_fucaijin.data.HomeNewTaskPopulWindowData;
 import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentAddressList;
 import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentFound;
 import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentMe;
 import com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment;
+import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
+import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends BaseActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
+public class HomeActivity extends BaseActivity implements ViewPager.OnPageChangeListener, View.OnClickListener, View.OnLongClickListener {
 //    TODO 设置底部按钮滑动时候的渐变细节未完成：应该添加一个中间图层，在滑动到一半的时候边框完全显示，滑动比例超过一般，Pressed状态的图案才开始显示
+//    TODO 顶部标题栏的“微信”在有未读消息时候会显示消息数量，例如“微信（1）”
+//    TODO 下方按钮的消息提醒设置未开发
+//    TODO 标题栏的搜索功能未开发
+//    TODO 新建任务未开发
+
     private ViewPager mViewPager;
     private List<Fragment> fragmentList;
+    private Context mContext;
 
     private ImageView homeBottomTabIvWechatNormal;
     private ImageView homeBottomTabIvWechatPressed;
@@ -41,11 +60,18 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private TextView homeBottomTabTvMeNormal;
     private TextView homeBottomTabTvMePressed;
     private HomeFragmentAdapter mPagerAdapter;
+    private TextView homeTopTabTitleTv;
+    private ImageView homeTopTabSearchIv;
+    private ImageView homeTopTabNewTaskIv;
+    private RelativeLayout homeTopTabRootRl;
+    private LinearLayout homeActivityRootLl;
+    private PopupWindow popupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Context mContext = WeixinApplication.getmContext();
         initUI();
     }
 
@@ -53,6 +79,17 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      * 获取所有需要用到的控件
      */
     private void initUI() {
+        homeActivityRootLl = (LinearLayout) findViewById(R.id.activity_home);
+//        获取标题栏,以及标题栏的文字，搜索按钮，新建任务按钮
+        homeTopTabRootRl = (RelativeLayout) findViewById(R.id.home_top_tab_root_rl);
+        homeTopTabTitleTv = (TextView) findViewById(R.id.home_top_tab_title_tv);
+        homeTopTabSearchIv = (ImageView) findViewById(R.id.home_top_tab_search_iv);
+        homeTopTabNewTaskIv = (ImageView) findViewById(R.id.home_top_tab_new_task_iv);
+
+        homeTopTabSearchIv.setOnClickListener(this);
+        homeTopTabSearchIv.setOnLongClickListener(this);
+        homeTopTabNewTaskIv.setOnClickListener(this);
+
 //        获取下方按钮，并设置监听点击事件
         LinearLayout homeBottomTabLlWechat = (LinearLayout) findViewById(R.id.home_bottom_tab_ll_wechat);
         LinearLayout homeBottomTabLlAddressList = (LinearLayout) findViewById(R.id.home_bottom_tab_ll_address_list);
@@ -102,40 +139,40 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        switch (position){
+        switch (position) {
             case 0:
-                homeBottomTabIvWechatNormal.setImageAlpha((int) (255f*positionOffset));
-                homeBottomTabIvWechatPressed.setImageAlpha((int) (255f*(1-positionOffset)));
+                homeBottomTabIvWechatNormal.setImageAlpha((int) (255f * positionOffset));
+                homeBottomTabIvWechatPressed.setImageAlpha((int) (255f * (1 - positionOffset)));
                 homeBottomTabTvWechatNormal.setAlpha(positionOffset);
-                homeBottomTabTvWechatPressed.setAlpha(1-positionOffset);
+                homeBottomTabTvWechatPressed.setAlpha(1 - positionOffset);
 
-                homeBottomTabIvAddressListNormal.setImageAlpha((int) (255f*(1-positionOffset)));
-                homeBottomTabIvAddressListPressed.setImageAlpha((int) (255f*positionOffset));
-                homeBottomTabTvAddressListNormal.setAlpha(1-positionOffset);
+                homeBottomTabIvAddressListNormal.setImageAlpha((int) (255f * (1 - positionOffset)));
+                homeBottomTabIvAddressListPressed.setImageAlpha((int) (255f * positionOffset));
+                homeBottomTabTvAddressListNormal.setAlpha(1 - positionOffset);
                 homeBottomTabTvAddressListPressed.setAlpha(positionOffset);
                 break;
 
             case 1:
-                homeBottomTabIvAddressListNormal.setImageAlpha((int) (255f*positionOffset));
-                homeBottomTabIvAddressListPressed.setImageAlpha((int) (255f*(1-positionOffset)));
+                homeBottomTabIvAddressListNormal.setImageAlpha((int) (255f * positionOffset));
+                homeBottomTabIvAddressListPressed.setImageAlpha((int) (255f * (1 - positionOffset)));
                 homeBottomTabTvAddressListNormal.setAlpha(positionOffset);
-                homeBottomTabTvAddressListPressed.setAlpha(1-positionOffset);
+                homeBottomTabTvAddressListPressed.setAlpha(1 - positionOffset);
 
-                homeBottomTabIvFoundNormal.setImageAlpha((int) (255f*(1-positionOffset)));
-                homeBottomTabIvFoundPressed.setImageAlpha((int) (255f*positionOffset));
-                homeBottomTabTvFoundNormal.setAlpha(1-positionOffset);
+                homeBottomTabIvFoundNormal.setImageAlpha((int) (255f * (1 - positionOffset)));
+                homeBottomTabIvFoundPressed.setImageAlpha((int) (255f * positionOffset));
+                homeBottomTabTvFoundNormal.setAlpha(1 - positionOffset);
                 homeBottomTabTvFoundPressed.setAlpha(positionOffset);
                 break;
 
             case 2:
-                homeBottomTabIvFoundNormal.setImageAlpha((int) (255f*positionOffset));
-                homeBottomTabIvFoundPressed.setImageAlpha((int) (255f*(1-positionOffset)));
+                homeBottomTabIvFoundNormal.setImageAlpha((int) (255f * positionOffset));
+                homeBottomTabIvFoundPressed.setImageAlpha((int) (255f * (1 - positionOffset)));
                 homeBottomTabTvFoundNormal.setAlpha(positionOffset);
-                homeBottomTabTvFoundPressed.setAlpha(1-positionOffset);
+                homeBottomTabTvFoundPressed.setAlpha(1 - positionOffset);
 
-                homeBottomTabIvMeNormal.setImageAlpha((int) (255f*(1-positionOffset)));
-                homeBottomTabIvMePressed.setImageAlpha((int) (255f*positionOffset));
-                homeBottomTabTvMeNormal.setAlpha(1-positionOffset);
+                homeBottomTabIvMeNormal.setImageAlpha((int) (255f * (1 - positionOffset)));
+                homeBottomTabIvMePressed.setImageAlpha((int) (255f * positionOffset));
+                homeBottomTabTvMeNormal.setAlpha(1 - positionOffset);
                 homeBottomTabTvMePressed.setAlpha(positionOffset);
                 break;
         }
@@ -147,39 +184,83 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {}
+    public void onPageScrollStateChanged(int state) {
+    }
 
     /**
      * 当前Activit的点击事件
+     *
      * @param view 当前的点击的View
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.home_bottom_tab_ll_wechat:
 //                设置指定ViewPager的页面是那一页，第二个参数是设置是否需要滑动，还是直接跳到那个页面
-                mViewPager.setCurrentItem(0,false);
+                mViewPager.setCurrentItem(0, false);
                 break;
             case R.id.home_bottom_tab_ll_address_list:
-                mViewPager.setCurrentItem(1,false);
+                mViewPager.setCurrentItem(1, false);
                 break;
             case R.id.home_bottom_tab_ll_found:
-                mViewPager.setCurrentItem(2,false);
+                mViewPager.setCurrentItem(2, false);
                 break;
             case R.id.home_bottom_tab_ll_me:
-                mViewPager.setCurrentItem(3,false);
+                mViewPager.setCurrentItem(3, false);
                 break;
-            case R.id.home_tab_top_new_task:
-//                TODO 弹出popupwindow，并实现相应的点击事件
+            case R.id.home_top_tab_new_task_iv:
+                showNewTaskPopupWindow();
                 break;
-            case R.id.home_tab_top_search:
+            case R.id.home_top_tab_search_iv:
 //                TODO 实现搜索功能
+                break;
+
+            case R.id.home_top_tab_new_task_popup_window_root:
+//                如果点击的是popupwindow的外部，就关闭popupWindow
+                popupWindow.dismiss();
+                popupWindow = null;
                 break;
         }
     }
 
     /**
+     * 显示主页面右上角“+”号 新建任务的popupWindow
+     */
+    private void showNewTaskPopupWindow() {
+//                TODO 并实现popupwindow相应的点击事件
+//                弹出popupwindow
+//                1.导入popupwindow的布局，并从布局找到ListView
+        View popupWindowLayout = LayoutInflater.from(this).inflate(R.layout.home_top_tab_new_task_popupwindow_layout, null);
+        ListView popupWindowListView = popupWindowLayout.findViewById(R.id.home_top_tab_new_task_popup_window_lv);
+
+//                2.为listView准备数据(图标和文字)，并将每条数据存入一个列表中，
+//                  列表中的对象存着每条数据的图标、文字地址，然后传入ListView的适配器中使用，
+//                  最后将Adapter绑定ListView
+        String[] homeNewTaskText = {"发起群聊", "添加朋友", "扫一扫", "收付款", "帮助与反馈"};
+        int[] homeNewTaskImageId = {R.drawable.action_bar_new_group_chat, R.drawable.action_bar_add_new_friend, R.drawable.action_bar_scan, R.drawable.action_bar_pay, R.drawable.action_bar_help_and_feedback};
+        ArrayList<HomeNewTaskPopulWindowData> populWindowDatas = new ArrayList<>();
+        for (int i = 0; i < homeNewTaskText.length; i++) {
+            HomeNewTaskPopulWindowData homeNewTaskPopulWindowData = new HomeNewTaskPopulWindowData();
+            homeNewTaskPopulWindowData.text = homeNewTaskText[i];
+            homeNewTaskPopulWindowData.drawableId = homeNewTaskImageId[i];
+            populWindowDatas.add(homeNewTaskPopulWindowData);
+        }
+        popupWindowListView.setAdapter(new HomeNewTaskPopupWindowAdapter(populWindowDatas));
+
+//                找到popupWindow的(填充屏幕)根布局的id，并给根布局设置点击事件，
+//                如果不是点击popupWindow中的ListView的话，就让popupWindow消失
+//                (让popupWindow充满屏幕原因1.实现点击外部消失 2.点击外部时候禁止外部的其他不相关控件响应)
+        View popupWindowRoot = popupWindowLayout.findViewById(R.id.home_top_tab_new_task_popup_window_root);
+        popupWindowRoot.setOnClickListener(this);
+
+//                创建popupWindow，并指定其显示位置
+        popupWindow = new PopupWindow(popupWindowLayout, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        popupWindow.showAtLocation(homeActivityRootLl, Gravity.END, 0, 0);
+    }
+
+    /**
      * 根据当前选中的页面，来改变底部的导航栏按钮颜色
+     *
      * @param position 当前选中的页面
      */
     private void setTabSelection(int position) {
@@ -203,10 +284,11 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
     /**
      * 设置底部的导航按钮为选中状态
-     * @param normalView 未选中的图标
+     *
+     * @param normalView  未选中的图标
      * @param pressedView 选中的图标
      * @param normalText  未选中的文字
-     * @param pressedText  选中的文字
+     * @param pressedText 选中的文字
      */
     private void setBottomTabSelect(ImageView normalView, ImageView pressedView, TextView normalText, TextView pressedText) {
         normalView.setImageAlpha(0);
@@ -240,4 +322,35 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         homeBottomTabTvMePressed.setAlpha(0f);
     }
 
+    /**
+     * 重写返回键，如果当前显示着新建任务的popupWindow的话就关闭它，否则就默认操作
+     */
+    @Override
+    public void onBackPressed() {
+        if(popupWindow != null){
+            popupWindow.dismiss();
+            popupWindow = null;
+        }else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        switch (view.getId()){
+            case R.id.home_top_tab_search_iv:
+//                长按搜索按钮时的事件
+
+//                弹出Toast，设置Toast的位置，高度是获取标题栏的高度
+                Toast toast = Toast.makeText(this, "搜索", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP | Gravity.END, ConvertUtils.dp2px(this,92), getResources().getDimensionPixelOffset(R.dimen.top_bar_height));//此处的92是:新建任务按钮长度 + 搜索按钮长度的一半 = 92dp
+                toast.show();
+
+//                设置震动
+                Vibrator vibrator = (Vibrator)this.getSystemService(this.VIBRATOR_SERVICE);
+                vibrator.vibrate(50);
+                break;
+        }
+        return false;
+    }
 }

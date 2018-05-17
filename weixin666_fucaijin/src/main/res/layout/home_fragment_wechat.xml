@@ -5,6 +5,8 @@
 
     <ListView
         android:id="@+id/home_wechat_fragment_list_view"
+        android:dividerHeight="1px"
+        android:divider="@color/colorLightGray"
         style="@style/w_h_double_match_parent">
     </ListView>
 

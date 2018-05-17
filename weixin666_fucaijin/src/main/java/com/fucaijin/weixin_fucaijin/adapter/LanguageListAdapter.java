@@ -58,6 +58,7 @@ public class LanguageListAdapter extends BaseAdapter {
         }
         viewHolder.tv_language.setText(languages[i]);
 
+//        判断当前条目是否selectItem来设定其图案
         if(selectItem != i){
             viewHolder.iv_radio_button.setImageResource(R.drawable.radio_button_normal);
         }else {

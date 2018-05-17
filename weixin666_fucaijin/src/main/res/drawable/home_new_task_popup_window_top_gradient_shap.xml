@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--主页面的左上角加号新建任务的popupWindow上方的阴影-->
+    <!--用xml画阴影图案-->
+    <gradient
+        android:startColor="#FF2E2F33"
+        android:endColor="#00000000"
+        android:angle="90"
+        />
+</shape>

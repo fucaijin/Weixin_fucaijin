@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="14dp"
+        android:clickable="true"
+        android:background="@drawable/list_view_selector">
+
+        <!--头像-->
+        <ImageView
+            android:background="#CCCCCC"
+            android:id="@+id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"/>
+
+        <!--聊天未读图标-->
+        <TextView
+            android:id="@+id/home_wechat_fragment_list_tv_item_unread_message"
+            android:layout_alignRight="@id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:layout_alignTop="@id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:layout_marginRight="-5dp"
+            android:layout_marginTop="-5dp"
+            style="@style/home_bottom_tab_unit_unread_message"/>
+
+        <!--订阅号的未读图标-->
+        <ImageView
+            android:id="@+id/home_wechat_fragment_list_iv_item_subscription_unread"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignEnd="@id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:layout_alignTop="@id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:layout_marginEnd="-4dp"
+            android:layout_marginTop="-3dp"
+            android:background="@drawable/home_wechat_fragment_lv_chat_unread_message_tv_bg"
+            android:visibility="gone" />
+
+        <!--昵称-->
+        <TextView
+            android:text="昵称"
+            android:id="@+id/home_wechat_fragment_list_tv_item_nick_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:textColor="@color/colorTextDarkGray"
+            android:textSize="15sp" />
+
+        <!--时间-->
+        <TextView
+            android:text="06:00"
+            android:id="@+id/home_wechat_fragment_list_tv_item_last_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:textSize="11sp"
+            android:textColor="@color/colorHomeWeChatFragmentLastMessageTime" />
+
+        <!--群消息静音-->
+        <ImageView
+            android:id="@+id/home_wechat_fragment_list_item_iv_group_mute"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignBottom="@id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="3dp"
+            android:src="@drawable/home_fragment_wechat_group_chat_mute"
+            android:visibility="invisible" />
+
+        <!--最近消息-->
+        <TextView
+            android:text="最近消息"
+            android:id="@+id/home_wechat_fragment_list_tv_item_recent_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:layout_alignStart="@+id/home_wechat_fragment_list_tv_item_nick_name"
+            android:ellipsize="end"
+            android:lines="1"
+            android:layout_marginEnd="40dp"
+            android:textColor="@color/colorHomeWeChatFragmentRecentMessage"
+            android:textSize="13sp" />
+        <!--android:ellipsize="end" 是设置文字的最后有三个点的省略号-->
+
+    </RelativeLayout>
+
+</RelativeLayout>

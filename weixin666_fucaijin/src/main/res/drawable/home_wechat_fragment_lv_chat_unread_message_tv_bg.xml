@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!--头像右上角未读消息的小圆背景-->
+    <solid android:color="#FF3E3E"/>
+
+</shape>

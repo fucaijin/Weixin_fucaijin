@@ -6,6 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
+ * 这是用来转换成md5的工具类
  * Created by fucaijin on 2018/5/8.
  */
 

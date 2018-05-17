@@ -242,4 +242,15 @@
         <item name="android:alpha">0</item>
     </style>
 
+    <!--主界面的底部导航栏的单元的未读消息提醒图标-->
+    <style name="home_bottom_tab_unit_unread_message">
+        <item name="android:layout_width">19dp</item>
+        <item name="android:layout_height">19dp</item>
+        <item name="android:background">@drawable/home_wechat_fragment_lv_chat_unread_message_tv_bg</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
 </resources>
