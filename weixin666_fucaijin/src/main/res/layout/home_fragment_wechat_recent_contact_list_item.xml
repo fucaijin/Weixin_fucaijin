@@ -52,7 +52,7 @@
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/home_wechat_fragment_list_iv_item_head_sculpture"
             android:textColor="@color/colorTextDarkGray"
-            android:textSize="15sp" />
+            android:textSize="@dimen/weixin_main_text_size" />
 
         <!--时间-->
         <TextView

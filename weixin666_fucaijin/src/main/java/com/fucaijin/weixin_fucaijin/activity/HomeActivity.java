@@ -22,7 +22,7 @@ import com.fucaijin.weixin_fucaijin.adapter.HomeFragmentAdapter;
 import com.fucaijin.weixin_fucaijin.adapter.HomeNewTaskPopupWindowAdapter;
 import com.fucaijin.weixin_fucaijin.data.HomeNewTaskPopulWindowData;
 import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentAddressList;
-import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentFound;
+import com.fucaijin.weixin_fucaijin.fragment.HomeFoundPageFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentMe;
 import com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
@@ -36,7 +36,10 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 //    TODO 顶部标题栏的“微信”在有未读消息时候会显示消息数量，例如“微信（1）”
 //    TODO 下方按钮的消息提醒设置未开发
 //    TODO 标题栏的搜索功能未开发
-//    TODO 新建任务未开发
+//    TODO 新建任务的点击事件未完成
+//    TODO 通讯录界面未开发
+//    TODO 发现界面未开发
+//    TODO 我界面未开发
 
     private ViewPager mViewPager;
     private List<Fragment> fragmentList;
@@ -66,12 +69,18 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private RelativeLayout homeTopTabRootRl;
     private LinearLayout homeActivityRootLl;
     private PopupWindow popupWindow;
+    private int[] foundIconArray = {R.drawable.found_frag_circle_of_friends, R.drawable.found_frag_scan, R.drawable.found_frag_shake,
+            R.drawable.found_frag_look, R.drawable.found_frag_search, R.drawable.found_frag_people_nearby, R.drawable.found_frag_drift_bottle,
+            R.drawable.found_frag_shoping, R.drawable.found_frag_games, R.drawable.found_frag_mini_program};
+    private String[] foundTextArray = {"朋友圈", "扫一扫", "摇一摇", "看一看",
+            "搜一搜", "附近的人", "漂流瓶",
+            "购物", "游戏", "小程序"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Context mContext = WeixinApplication.getmContext();
+        mContext =  WeixinApplication.getmContext();
         initUI();
     }
 
@@ -124,10 +133,14 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 //        找到ViewPager，并准备数据(适配器),然后给ViewPager设置适配器即可
         mViewPager = (ViewPager) findViewById(R.id.home_view_pager);
 
+        Bundle foundFragmentBundle = new Bundle();
+        foundFragmentBundle.putIntArray("foundIconArray",foundIconArray);
+        foundFragmentBundle.putStringArray("foundTextArray",foundTextArray);
+
         fragmentList = new ArrayList<>();
         fragmentList.add(new HomeWechatFragment());
         fragmentList.add(new HomeFragmentAddressList());
-        fragmentList.add(new HomeFragmentFound());
+        fragmentList.add(HomeFoundPageFragment.getInstance(foundIconArray,foundTextArray));
         fragmentList.add(new HomeFragmentMe());
         mPagerAdapter = new HomeFragmentAdapter(getSupportFragmentManager(), fragmentList);
 

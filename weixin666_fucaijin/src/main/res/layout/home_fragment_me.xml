@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_height="80dp"
+        style="@style/home_list_margin_view_style">
 
-    <TextView
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="这是我的界面"
-        android:textSize="30sp"
-        android:textColor="#FF0000"
-        android:layout_gravity="center_vertical"/>
+    </RelativeLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/home_me_fragment_item_wallet"
+        style="@style/home_list_margin_view_style">
+
+        <ImageView
+            android:src="@drawable/me_frag_wallet"
+            android:layout_marginStart="21dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp" />
+
+        <TextView
+            android:text="@string/wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/weixin_main_text_size"
+            android:textColor="@color/colorTextDarkGray"
+            android:layout_marginStart="20dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -7,6 +7,7 @@
 
     <!--顶部标题栏-->
     <RelativeLayout
+        android:clickable="true"
         android:id="@+id/home_top_tab_root_rl"
         android:layout_height="@dimen/top_bar_height"
         android:layout_width="match_parent"

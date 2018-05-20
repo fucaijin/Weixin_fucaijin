@@ -30,4 +30,14 @@
     <string name="me">我</string>
     <string name="wechat">微信</string>
     <string name="address_list">通讯录</string>
+    <string name="wallet">钱包</string>
+    <string name="circle_of_friends">朋友圈</string>
+    <string name="mini_program">小程序</string>
+    <string name="games">游戏</string>
+    <string name="shopping">购物</string>
+    <string name="drift_bottle">漂流瓶</string>
+    <string name="people_nearby">附近的人</string>
+    <string name="search">搜一搜</string>
+    <string name="look">看一看</string>
+    <string name="scan">扫一扫</string>
 </resources>

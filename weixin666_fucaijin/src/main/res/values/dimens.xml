@@ -18,4 +18,15 @@
     <!--大按钮的字体大小-->
     <dimen name="button_text_size">15sp</dimen>
 
+    <!--微信大部分的字体：微信页的昵称、通讯录的名称、发现页面的Item文字、我页面的Item文字-->
+    <dimen name="weixin_main_text_size">15sp</dimen>
+
+    <!--ListView的分割线的Padding值，首次创建：用于发现页面的ListView的分割线-->
+    <dimen name="list_view_divider_padding">14dp</dimen>
+
+    <!--ListView的Item如果与上面有间隔，则这个间隔的距离是20dp-->
+    <dimen name="list_view_item_margin_top_size">20dp</dimen>
+
+    <!--ListView的Item的高度-->
+    <dimen name="list_view_item_height">48dp</dimen>
 </resources>

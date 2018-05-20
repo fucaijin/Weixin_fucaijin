@@ -1,15 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/w_h_double_match_parent">
 
-    <TextView
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="这是发现界面"
-        android:textSize="30sp"
-        android:textColor="#FF0000"
-        android:layout_gravity="center_vertical"/>
+    <!--第一种方法-->
+    <ListView
+        android:id="@+id/home_fragment_found_lv"
+        style="@style/w_h_double_match_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="@null"
+        android:listSelector="#00000000"
+        android:visibility="gone"></ListView>
 
+    <!--第二种方法-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--朋友圈-->
+            <RelativeLayout
+                android:id="@+id/home_found_frag_lv_item_circle_of_friends"
+                style="@style/home_list_view_style"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:src="@drawable/found_frag_circle_of_friends"
+                    style="@style/home_found_fragment_item_iv" />
+
+                <TextView
+                    android:text="@string/circle_of_friends"
+                    style="@style/home_found_fragment_item_tv" />
+
+                <!--分割线-->
+                <ImageView
+                    style="@style/home_list_view_divider_style"/>
+            </RelativeLayout>
+
+            <!--扫一扫-->
+            <RelativeLayout
+                android:id="@+id/home_found_frag_lv_item_scan"
+                style="@style/home_list_view_style"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:src="@drawable/found_frag_scan"
+                    style="@style/home_found_fragment_item_iv" />
+
+                <TextView
+                    android:text="@string/scan"
+                    style="@style/home_found_fragment_item_tv" />
+
+                <!--分割线-->
+                <ImageView
+                    style="@style/home_list_view_divider_style"/>
+            </RelativeLayout>
+
+            <!--摇一摇-->
+            <RelativeLayout
+                android:id="@+id/home_found_frag_lv_item_shake"
+                style="@style/home_list_view_style">
+
+                <ImageView
+                    android:src="@drawable/found_frag_shake"
+                    style="@style/home_found_fragment_item_iv" />
+
+                <TextView
+                    android:text="摇一摇"
+                    style="@style/home_found_fragment_item_tv" />
+
+                <!--分割线-->
+                <ImageView
+                    style="@style/home_list_view_divider_style"/>
+            </RelativeLayout>
+
+            <!--看一看-->
+            <RelativeLayout
+                android:id="@+id/home_found_frag_lv_item_look"
+                style="@style/home_list_view_style"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:src="@drawable/found_frag_look"
+                    style="@style/home_found_fragment_item_iv" />
+
+                <TextView
+                    android:text="看一看"
+                    style="@style/home_found_fragment_item_tv" />
+
+                <!--分割线-->
+                <ImageView
+                    style="@style/home_list_view_divider_style"/>
+            </RelativeLayout>
+
+            <!--搜一搜-->
+            <RelativeLayout
+                android:id="@+id/home_found_frag_lv_item_search"
+                style="@style/home_list_view_style">
+
+                <ImageView
+                    android:src="@drawable/found_frag_search"
+                    style="@style/home_found_fragment_item_iv" />
+
+                <TextView
+                    android:text="@string/search"
+                    style="@style/home_found_fragment_item_tv" />
+
+            </RelativeLayout>
+
+            <!--附近的人-->
+            <RelativeLayout
+                android:id="@+id/home_found_frag_lv_item_people_nearby"
+                style="@style/home_list_view_style"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:src="@drawable/found_frag_people_nearby"
+                    style="@style/home_found_fragment_item_iv" />
+
+                <TextView
+                    android:text="@string/people_nearby"
+                    style="@style/home_found_fragment_item_tv" />
+
+                <!--分割线-->
+                <ImageView
+                    style="@style/home_list_view_divider_style"/>
+            </RelativeLayout>
+
+            <!--漂流瓶-->
+            <RelativeLayout
+                android:id="@+id/home_found_frag_lv_item_drift_bottle"
+                style="@style/home_list_view_style">
+
+                <ImageView
+                    android:src="@drawable/found_frag_drift_bottle"
+                    style="@style/home_found_fragment_item_iv" />
+
+                <TextView
+                    android:text="@string/drift_bottle"
+                    style="@style/home_found_fragment_item_tv" />
+            </RelativeLayout>
+
+            <!--购物-->
+            <RelativeLayout
+                android:id="@+id/home_found_frag_lv_item_shopping"
+                style="@style/home_list_view_style"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:src="@drawable/found_frag_shoping"
+                    style="@style/home_found_fragment_item_iv" />
+
+                <TextView
+                    android:text="@string/shopping"
+                    style="@style/home_found_fragment_item_tv" />
+
+                <!--分割线-->
+                <ImageView
+                    style="@style/home_list_view_divider_style"/>
+            </RelativeLayout>
+
+            <!--游戏-->
+            <RelativeLayout
+                android:id="@+id/home_found_frag_lv_item_games"
+                style="@style/home_list_view_style">
+
+                <ImageView
+                    android:src="@drawable/found_frag_games"
+                    style="@style/home_found_fragment_item_iv" />
+
+                <TextView
+                    android:text="@string/games"
+                    style="@style/home_found_fragment_item_tv" />
+
+            </RelativeLayout>
+
+            <!--小程序-->
+            <RelativeLayout
+                android:id="@+id/home_found_frag_lv_item_mini_program"
+                style="@style/home_list_view_style"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:src="@drawable/found_frag_mini_program"
+                    style="@style/home_found_fragment_item_iv" />
+
+                <TextView
+                    android:text="@string/mini_program"
+                    style="@style/home_found_fragment_item_tv" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!--第三种方法-->
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="1px"
+        android:id="@+id/home_found_fragment_recycler_view">
+
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

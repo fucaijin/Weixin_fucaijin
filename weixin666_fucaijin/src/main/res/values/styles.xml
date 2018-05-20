@@ -253,4 +253,50 @@
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
+    <!--主界面的ListView的样式-->
+    <style name="home_list_view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/list_view_item_height</item>
+        <item name="android:background">@drawable/list_view_white_selector</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <!--主界面的ListView带有MarginTop的样式-->
+    <style name="home_list_margin_view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/list_view_item_height</item>
+        <item name="android:background">@drawable/list_view_white_selector</item>
+        <item name="android:layout_marginTop">@dimen/list_view_item_margin_top_size</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <!--主界面的ListView的底部的分割线样式-->
+    <style name="home_list_view_divider_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:layout_marginStart">@dimen/list_view_divider_padding</item>
+        <item name="android:layout_marginEnd">@dimen/list_view_divider_padding</item>
+        <item name="android:background">@color/colorLightGray</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+
+    <!--发现页面的条目的图标样式-->
+    <style name="home_found_fragment_item_iv">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:layout_marginStart">21dp</item>
+    </style>
+
+    <style name="home_found_fragment_item_tv">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginStart">62dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTextDarkGray</item>
+        <item name="android:textSize">@dimen/weixin_main_text_size</item>
+    </style>
+
 </resources>
