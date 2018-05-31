@@ -4,30 +4,150 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_height="80dp"
         style="@style/home_list_margin_view_style">
+        
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="14dp"
+            android:src="@drawable/head_sculpture_27"/>
+        
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="17dp"
+            android:gravity="center_vertical">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="符才锦吃..."
+                android:textSize="@dimen/weixin_main_text_size"
+                android:textColor="@color/colorTextDarkGray"/>
+            
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信号：fcj945188951"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="13sp"/>
 
-    </RelativeLayout>
+        </LinearLayout>
 
-    <LinearLayout
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="25dp"
+            android:src="@drawable/me_frag_item_qr_code_micro"
+            />
+        
+    </LinearLayout>
+
+    <!--钱包-->
+    <RelativeLayout
         android:id="@+id/home_me_fragment_item_wallet"
-        style="@style/home_list_margin_view_style">
+        style="@style/home_list_view_style"
+        android:layout_marginTop="20dp">
 
         <ImageView
             android:src="@drawable/me_frag_wallet"
-            android:layout_marginStart="21dp"
-            android:layout_width="23dp"
-            android:layout_height="23dp" />
+            style="@style/home_found_fragment_item_iv" />
 
         <TextView
             android:text="@string/wallet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/weixin_main_text_size"
-            android:textColor="@color/colorTextDarkGray"
-            android:layout_marginStart="20dp"/>
+            style="@style/home_found_fragment_item_tv" />
 
-    </LinearLayout>
+    </RelativeLayout>
+
+    <!--收藏-->
+    <RelativeLayout
+        android:id="@+id/home_me_fragment_item_collection"
+        style="@style/home_list_view_style"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:src="@drawable/me_frag_collection"
+            style="@style/home_found_fragment_item_iv" />
+
+        <TextView
+            android:text="@string/collection"
+            style="@style/home_found_fragment_item_tv" />
+
+        <!--分割线-->
+        <ImageView
+            style="@style/home_list_view_divider_style"/>
+    </RelativeLayout>
+
+    <!--相册-->
+    <RelativeLayout
+        android:id="@+id/home_me_fragment_item_album"
+        style="@style/home_list_view_style">
+
+        <ImageView
+            android:src="@drawable/me_frag_album"
+            style="@style/home_found_fragment_item_iv" />
+
+        <TextView
+            android:text="@string/album"
+            style="@style/home_found_fragment_item_tv" />
+
+        <!--分割线-->
+        <ImageView
+            style="@style/home_list_view_divider_style"/>
+    </RelativeLayout>
+
+    <!--卡包-->
+    <RelativeLayout
+        android:id="@+id/home_me_fragment_item_card_holder"
+        style="@style/home_list_view_style">
+
+        <ImageView
+            android:src="@drawable/me_frag_card_holder"
+            style="@style/home_found_fragment_item_iv" />
+
+        <TextView
+            android:text="@string/card_holder"
+            style="@style/home_found_fragment_item_tv" />
+
+        <!--分割线-->
+        <ImageView
+            style="@style/home_list_view_divider_style"/>
+    </RelativeLayout>
+
+    <!--表情-->
+    <RelativeLayout
+        android:id="@+id/home_me_fragment_item_emoji"
+        style="@style/home_list_view_style">
+
+        <ImageView
+            android:src="@drawable/me_frag_emoji"
+            style="@style/home_found_fragment_item_iv" />
+
+        <TextView
+            android:text="@string/emoji"
+            style="@style/home_found_fragment_item_tv" />
+
+    </RelativeLayout>
+
+    <!--设置-->
+    <RelativeLayout
+        android:id="@+id/home_me_fragment_item_setting"
+        style="@style/home_list_view_style"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:src="@drawable/me_frag_setting"
+            style="@style/home_found_fragment_item_iv" />
+
+        <TextView
+            android:text="@string/setting"
+            style="@style/home_found_fragment_item_tv" />
+
+    </RelativeLayout>
 
 </LinearLayout>

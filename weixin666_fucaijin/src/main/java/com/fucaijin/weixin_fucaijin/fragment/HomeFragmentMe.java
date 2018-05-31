@@ -14,6 +14,7 @@ import com.fucaijin.weixin_fucaijin.R;
  */
 
 public class HomeFragmentMe extends Fragment {
+//    TODO 需要给各个条目添加ID，并找到，然后实现各个点击事件
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
