@@ -299,4 +299,10 @@
         <item name="android:textSize">@dimen/weixin_main_text_size</item>
     </style>
 
+    <!--右上角新任务的popupWindow的弹出和消失动画-->
+    <style name="custom_popup_window_anim_style" >
+        <item name="android:windowEnterAnimation">@anim/new_task_popup_window_show</item>
+        <item name="android:windowExitAnimation">@anim/new_task_popup_window_hidden</item>
+    </style>
+
 </resources>

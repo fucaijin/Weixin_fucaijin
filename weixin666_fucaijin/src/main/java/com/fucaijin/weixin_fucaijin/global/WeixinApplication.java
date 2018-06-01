@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 
+import com.fucaijin.weixin_fucaijin.R;
+
 /**
  * Created by fucaijin on 2018/5/1.
  */
@@ -21,6 +23,34 @@ public class WeixinApplication extends Application {
     private static boolean signIn = true;       //设定默认是已登录状态
     private static boolean firstRun = false;    //设定默认不是第一次登录
     private static SharedPreferences user;
+
+    public static int[] headSculptureList = {R.drawable.head_sculpture_1, R.drawable.head_sculpture_2,
+            R.drawable.head_sculpture_3, R.drawable.head_sculpture_4,
+            R.drawable.head_sculpture_5, R.drawable.head_sculpture_6,
+            R.drawable.head_sculpture_7, R.drawable.head_sculpture_8,
+            R.drawable.head_sculpture_9, R.drawable.head_sculpture_10,
+            R.drawable.head_sculpture_11, R.drawable.head_sculpture_12,
+            R.drawable.head_sculpture_13, R.drawable.head_sculpture_14,
+            R.drawable.head_sculpture_15, R.drawable.head_sculpture_16,
+            R.drawable.head_sculpture_17, R.drawable.head_sculpture_18,
+            R.drawable.head_sculpture_19, R.drawable.head_sculpture_20,
+            R.drawable.head_sculpture_21, R.drawable.head_sculpture_22,
+            R.drawable.head_sculpture_23, R.drawable.head_sculpture_24,
+            R.drawable.head_sculpture_25, R.drawable.head_sculpture_26,
+            R.drawable.head_sculpture_27, R.drawable.head_sculpture_28,
+            R.drawable.head_sculpture_29, R.drawable.head_sculpture_30,
+            R.drawable.head_sculpture_31, R.drawable.head_sculpture_32,
+            R.drawable.head_sculpture_33, R.drawable.head_sculpture_34,
+            R.drawable.head_sculpture_35,
+    };
+
+    public static String[] nickNameList = {"HelloKitty", "阿拉蕾", "白娘子", "白头发少年", "白头发鸣人",
+            "白雪公主", "超级玛红", "超级玛绿", "大白鹅", "丁丁",
+            "猥琐海盗", "黑猫警长", "葫芦娃", "加肥猫", "胖小弟",
+            "不平易近人的警察", "啃德鸡老爷爷", "我是小新", "灌篮小胖子", "雷神",
+            "大龙猫", "路灰", "满头绿", "卖兜", "超级无敌美少女",
+            "真的鸣人", "派派派派派大星", "瞧吧", "圣诞老爷爷", "不认识这是谁",
+            "无脸人", "绿了全身的猪", "小熊维尼", "可爱的小樱桃", "猥琐小胖子", };
 
     @Override
     public void onCreate() {

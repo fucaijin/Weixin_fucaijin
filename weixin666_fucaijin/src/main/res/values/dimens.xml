@@ -29,4 +29,8 @@
 
     <!--ListView的Item的高度-->
     <dimen name="list_view_item_height">48dp</dimen>
+
+    <!--通讯录列表的条目的文字大小-->
+    <dimen name="address_list_nick_name_text_size">16sp</dimen>
+
 </resources>

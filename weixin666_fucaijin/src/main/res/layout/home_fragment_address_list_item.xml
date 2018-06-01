@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+    <TextView
+        android:id="@+id/address_list_name_first_word"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="14dp"
+        android:textColor="#787878"
+        android:background="@color/colorMainBackGroundLightGray"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:id="@+id/address_list_head_sculpture"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="14dp"/>
+
+        <TextView
+            android:layout_marginStart="13dp"
+            android:id="@+id/address_list_nick_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorTextDarkGray"
+            android:textSize="@dimen/address_list_nick_name_text_size"
+            android:layout_toEndOf="@id/address_list_head_sculpture"/>
+
+        <include layout="@layout/divider"
+            android:layout_height="1px"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

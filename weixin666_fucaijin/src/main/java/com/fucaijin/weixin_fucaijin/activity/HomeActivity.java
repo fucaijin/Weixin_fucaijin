@@ -21,8 +21,8 @@ import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.adapter.HomeFragmentAdapter;
 import com.fucaijin.weixin_fucaijin.adapter.HomeNewTaskPopupWindowAdapter;
 import com.fucaijin.weixin_fucaijin.data.HomeNewTaskPopulWindowData;
-import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentAddressList;
 import com.fucaijin.weixin_fucaijin.fragment.HomeFoundPageFragment;
+import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentAddressList;
 import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentMe;
 import com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
@@ -75,12 +75,14 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private String[] foundTextArray = {"朋友圈", "扫一扫", "摇一摇", "看一看",
             "搜一搜", "附近的人", "漂流瓶",
             "购物", "游戏", "小程序"};
+    private HomeFragmentAddressList homeFragmentAddressList;
+    private boolean isShowIndexBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        mContext =  WeixinApplication.getmContext();
+        mContext = WeixinApplication.getmContext();
         initUI();
     }
 
@@ -134,13 +136,14 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         mViewPager = (ViewPager) findViewById(R.id.home_view_pager);
 
         Bundle foundFragmentBundle = new Bundle();
-        foundFragmentBundle.putIntArray("foundIconArray",foundIconArray);
-        foundFragmentBundle.putStringArray("foundTextArray",foundTextArray);
+        foundFragmentBundle.putIntArray("foundIconArray", foundIconArray);
+        foundFragmentBundle.putStringArray("foundTextArray", foundTextArray);
 
+        homeFragmentAddressList = new HomeFragmentAddressList();
         fragmentList = new ArrayList<>();
         fragmentList.add(new HomeWechatFragment());
-        fragmentList.add(new HomeFragmentAddressList());
-        fragmentList.add(HomeFoundPageFragment.getInstance(foundIconArray,foundTextArray));
+        fragmentList.add(homeFragmentAddressList);
+        fragmentList.add(HomeFoundPageFragment.getInstance(foundIconArray, foundTextArray));
         fragmentList.add(new HomeFragmentMe());
         mPagerAdapter = new HomeFragmentAdapter(getSupportFragmentManager(), fragmentList);
 
@@ -163,6 +166,14 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
                 homeBottomTabIvAddressListPressed.setImageAlpha((int) (255f * positionOffset));
                 homeBottomTabTvAddressListNormal.setAlpha(1 - positionOffset);
                 homeBottomTabTvAddressListPressed.setAlpha(positionOffset);
+
+//                在通讯录向微信页滑动过程中也会进入此代码块
+                if (isShowIndexBar) {
+//                    如果页面处于滑动状态，则隐藏侧边快速检索栏。记录显示或隐藏状态是避免滑动过程中过多调用隐藏方法影响性能
+                    homeFragmentAddressList.hideIndexBar();
+                    isShowIndexBar = false;
+                }
+
                 break;
 
             case 1:
@@ -175,6 +186,17 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
                 homeBottomTabIvFoundPressed.setImageAlpha((int) (255f * positionOffset));
                 homeBottomTabTvFoundNormal.setAlpha(1 - positionOffset);
                 homeBottomTabTvFoundPressed.setAlpha(positionOffset);
+
+//                如果当前页面是通讯录页(position为1)，并且页面滑动停止的时候，就显示右侧快速检索栏
+                if (positionOffset == 0) {
+                    homeFragmentAddressList.showIndexBar();
+                    isShowIndexBar = true;
+                } else if (isShowIndexBar) {
+//                    如果页面处于滑动状态，则隐藏右侧快速检索栏。记录显示或隐藏状态是避免滑动过程中过多调用隐藏方法影响性能
+                    homeFragmentAddressList.hideIndexBar();
+                    isShowIndexBar = false;
+                }
+
                 break;
 
             case 2:
@@ -193,11 +215,19 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
     @Override
     public void onPageSelected(int position) {
+//        更改底部Tab的颜色
         setTabSelection(position);
+
+//        如果是滑到通讯录页面，则显示通讯录页的右侧快速检索栏
+        if (position == 1) {
+            homeFragmentAddressList.showIndexBar();
+            isShowIndexBar = true;
+        }
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
+//        0：什么都没做 1：开始滑动 2：滑动结束
     }
 
     /**
@@ -209,7 +239,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_bottom_tab_ll_wechat:
-//                设置指定ViewPager的页面是那一页，第二个参数是设置是否需要滑动，还是直接跳到那个页面
+//                设置指定ViewPager的页面是那一页，第二个参数是设置是否需要滑动（false是不滑动，直接跳到那个页面）
                 mViewPager.setCurrentItem(0, false);
                 break;
             case R.id.home_bottom_tab_ll_address_list:
@@ -237,18 +267,19 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     /**
-     * 显示主页面右上角“+”号 新建任务的popupWindow
+     * 弹出主页面右上角“+”号 新建任务的popupWindow
      */
     private void showNewTaskPopupWindow() {
-//                TODO 并实现popupwindow相应的点击事件
-//                弹出popupwindow
-//                1.导入popupwindow的布局，并从布局找到ListView
+//        TODO 并实现popupwindow相应的点击事件
+
+//            弹出popupwindow
+//            1.导入popupwindow的布局，并从布局找到ListView
         View popupWindowLayout = LayoutInflater.from(this).inflate(R.layout.home_top_tab_new_task_popupwindow_layout, null);
         ListView popupWindowListView = popupWindowLayout.findViewById(R.id.home_top_tab_new_task_popup_window_lv);
 
-//                2.为listView准备数据(图标和文字)，并将每条数据存入一个列表中，
-//                  列表中的对象存着每条数据的图标、文字地址，然后传入ListView的适配器中使用，
-//                  最后将Adapter绑定ListView
+//        2.为listView准备数据(图标和文字)，并将每条数据存入一个列表中，
+//          列表中的对象存着每条数据的图标、文字地址，然后传入ListView的适配器中使用，
+//          最后将Adapter绑定ListView
         String[] homeNewTaskText = {"发起群聊", "添加朋友", "扫一扫", "收付款", "帮助与反馈"};
         int[] homeNewTaskImageId = {R.drawable.action_bar_new_group_chat, R.drawable.action_bar_add_new_friend, R.drawable.action_bar_scan, R.drawable.action_bar_pay, R.drawable.action_bar_help_and_feedback};
         ArrayList<HomeNewTaskPopulWindowData> populWindowDatas = new ArrayList<>();
@@ -260,15 +291,19 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         }
         popupWindowListView.setAdapter(new HomeNewTaskPopupWindowAdapter(populWindowDatas));
 
-//                找到popupWindow的(填充屏幕)根布局的id，并给根布局设置点击事件，
-//                如果不是点击popupWindow中的ListView的话，就让popupWindow消失
-//                (让popupWindow充满屏幕原因1.实现点击外部消失 2.点击外部时候禁止外部的其他不相关控件响应)
+//        找到popupWindow的(填充屏幕)根布局的id，并给根布局设置点击事件，
+//        如果不是点击popupWindow中的ListView的话，就让popupWindow消失
+//        (让popupWindow充满屏幕原因1.实现点击外部消失 2.点击外部时候禁止外部的其他不相关控件响应)
         View popupWindowRoot = popupWindowLayout.findViewById(R.id.home_top_tab_new_task_popup_window_root);
         popupWindowRoot.setOnClickListener(this);
 
 //                创建popupWindow，并指定其显示位置
         popupWindow = new PopupWindow(popupWindowLayout, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+//        设置popupWindow动画(放大弹出和缩小消失) TODO popupWindow弹出和收回的动画效果无效，且效果的时长等属性值需更改
+        popupWindow.setAnimationStyle(R.style.custom_popup_window_anim_style);
         popupWindow.showAtLocation(homeActivityRootLl, Gravity.END, 0, 0);
+        popupWindow.update();
+
     }
 
     /**
@@ -340,27 +375,27 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      */
     @Override
     public void onBackPressed() {
-        if(popupWindow != null){
+        if (popupWindow != null) {
             popupWindow.dismiss();
             popupWindow = null;
-        }else {
+        } else {
             super.onBackPressed();
         }
     }
 
     @Override
     public boolean onLongClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.home_top_tab_search_iv:
 //                长按搜索按钮时的事件
 
 //                弹出Toast，设置Toast的位置，高度是获取标题栏的高度
                 Toast toast = Toast.makeText(this, "搜索", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP | Gravity.END, ConvertUtils.dp2px(this,92), getResources().getDimensionPixelOffset(R.dimen.top_bar_height));//此处的92是:新建任务按钮长度 + 搜索按钮长度的一半 = 92dp
+                toast.setGravity(Gravity.TOP | Gravity.END, ConvertUtils.dp2px(this, 92), getResources().getDimensionPixelOffset(R.dimen.top_bar_height));//此处的92是:新建任务按钮长度 + 搜索按钮长度的一半 = 92dp
                 toast.show();
 
 //                设置震动
-                Vibrator vibrator = (Vibrator)this.getSystemService(this.VIBRATOR_SERVICE);
+                Vibrator vibrator = (Vibrator) this.getSystemService(this.VIBRATOR_SERVICE);
                 vibrator.vibrate(50);
                 break;
         }

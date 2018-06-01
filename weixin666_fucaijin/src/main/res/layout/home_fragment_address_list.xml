@@ -3,13 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="这是通讯录界面"
-        android:textSize="30sp"
-        android:textColor="#FF0000"
-        android:layout_gravity="center_vertical"/>
+    <ListView
+        android:id="@+id/address_list_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+
+    <com.fucaijin.weixin_fucaijin.view.QuickIndexBar
+        android:id="@+id/home_fragment_address_list_quick_index_bar"
+        android:layout_width="24dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true">
+    </com.fucaijin.weixin_fucaijin.view.QuickIndexBar>
 
 </RelativeLayout>
