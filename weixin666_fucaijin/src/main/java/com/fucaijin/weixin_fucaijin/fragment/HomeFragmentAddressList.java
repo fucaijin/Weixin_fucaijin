@@ -1,7 +1,6 @@
 package com.fucaijin.weixin_fucaijin.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,7 +25,6 @@ public class HomeFragmentAddressList extends Fragment {
 
     private QuickIndexBar quickIndexBar;
     private TextView currentBigLetterTv;
-    private Handler handler = new Handler();
 
     @Nullable
     @Override
@@ -40,17 +38,20 @@ public class HomeFragmentAddressList extends Fragment {
         final ListView addressListLv = inflate.findViewById(R.id.address_list_lv);
         addressListLv.setAdapter(new AddressListAdapter());
 
+//        给右侧边栏设置触摸监听器，监听触摸到哪个字母，和监听手指是否离开右侧边栏
         quickIndexBar.setOnTouchLetterListener(new QuickIndexBar.onTouchLetterListener() {
             @Override
             public void onTouchLetter(String letter) {
-//                TODO 快速检索逻辑未完成
                 for (int i = 0; i < mAddressListItem.size(); i++) {
                     if(letter.equals(mAddressListItem.get(i).getNickNameFirstLetter())){
                         addressListLv.setSelection(i);
                         break;
+                    }else if(letter.equals("↑")){
+                        addressListLv.setSelection(0);
+                        break;
                     }
                 }
-                showCurrentLetter(letter);
+                showCurrentBigLetter(letter);
             }
 
             @Override
@@ -61,11 +62,6 @@ public class HomeFragmentAddressList extends Fragment {
         return inflate;
     }
 
-    private void showCurrentLetter(String letter) {
-        currentBigLetterTv.setVisibility(View.VISIBLE);
-        currentBigLetterTv.setText(letter);
-    }
-
     /**
      * 隐藏通讯录页右侧的检索栏
      */
@@ -74,7 +70,7 @@ public class HomeFragmentAddressList extends Fragment {
         quickIndexBar.setVisibility(View.INVISIBLE);
         quickIndexBar.setBackgroundColor(0x00000000);
 
-//        以下注释代码是因为渐变显示效果有BUG，暂时不使用
+//        以下注释代码是因为渐变透明显示效果有BUG，暂时不使用
 //        quickIndexBar.setAlpha(0);
 //        quickIndexBar.setBackgroundColor(0x00000000);
     }
@@ -91,6 +87,18 @@ public class HomeFragmentAddressList extends Fragment {
 //        anim.start();
     }
 
+    /**
+     * 隐藏中间显示的当前的大字母
+     * @param letter 当前右侧检索栏所滑到的字母
+     */
+    private void showCurrentBigLetter(String letter) {
+        currentBigLetterTv.setVisibility(View.VISIBLE);
+        currentBigLetterTv.setText(letter);
+    }
+
+    /**
+     * 隐藏中间显示的当前的大字母
+     */
     public void hideCurrentBigLetter() {
         currentBigLetterTv.setVisibility(View.GONE);
     }

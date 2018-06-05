@@ -28,8 +28,13 @@ public class WeixinApplication extends Application {
     private static boolean firstRun = false;    //设定默认不是第一次登录
     private static SharedPreferences user;
 
+//    模拟的用户信息（头像和昵称）
     public static List<AddressListItemData> mAddressListItem = new ArrayList<>();
 
+//    官方的头像和昵称
+    public static List<AddressListItemData> mAddressListOfficialItem = new ArrayList<>();
+
+//    模拟的用户头像
     private int[] headSculptureList = {R.drawable.head_sculpture_1, R.drawable.head_sculpture_2,
             R.drawable.head_sculpture_3, R.drawable.head_sculpture_4,
             R.drawable.head_sculpture_5, R.drawable.head_sculpture_6,
@@ -50,6 +55,7 @@ public class WeixinApplication extends Application {
             R.drawable.head_sculpture_35,
     };
 
+//    模拟的用户昵称
     private String[] nickNameList = {"HelloKitty", "阿拉蕾", "白娘子", "白头发少年", "白头发鸣人",
             "白雪公主", "超级玛红", "超级玛绿", "大白鹅", "丁丁",
             "猥琐海盗", "黑猫警长", "葫芦娃", "加肥猫", "胖小弟",
@@ -57,6 +63,13 @@ public class WeixinApplication extends Application {
             "大龙猫", "路灰", "满头绿", "卖兜", "超级无敌美少女",
             "真的鸣人", "派派派派派大星", "瞧吧", "圣诞老爷爷", "不认识这是谁",
             "无脸人", "绿了全身的猪", "小熊维尼", "可爱的小樱桃", "猥琐小胖子", };
+
+//    模拟的官方头像（通讯录顶部的四个：新朋友、群聊、标签、公众号）
+    private int[] OfficialHeadSculptureList = {R.drawable.address_list_new_friends, R.drawable.address_list_group_chat,
+            R.drawable.address_list_tags, R.drawable.address_list_public_account};
+
+    //    模拟的用户昵称
+    private String[] OfficialNickNameList = {"新朋友", "群聊", "标签", "公众号"};
 
     @Override
     public void onCreate() {
@@ -70,6 +83,16 @@ public class WeixinApplication extends Application {
     }
 
     private void initData() {
+//        封装官方的头像和昵称
+        if(OfficialHeadSculptureList.length == OfficialNickNameList.length){
+            for (int i = 0 ; i < OfficialNickNameList.length ; i++){
+                AddressListItemData addressListItemData = new AddressListItemData();
+                addressListItemData.setHeadSculpture(OfficialHeadSculptureList[i]);
+                addressListItemData.setNickName(OfficialNickNameList[i]);
+                mAddressListOfficialItem.add(addressListItemData);
+            }
+        }
+
 //        把通讯录的条目数据封装到addressListItemData里面，然后再把所有条目信息装到mAddressListItem
         if(nickNameList.length == headSculptureList.length){
             for (int i = 0 ; i < nickNameList.length ; i++){

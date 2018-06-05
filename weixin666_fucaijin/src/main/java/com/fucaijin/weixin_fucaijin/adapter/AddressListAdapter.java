@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.fucaijin.weixin_fucaijin.R;
 
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mAddressListItem;
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mAddressListOfficialItem;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
 /**
@@ -20,6 +21,7 @@ import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
 public class AddressListAdapter extends BaseAdapter implements View.OnLongClickListener, View.OnClickListener {
 
+
     @Override
     public int getCount() {
         return mAddressListItem.size();
@@ -27,7 +29,10 @@ public class AddressListAdapter extends BaseAdapter implements View.OnLongClickL
 
     @Override
     public Object getItem(int i) {
-        return mAddressListItem.get(i);
+        if(i > mAddressListOfficialItem.size()){
+            return mAddressListItem.get(i - mAddressListOfficialItem.size() - 1 );
+        }
+        return mAddressListOfficialItem.get(i);
     }
 
     @Override
@@ -41,32 +46,49 @@ public class AddressListAdapter extends BaseAdapter implements View.OnLongClickL
             convertView = View.inflate(mContext, R.layout.home_fragment_address_list_item, null);
         }
 
-//        从数据中获取昵称、昵称的首字母
-        String nickName = mAddressListItem.get(i).getNickName();
-        String nickNameFirstLetter = mAddressListItem.get(i).getNickNameFirstLetter();
-
         ViewHolder holder = ViewHolder.getViewHolder(convertView);
-        holder.headSculpture.setImageResource(mAddressListItem.get(i).getHeadSculpture());
-        holder.nickName.setText(nickName);
+
+        String nickName;
+        String nickNameFirstLetter = "";
+
+        if(i < mAddressListOfficialItem.size()){
+            holder.firstWord.setVisibility(View.GONE);
+            holder.headSculpture.setImageResource(mAddressListOfficialItem.get(i).getHeadSculpture());
+            holder.nickName.setText(mAddressListOfficialItem.get(i).getNickName());
+        }else {
+            //        从数据中获取昵称、昵称的首字母
+            nickName = mAddressListItem.get(i).getNickName();
+            nickNameFirstLetter = mAddressListItem.get(i).getNickNameFirstLetter();
+
+            holder.headSculpture.setImageResource(mAddressListItem.get(i).getHeadSculpture());
+            holder.nickName.setText(nickName);
+
+            //        如果当前不是第一个条目，则判断当前条目的首字母是否和上一个的相同，如果相同就隐藏，不相同就显示
+            if(i > 0 ){
+                String lastNickNameFirstLetter = mAddressListItem.get(i - 1).getNickNameFirstLetter();//获取上一个条目的首字母
+                if(nickNameFirstLetter.equals(lastNickNameFirstLetter)){
+                    holder.firstWord.setVisibility(View.GONE);
+                }else {
+                    holder.firstWord.setVisibility(View.VISIBLE);
+                    holder.firstWord.setText(nickNameFirstLetter);
+                }
+
+                if(i == mAddressListOfficialItem.size()){
+                    holder.firstWord.setVisibility(View.VISIBLE);
+                    holder.firstWord.setText(nickNameFirstLetter);
+                }
+            }else {
+                holder.firstWord.setVisibility(View.VISIBLE);
+                holder.firstWord.setText(nickNameFirstLetter);
+            }
+        }
 
 //        原本应该给ListView设置点击和长按事件的，结果ListView没响应，只能在此处设置，
 //        TODO 但长按通讯录，弹出PopupWindow功能未实现
 //        holder.itemRoot.setOnLongClickListener(this);
 //        holder.itemRoot.setOnClickListener(this);
 
-//        如果当前不是第一个条目，则判断当前条目的首字母是否和上一个的相同，如果相同就隐藏，不相同就显示
-        if(i > 0 ){
-            String lastNickNameFirstLetter = mAddressListItem.get(i - 1).getNickNameFirstLetter();//获取上一个条目的首字母
-            if(nickNameFirstLetter.equals(lastNickNameFirstLetter)){
-                holder.firstWord.setVisibility(View.GONE);
-            }else {
-                holder.firstWord.setVisibility(View.VISIBLE);
-                holder.firstWord.setText(nickNameFirstLetter);
-            }
-        }else {
-            holder.firstWord.setVisibility(View.VISIBLE);
-            holder.firstWord.setText(nickNameFirstLetter);
-        }
+
         return convertView;
     }
 
