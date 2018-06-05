@@ -1,6 +1,5 @@
 package com.fucaijin.weixin_fucaijin.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,6 +19,8 @@ import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 import com.fucaijin.weixin_fucaijin.utils.JudgementUtils;
 import com.fucaijin.weixin_fucaijin.utils.Md5;
 
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
+
 
 /**
  * 登录页面：1.手机号登录 2.账号密码登录 3.已注销重新登录
@@ -30,8 +31,6 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
 //    TODO 手机号、账号、密码这三个输入框的数字字体的更改
 //    TODO 底部找回密码、紧急冻结、微信安全中心的点击逻辑的实现
 //    TODO 尚未完成注销之后的使用之前账户登录的界面（语音登录界面）
-
-    private Context mContext;
 
     private LinearLayout sign_in_ll_use_phone_ui;
     private LinearLayout sign_in_ll_use_other_way_ui;
@@ -51,7 +50,6 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setStatusBarColor(0xFFFFFFFE);//全白的状态栏设置无效，采用接近纯白色代替
         setContentView(R.layout.activity_sign_in);
-        mContext = WeixinApplication.getmContext();
         initUI();
     }
 

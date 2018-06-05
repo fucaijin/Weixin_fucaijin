@@ -178,7 +178,8 @@
             <RelativeLayout
                 android:id="@+id/home_found_frag_lv_item_mini_program"
                 style="@style/home_list_view_style"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
 
                 <ImageView
                     android:src="@drawable/found_frag_mini_program"

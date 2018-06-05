@@ -11,6 +11,8 @@ import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.adapter.LanguageListAdapter;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
+
 public class SelectLanguageActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 //    TODO 真正更改语言的逻辑未完成(更改后微信的所有文字都变成相应的语言)
 //    TODO 进来界面，根据历史记录自动选择到相应条目未实现
@@ -35,7 +37,7 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
         }
 
 //        ListView数据的填充,传入要显示的列表，以及之前保存在xml文件中的语言选择的设置
-        languageListAdapter = new LanguageListAdapter(WeixinApplication.getmContext(), languageList,index);
+        languageListAdapter = new LanguageListAdapter(mContext, languageList,index);
         lv_selectLanguage.setAdapter(languageListAdapter);
     }
 

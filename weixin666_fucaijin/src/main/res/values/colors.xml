@@ -28,6 +28,7 @@
     <color name="colorHomeTopTabButtonPressed">#2E2E32</color>//顶部标题栏按下之后的背景色
     <color name="colorHomeWeChatFragmentRecentMessage">#999999</color>//聊天页面的ListView的条目的最近的消息文字颜色
     <color name="colorHomeWeChatFragmentLastMessageTime">#BBBBBB</color>//聊天页面的ListView的条目的最近的消息文字颜色
-    <color name="colorHomeSearchPopupWindowDivider">#191B1C</color>//聊天页面的ListView的条目的最近的消息文字颜色
+    <color name="colorHomeNewTaskPopupWindowDivider">#191B1C</color>//聊天页面的ListView的条目的最近的消息文字颜色
+    <color name="colorHomeSearchPageBackGround">#F6F6F8</color>//主页左上角搜索页面的背景颜色
 
 </resources>

@@ -7,8 +7,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
+
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
 /**
  * 可检索的列表View
@@ -51,7 +52,7 @@ public class QuickIndexBar extends View {
         if(!isInEditMode()){
             mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);//设置抗锯齿
             mPaint.setColor(0xFF616161);
-            mPaint.setTextSize(ConvertUtils.sp2px(WeixinApplication.getmContext(), 13));
+            mPaint.setTextSize(ConvertUtils.sp2px(mContext, 13));
             mPaint.setTextAlign(Paint.Align.CENTER);//设置文本的起点是文本的正中心
         }
 
@@ -102,6 +103,9 @@ public class QuickIndexBar extends View {
                 setBackgroundColor(0x00BFBFBF);
                 isShowBackGround = false;
                 lastIndex = -1;
+
+//                把取消点击的事件传出去
+                touchLetterListener.onCancelTouch();
                 break;
         }
         return true;
@@ -114,6 +118,10 @@ public class QuickIndexBar extends View {
     }
 
     public interface onTouchLetterListener{
+//        只要有点击/滑动，而且字母有改变的时候就会调用onTouchLetter()
         void onTouchLetter(String letter);
+
+//        只要触摸事件结束，就会调用onCancelTouch()
+        void onCancelTouch();
     }
 }

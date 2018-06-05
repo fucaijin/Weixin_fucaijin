@@ -6,14 +6,26 @@
     <ListView
         android:id="@+id/address_list_lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:divider="@null">
     </ListView>
 
     <com.fucaijin.weixin_fucaijin.view.QuickIndexBar
         android:id="@+id/home_fragment_address_list_quick_index_bar"
-        android:layout_width="24dp"
+        android:layout_width="@dimen/address_list_quick_index_bar_width"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true">
     </com.fucaijin.weixin_fucaijin.view.QuickIndexBar>
+    
+    <TextView
+        android:id="@+id/address_list_quick_index_big_letter"
+        android:layout_width="79dp"
+        android:layout_height="79dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/quick_index_big_letter"
+        android:textSize="38sp"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:visibility="gone"/>
 
 </RelativeLayout>

@@ -1,209 +1,412 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_home"
     style="@style/ll_base_root_style"
     tools:context="com.fucaijin.weixin_fucaijin.activity.HomeActivity">
 
-    <!--顶部标题栏-->
-    <RelativeLayout
-        android:clickable="true"
-        android:id="@+id/home_top_tab_root_rl"
-        android:layout_height="@dimen/top_bar_height"
-        android:layout_width="match_parent"
-        android:background="@color/colorTabTopDarkGray">
-
-        <!--标题-->
-        <TextView
-            android:id="@+id/home_top_tab_title_tv"
-            style="@style/w_h_double_wrap_content"
-            android:text="@string/app_name"
-            android:textColor="@color/colorWhite"
-            android:layout_centerVertical="true"
-            android:textSize="18sp"
-            android:layout_marginStart="15dp"/>
-
-        <!--新建任务-->
-        <ImageView
-            android:clickable="true"
-            android:id="@+id/home_top_tab_new_task_iv"
-            android:layout_width="68dp"
-            android:layout_height="@dimen/top_bar_height"
-            android:src="@drawable/home_top_tab_new_task"
-            android:padding="15dp"
-            android:background="@drawable/home_new_task_iv_selector"
-            android:layout_alignParentEnd="true"/>
-
-        <!--搜索按钮-->
-        <ImageView
-            android:id="@+id/home_top_tab_search_iv"
-            android:clickable="true"
-            android:layout_toStartOf="@id/home_top_tab_new_task_iv"
-            android:layout_width="@dimen/top_bar_height"
-            android:layout_height="@dimen/top_bar_height"
-            android:background="@drawable/home_new_task_iv_selector"
-            android:src="@drawable/home_top_tab_search"
-            android:padding="15dp"/>
-
-    </RelativeLayout>
-
-    <!--中间的内容-->
-    <android.support.v4.view.ViewPager
-        android:id="@+id/home_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-    </android.support.v4.view.ViewPager>
-
-    <!--底部栏上方的分割线-->
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/colorHomeBottomTabTopDivider"/>
-
-    <!--底部导航栏-->
+    <!--主页-->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:orientation="horizontal"
-        android:background="@color/colorHomeBottomTab">
+        android:id="@+id/activity_home"
+        style="@style/ll_base_root_style">
 
-        <!--微信-->
-        <LinearLayout
-            android:id="@+id/home_bottom_tab_ll_wechat"
-            style="@style/home_bottom_tab_unit_root_ll">
+        <!--顶部标题栏-->
+        <RelativeLayout
+            android:id="@+id/home_top_tab_root_rl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_bar_height"
+            android:background="@color/colorTabTopDarkGray"
+            android:clickable="true">
 
-            <!--微信图片层-->
-            <FrameLayout
-                style="@style/home_bottom_tab_unit_fl">
-                <ImageView
-                    android:id="@+id/home_bottom_tab_iv_wechat_normal"
-                    style="@style/w_h_double_match_parent"
-                    android:src="@drawable/home_bottom_tab_wechat_normal"/>
-                <ImageView
-                    android:id="@+id/home_bottom_tab_iv_wechat_pressed"
-                    style="@style/home_bottom_tab_iv_pressed"
-                    android:src="@drawable/home_bottom_tab_wechat_pressed" />
-            </FrameLayout>
-
-            <!--微信文字层-->
-            <FrameLayout
+            <!--标题-->
+            <TextView
+                android:id="@+id/home_top_tab_title_tv"
                 style="@style/w_h_double_wrap_content"
-                android:layout_marginTop="2dp">
-                <TextView
-                    android:id="@+id/home_bottom_tab_tv_wechat_normal"
-                    android:text="@string/wechat"
-                    style="@style/home_bottom_tab_unit_text_normal"/>
-                <TextView
-                    android:id="@+id/home_bottom_tab_tv_wechat_pressed"
-                    android:text="@string/wechat"
-                    style="@style/home_bottom_tab_unit_text_pressed"/>
-            </FrameLayout>
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:text="@string/app_name"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+
+            <!--新建任务-->
+            <ImageView
+                android:id="@+id/home_top_tab_new_task_iv"
+                android:layout_width="68dp"
+                android:layout_height="@dimen/top_bar_height"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/home_new_task_iv_selector"
+                android:clickable="true"
+                android:padding="15dp"
+                android:src="@drawable/home_top_tab_new_task" />
+
+            <!--搜索按钮-->
+            <ImageView
+                android:id="@+id/home_top_tab_search_iv"
+                android:layout_width="@dimen/top_bar_height"
+                android:layout_height="@dimen/top_bar_height"
+                android:layout_toStartOf="@id/home_top_tab_new_task_iv"
+                android:background="@drawable/home_new_task_iv_selector"
+                android:clickable="true"
+                android:padding="15dp"
+                android:src="@drawable/home_top_tab_search" />
+
+        </RelativeLayout>
+
+        <!--中间的内容-->
+        <android.support.v4.view.ViewPager
+            android:id="@+id/home_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"></android.support.v4.view.ViewPager>
+
+        <!--底部栏上方的分割线-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/colorHomeBottomTabTopDivider" />
+
+        <!--底部导航栏-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:background="@color/colorHomeBottomTab"
+            android:orientation="horizontal">
+
+            <!--微信-->
+            <LinearLayout
+                android:id="@+id/home_bottom_tab_ll_wechat"
+                style="@style/home_bottom_tab_unit_root_ll">
+
+                <!--微信图片层-->
+                <FrameLayout style="@style/home_bottom_tab_unit_fl">
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_wechat_normal"
+                        style="@style/w_h_double_match_parent"
+                        android:src="@drawable/home_bottom_tab_wechat_normal" />
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_wechat_middle"
+                        style="@style/w_h_double_match_parent"
+                        android:src="@drawable/home_bottom_tab_wechat_middle_status"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_wechat_pressed"
+                        style="@style/home_bottom_tab_iv_pressed"
+                        android:src="@drawable/home_bottom_tab_wechat_pressed" />
+                </FrameLayout>
+
+                <!--微信文字层-->
+                <FrameLayout
+                    style="@style/w_h_double_wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/home_bottom_tab_tv_wechat_normal"
+                        style="@style/home_bottom_tab_unit_text_normal"
+                        android:text="@string/wechat" />
+
+                    <TextView
+                        android:id="@+id/home_bottom_tab_tv_wechat_pressed"
+                        style="@style/home_bottom_tab_unit_text_pressed"
+                        android:text="@string/wechat" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <!--通讯录-->
+            <LinearLayout
+                android:id="@+id/home_bottom_tab_ll_address_list"
+                style="@style/home_bottom_tab_unit_root_ll">
+
+                <!--通讯录图片层-->
+                <FrameLayout style="@style/home_bottom_tab_unit_fl">
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_address_list_normal"
+                        style="@style/home_bottom_tab_unit_fl"
+                        android:src="@drawable/home_bottom_tab_address_list_normal" />
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_address_list_middle"
+                        style="@style/home_bottom_tab_unit_fl"
+                        android:src="@drawable/home_bottom_tab_address_middle_status"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_address_list_pressed"
+                        style="@style/home_bottom_tab_iv_pressed"
+                        android:src="@drawable/home_bottom_tab_address_list_pressed" />
+                </FrameLayout>
+
+                <!--通讯录文字层-->
+                <FrameLayout
+                    style="@style/w_h_double_wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/home_bottom_tab_tv_address_list_normal"
+                        style="@style/home_bottom_tab_unit_text_normal"
+                        android:text="@string/address_list" />
+
+                    <TextView
+                        android:id="@+id/home_bottom_tab_tv_address_list_pressed"
+                        style="@style/home_bottom_tab_unit_text_pressed"
+                        android:text="@string/address_list" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <!--发现-->
+            <LinearLayout
+                android:id="@+id/home_bottom_tab_ll_found"
+                style="@style/home_bottom_tab_unit_root_ll">
+
+                <!--发现图片层-->
+                <FrameLayout style="@style/home_bottom_tab_unit_fl">
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_found_normal"
+                        style="@style/home_bottom_tab_unit_fl"
+                        android:src="@drawable/home_bottom_tab_found_normal" />
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_found_middle"
+                        style="@style/home_bottom_tab_unit_fl"
+                        android:src="@drawable/home_bottom_tab_found_middle_status"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_found_pressed"
+                        style="@style/home_bottom_tab_iv_pressed"
+
+                        android:src="@drawable/home_bottom_tab_found_pressed" />
+                </FrameLayout>
+
+                <!--发现文字层-->
+                <FrameLayout
+                    style="@style/w_h_double_wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/home_bottom_tab_tv_found_normal"
+                        style="@style/home_bottom_tab_unit_text_normal"
+                        android:text="@string/found" />
+
+                    <TextView
+                        android:id="@+id/home_bottom_tab_tv_found_pressed"
+                        style="@style/home_bottom_tab_unit_text_pressed"
+                        android:text="@string/found" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <!--我-->
+            <LinearLayout
+                android:id="@+id/home_bottom_tab_ll_me"
+                style="@style/home_bottom_tab_unit_root_ll">
+
+                <!--我icon层-->
+                <FrameLayout style="@style/home_bottom_tab_unit_fl">
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_me_normal"
+                        style="@style/home_bottom_tab_unit_fl"
+                        android:src="@drawable/home_bottom_tab_me_normal" />
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_me_middle"
+                        style="@style/home_bottom_tab_unit_fl"
+                        android:src="@drawable/home_bottom_tab_me_middle_status"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/home_bottom_tab_iv_me_pressed"
+                        style="@style/home_bottom_tab_iv_pressed"
+                        android:src="@drawable/home_bottom_tab_me_pressed" />
+                </FrameLayout>
+
+                <!--我文字层-->
+                <FrameLayout
+                    style="@style/w_h_double_wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/home_bottom_tab_tv_me_normal"
+                        style="@style/home_bottom_tab_unit_text_normal"
+                        android:text="@string/me" />
+
+                    <TextView
+                        android:id="@+id/home_bottom_tab_tv_me_pressed"
+                        style="@style/home_bottom_tab_unit_text_pressed"
+                        android:text="@string/me" />
+                </FrameLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <!--通讯录-->
-        <LinearLayout
-            android:id="@+id/home_bottom_tab_ll_address_list"
-            style="@style/home_bottom_tab_unit_root_ll">
-
-            <!--通讯录图片层-->
-            <FrameLayout
-                style="@style/home_bottom_tab_unit_fl">
-                <ImageView
-                    android:id="@+id/home_bottom_tab_iv_address_list_normal"
-                    style="@style/home_bottom_tab_unit_fl"
-                    android:src="@drawable/home_bottom_tab_address_list_normal" />
-                <ImageView
-                    android:id="@+id/home_bottom_tab_iv_address_list_pressed"
-                    style="@style/home_bottom_tab_iv_pressed"
-                    android:src="@drawable/home_bottom_tab_address_list_pressed" />
-            </FrameLayout>
-
-            <!--通讯录文字层-->
-            <FrameLayout
-                style="@style/w_h_double_wrap_content"
-                android:layout_marginTop="2dp">
-                <TextView
-                    android:id="@+id/home_bottom_tab_tv_address_list_normal"
-                    android:text="@string/address_list"
-                    style="@style/home_bottom_tab_unit_text_normal"/>
-                <TextView
-                    android:id="@+id/home_bottom_tab_tv_address_list_pressed"
-                    android:text="@string/address_list"
-                    style="@style/home_bottom_tab_unit_text_pressed"/>
-            </FrameLayout>
-
-        </LinearLayout>
-
-        <!--发现-->
-        <LinearLayout
-            android:id="@+id/home_bottom_tab_ll_found"
-            style="@style/home_bottom_tab_unit_root_ll">
-
-            <!--发现图片层-->
-            <FrameLayout
-                style="@style/home_bottom_tab_unit_fl">
-                <ImageView
-                    android:id="@+id/home_bottom_tab_iv_found_normal"
-                    style="@style/home_bottom_tab_unit_fl"
-                    android:src="@drawable/home_bottom_tab_found_normal" />
-                <ImageView
-                    android:id="@+id/home_bottom_tab_iv_found_pressed"
-                    style="@style/home_bottom_tab_iv_pressed"
-                    android:src="@drawable/home_bottom_tab_found_pressed" />
-            </FrameLayout>
-
-            <!--发现文字层-->
-            <FrameLayout
-                style="@style/w_h_double_wrap_content"
-                android:layout_marginTop="2dp">
-                <TextView
-                    android:id="@+id/home_bottom_tab_tv_found_normal"
-                    android:text="@string/found"
-                    style="@style/home_bottom_tab_unit_text_normal"/>
-                <TextView
-                    android:id="@+id/home_bottom_tab_tv_found_pressed"
-                    android:text="@string/found"
-                    style="@style/home_bottom_tab_unit_text_pressed"/>
-            </FrameLayout>
-
-        </LinearLayout>
-
-        <!--我-->
-        <LinearLayout
-            android:id="@+id/home_bottom_tab_ll_me"
-            style="@style/home_bottom_tab_unit_root_ll">
-
-            <!--我icon层-->
-            <FrameLayout
-                style="@style/home_bottom_tab_unit_fl">
-                <ImageView
-                    android:id="@+id/home_bottom_tab_iv_me_normal"
-                    style="@style/home_bottom_tab_unit_fl"
-                    android:src="@drawable/home_bottom_tab_me_normal" />
-                <ImageView
-                    android:id="@+id/home_bottom_tab_iv_me_pressed"
-                    style="@style/home_bottom_tab_iv_pressed"
-                    android:src="@drawable/home_bottom_tab_me_pressed" />
-            </FrameLayout>
-
-            <!--我文字层-->
-            <FrameLayout
-                style="@style/w_h_double_wrap_content"
-                android:layout_marginTop="2dp">
-                <TextView
-                    android:id="@+id/home_bottom_tab_tv_me_normal"
-                    android:text="@string/me"
-                    style="@style/home_bottom_tab_unit_text_normal"/>
-                <TextView
-                    android:id="@+id/home_bottom_tab_tv_me_pressed"
-                    android:text="@string/me"
-                    style="@style/home_bottom_tab_unit_text_pressed"/>
-            </FrameLayout>
-
-        </LinearLayout>
-
+        
     </LinearLayout>
 
-</LinearLayout>
+    <!--搜索页-->
+    <FrameLayout
+        android:id="@+id/home_search_page_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorHomeSearchPageBackGround"
+        android:visibility="gone">
+
+        <!--顶部标题栏-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_bar_height"
+            android:background="@color/colorTabTopDarkGray">
+
+            <!--回退/关闭按钮-->
+            <RelativeLayout
+                android:id="@+id/search_page_back_btn_rl"
+                style="@style/rl_top_bar_close_back"
+                android:layout_marginEnd="0dp">
+
+                <!--图片-->
+                <ImageView
+                    style="@style/iv_top_bar_go_back"
+                    android:src="@drawable/img_back"/>
+
+                <!--深灰色竖直分割线-->
+                <ImageView
+                    style="@style/top_bar_divider"/>
+
+            </RelativeLayout>
+
+            <!--输入框底部的绿线-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                style="divider"
+                android:background="@color/colorLineGreen"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toEndOf="@id/search_page_back_btn_rl"/>
+
+            <!--搜索按钮-->
+            <ImageView
+                android:id="@+id/search_page_search_iv_bt"
+                android:layout_width="@dimen/top_bar_height"
+                android:layout_height="@dimen/top_bar_height"
+                android:padding="15dp"
+                android:src="@drawable/home_top_tab_search"
+                android:layout_toEndOf="@id/search_page_back_btn_rl"/>
+
+            <!--搜索输入框-->
+            <EditText
+                android:id="@+id/search_page_input_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="搜索"
+                android:textSize="15sp"
+                android:layout_marginStart="-7dp"
+                android:layout_marginEnd="39dp"
+                android:textCursorDrawable="@drawable/edit_text_white_cursor_img"
+                android:layout_toEndOf="@id/search_page_search_iv_bt"/>
+
+            <!--语音搜索按钮-->
+            <ImageView
+                android:id="@+id/search_page_voice_btn_iv"
+                android:layout_width="@dimen/top_bar_height"
+                android:layout_height="@dimen/top_bar_height"
+                android:padding="15dp"
+                android:src="@drawable/search_page_voice_search"
+                android:layout_alignParentEnd="true" />
+
+            <!--清空输入框按钮-->
+            <ImageView
+                android:id="@+id/search_page_clear_edit_text_btn_iv"
+                android:layout_width="@dimen/top_bar_height"
+                android:layout_height="@dimen/top_bar_height"
+                android:padding="17dp"
+                android:src="@drawable/image_close_white"
+                android:alpha="0.5"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <!--底部文字根布局-->
+        <LinearLayout
+            android:id="@+id/search_appoint_content_root"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="98dp"
+            android:visibility="gone">
+
+            <!--搜索指定内容-->
+            <TextView
+                style="@style/w_h_double_wrap_content"
+                android:text="搜索指定内容"
+                android:textColor="@color/colorHomeWeChatFragmentRecentMessage"
+                android:layout_gravity="center_horizontal"/>
+
+            <!--第一行：朋友圈 文章 公众号-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:text="朋友圈"
+                    style="@style/search_page_clickable_green_text"/>
+
+                <ImageView
+                    style="@style/search_page_vertical_divider"/>
+
+                <TextView
+                    android:text="文章"
+                    style="@style/search_page_clickable_green_text"/>
+
+                <ImageView
+                    style="@style/search_page_vertical_divider"/>
+
+                <TextView
+                    android:text="公众号"
+                    style="@style/search_page_clickable_green_text"/>
+
+            </LinearLayout>
+
+            <!--第二行：小说 音乐 表情-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:text="小说"
+                    style="@style/search_page_clickable_green_text"/>
+
+                <ImageView
+                    style="@style/search_page_vertical_divider"/>
+
+                <TextView
+                    android:text="音乐"
+                    style="@style/search_page_clickable_green_text"/>
+
+                <ImageView
+                    style="@style/search_page_vertical_divider"/>
+
+                <TextView
+                    android:text="表情"
+                    style="@style/search_page_clickable_green_text"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>

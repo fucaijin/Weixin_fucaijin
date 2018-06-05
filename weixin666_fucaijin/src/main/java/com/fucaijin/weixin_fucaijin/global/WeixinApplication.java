@@ -6,6 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 
 import com.fucaijin.weixin_fucaijin.R;
+import com.fucaijin.weixin_fucaijin.data.AddressListItemData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by fucaijin on 2018/5/1.
@@ -17,14 +21,16 @@ public class WeixinApplication extends Application {
     //    Sign in   登录
     //    Sign out  退出
 
-    private static Context mContext;
+    public static Context mContext;
     private static Handler mHandler;
     private static int mainThreadId;
     private static boolean signIn = true;       //设定默认是已登录状态
     private static boolean firstRun = false;    //设定默认不是第一次登录
     private static SharedPreferences user;
 
-    public static int[] headSculptureList = {R.drawable.head_sculpture_1, R.drawable.head_sculpture_2,
+    public static List<AddressListItemData> mAddressListItem = new ArrayList<>();
+
+    private int[] headSculptureList = {R.drawable.head_sculpture_1, R.drawable.head_sculpture_2,
             R.drawable.head_sculpture_3, R.drawable.head_sculpture_4,
             R.drawable.head_sculpture_5, R.drawable.head_sculpture_6,
             R.drawable.head_sculpture_7, R.drawable.head_sculpture_8,
@@ -44,7 +50,7 @@ public class WeixinApplication extends Application {
             R.drawable.head_sculpture_35,
     };
 
-    public static String[] nickNameList = {"HelloKitty", "阿拉蕾", "白娘子", "白头发少年", "白头发鸣人",
+    private String[] nickNameList = {"HelloKitty", "阿拉蕾", "白娘子", "白头发少年", "白头发鸣人",
             "白雪公主", "超级玛红", "超级玛绿", "大白鹅", "丁丁",
             "猥琐海盗", "黑猫警长", "葫芦娃", "加肥猫", "胖小弟",
             "不平易近人的警察", "啃德鸡老爷爷", "我是小新", "灌篮小胖子", "雷神",
@@ -60,6 +66,19 @@ public class WeixinApplication extends Application {
         mainThreadId = android.os.Process.myTid();
         user = mContext.getSharedPreferences("user", MODE_PRIVATE);
         LoginStatus();
+        initData();
+    }
+
+    private void initData() {
+//        把通讯录的条目数据封装到addressListItemData里面，然后再把所有条目信息装到mAddressListItem
+        if(nickNameList.length == headSculptureList.length){
+            for (int i = 0 ; i < nickNameList.length ; i++){
+                AddressListItemData addressListItemData = new AddressListItemData();
+                addressListItemData.setHeadSculpture(headSculptureList[i]);
+                addressListItemData.setNickName(nickNameList[i]);
+                mAddressListItem.add(addressListItemData);
+            }
+        }
     }
 
     private void LoginStatus() {
@@ -83,9 +102,10 @@ public class WeixinApplication extends Application {
         }
     }
 
-    public static Context getmContext() {
-        return mContext;
-    }
+//    把mContext改成了public static 因此就不需要此方法了
+//    public static Context getmContext() {
+//        return mContext;
+//    }
 
     public static Handler getmHandler() {
         return mHandler;

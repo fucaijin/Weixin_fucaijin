@@ -16,8 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.headSculptureList;
-import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.nickNameList;
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mAddressListItem;
 
 /**
  * Created by fucaijin on 2018/5/9.
@@ -88,9 +87,9 @@ public class HomeWechatFragment extends Fragment {
         for (int i = 0;i < 35 ;i++){
             MessageListItem item = new MessageListItem();
 
-            item.headSculpture = headSculptureList[i];
-            item.nickName = nickNameList[i];
-            item.lastMessage = nickNameList[i] + "给你发来了问候，祝你身体健康工作顺利，妹子多多，帅锅多多";
+            item.headSculpture = mAddressListItem.get(i).getHeadSculpture();
+            item.nickName = mAddressListItem.get(i).getNickName();
+            item.lastMessage = mAddressListItem.get(i).getNickName() + "给你发来了问候，祝你身体健康工作顺利，妹子多多，帅锅多多";
             item.messageType = PESONAL_CHAT_TYPE;
 
 //        生成随机要减去/退回的毫秒数，并生成时间，然后格式化成字符串

@@ -1,6 +1,5 @@
 package com.fucaijin.weixin_fucaijin.adapter;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -9,21 +8,19 @@ import android.widget.TextView;
 
 import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.data.MessageListItem;
-import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 
 import java.util.List;
 
 import static com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment.PESONAL_CHAT_TYPE;
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
 /**
  * Created by fucaijin on 2018/5/14.
  */
 public class RecentContactAdapter extends BaseAdapter {
-    Context mContext;
     List list;
     public RecentContactAdapter(List list) {
         this.list = list;
-        mContext = WeixinApplication.getmContext();
     }
 
     @Override

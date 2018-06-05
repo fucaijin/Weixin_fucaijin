@@ -12,7 +12,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:dividerHeight="1px"
-        android:divider="@color/colorHomeSearchPopupWindowDivider"
+        android:divider="@color/colorHomeNewTaskPopupWindowDivider"
         android:background="@color/colorTabTopDarkGray"/>
 
     <ImageView

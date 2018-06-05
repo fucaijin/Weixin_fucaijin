@@ -1,14 +1,22 @@
 package com.fucaijin.weixin_fucaijin.activity;
 
-import android.content.Context;
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,7 +33,6 @@ import com.fucaijin.weixin_fucaijin.fragment.HomeFoundPageFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentAddressList;
 import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentMe;
 import com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment;
-import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
 
 import java.util.ArrayList;
@@ -43,15 +50,18 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
     private ViewPager mViewPager;
     private List<Fragment> fragmentList;
-    private Context mContext;
 
     private ImageView homeBottomTabIvWechatNormal;
+    private ImageView homeBottomTabIvWechatMiddle;
     private ImageView homeBottomTabIvWechatPressed;
     private ImageView homeBottomTabIvAddressListNormal;
+    private ImageView homeBottomTabIvAddressListMiddle;
     private ImageView homeBottomTabIvAddressListPressed;
     private ImageView homeBottomTabIvFoundNormal;
+    private ImageView homeBottomTabIvFoundMiddle;
     private ImageView homeBottomTabIvFoundPressed;
     private ImageView homeBottomTabIvMeNormal;
+    private ImageView homeBottomTabIvMeMiddle;
     private ImageView homeBottomTabIvMePressed;
 
     private TextView homeBottomTabTvWechatNormal;
@@ -62,6 +72,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private TextView homeBottomTabTvFoundPressed;
     private TextView homeBottomTabTvMeNormal;
     private TextView homeBottomTabTvMePressed;
+
     private HomeFragmentAdapter mPagerAdapter;
     private TextView homeTopTabTitleTv;
     private ImageView homeTopTabSearchIv;
@@ -77,12 +88,15 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             "购物", "游戏", "小程序"};
     private HomeFragmentAddressList homeFragmentAddressList;
     private boolean isShowIndexBar;
+    private FrameLayout homeSearchPage;
+    private boolean isHomeSearchPageOpened;
+    private LinearLayout searchAppointContentRoot;
+    private EditText searchPageInputEt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        mContext = WeixinApplication.getmContext();
         initUI();
     }
 
@@ -96,6 +110,37 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         homeTopTabTitleTv = (TextView) findViewById(R.id.home_top_tab_title_tv);
         homeTopTabSearchIv = (ImageView) findViewById(R.id.home_top_tab_search_iv);
         homeTopTabNewTaskIv = (ImageView) findViewById(R.id.home_top_tab_new_task_iv);
+
+        homeSearchPage = (FrameLayout) findViewById(R.id.home_search_page_ll);
+        searchAppointContentRoot = (LinearLayout) findViewById(R.id.search_appoint_content_root);
+        searchPageInputEt = (EditText) findViewById(R.id.search_page_input_et);
+        RelativeLayout searchPageBack = (RelativeLayout) findViewById(R.id.search_page_back_btn_rl);
+        searchPageBack.setOnClickListener(this);
+        final ImageView searchPageVoiceSearch = (ImageView) findViewById(R.id.search_page_voice_btn_iv);
+        final ImageView searchPageClearEditText =  (ImageView) findViewById(R.id.search_page_clear_edit_text_btn_iv);
+        searchPageClearEditText.setOnClickListener(this);
+        searchPageInputEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (TextUtils.isEmpty(editable)) {
+                    searchPageClearEditText.setVisibility(View.GONE);
+                    searchPageVoiceSearch.setVisibility(View.VISIBLE);
+                } else {
+                    searchPageVoiceSearch.setVisibility(View.GONE);
+                    searchPageClearEditText.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         homeTopTabSearchIv.setOnClickListener(this);
         homeTopTabSearchIv.setOnLongClickListener(this);
@@ -114,12 +159,16 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
 //        获取下方导航栏的图片(每张图片包含点击和正常两张的叠加)
         homeBottomTabIvWechatNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_wechat_normal);
+        homeBottomTabIvWechatMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_wechat_middle);
         homeBottomTabIvWechatPressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_wechat_pressed);
         homeBottomTabIvAddressListNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_address_list_normal);
+        homeBottomTabIvAddressListMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_address_list_middle);
         homeBottomTabIvAddressListPressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_address_list_pressed);
         homeBottomTabIvFoundNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_found_normal);
+        homeBottomTabIvFoundMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_found_middle);
         homeBottomTabIvFoundPressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_found_pressed);
         homeBottomTabIvMeNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_me_normal);
+        homeBottomTabIvMeMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_me_middle);
         homeBottomTabIvMePressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_me_pressed);
 
 //        获取下方导航栏的文字(每段文字包含点击和正常两张的叠加)
@@ -159,21 +208,34 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             case 0:
                 homeBottomTabIvWechatNormal.setImageAlpha((int) (255f * positionOffset));
                 homeBottomTabIvWechatPressed.setImageAlpha((int) (255f * (1 - positionOffset)));
-                homeBottomTabTvWechatNormal.setAlpha(positionOffset);
-                homeBottomTabTvWechatPressed.setAlpha(1 - positionOffset);
-
                 homeBottomTabIvAddressListNormal.setImageAlpha((int) (255f * (1 - positionOffset)));
                 homeBottomTabIvAddressListPressed.setImageAlpha((int) (255f * positionOffset));
+//
+                homeBottomTabTvWechatNormal.setAlpha(positionOffset);
+                homeBottomTabTvWechatPressed.setAlpha(1 - positionOffset);
                 homeBottomTabTvAddressListNormal.setAlpha(1 - positionOffset);
                 homeBottomTabTvAddressListPressed.setAlpha(positionOffset);
+
+//                下面注释代码是实现二级渐变过渡的效果，但有闪烁的Bug,暂时注释
+//                (即实现当在微信页面，手指向左滑的时候，一共有2步（以滑到屏幕的一半为分界线）:
+//                  1.微信选中状态从完全显示到(滑到屏幕一半宽度的时候)完全消失，同时中间状态(和未选中图案一致但颜色是绿色)从完全消失到完全显示
+//                  2.中间状态(和未选中图案一致但颜色是绿色)从完全显示到完全消失，同时未选中状态从完全消失到完全显示)
+//                if (positionOffset < 0.5) {
+//                      //手指往左滑，尚未滑到一半，
+//                    homeBottomTabIvWechatPressed.setImageAlpha((int) (255f * (1 - positionOffset * 2)));
+//                    homeBottomTabIvWechatMiddle.setImageAlpha((int) (255f * positionOffset * 2));
+//                } else {
+//                    homeBottomTabIvWechatMiddle.setImageAlpha((int) (255f * (1 - (positionOffset - 0.5) * 2)));
+//                    homeBottomTabIvWechatNormal.setImageAlpha((int) (255f * (positionOffset - 0.5) * 2));
+//                }
 
 //                在通讯录向微信页滑动过程中也会进入此代码块
                 if (isShowIndexBar) {
 //                    如果页面处于滑动状态，则隐藏侧边快速检索栏。记录显示或隐藏状态是避免滑动过程中过多调用隐藏方法影响性能
                     homeFragmentAddressList.hideIndexBar();
+                    homeFragmentAddressList.hideCurrentBigLetter();
                     isShowIndexBar = false;
                 }
-
                 break;
 
             case 1:
@@ -187,6 +249,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
                 homeBottomTabTvFoundNormal.setAlpha(1 - positionOffset);
                 homeBottomTabTvFoundPressed.setAlpha(positionOffset);
 
+
 //                如果当前页面是通讯录页(position为1)，并且页面滑动停止的时候，就显示右侧快速检索栏
                 if (positionOffset == 0) {
                     homeFragmentAddressList.showIndexBar();
@@ -194,6 +257,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
                 } else if (isShowIndexBar) {
 //                    如果页面处于滑动状态，则隐藏右侧快速检索栏。记录显示或隐藏状态是避免滑动过程中过多调用隐藏方法影响性能
                     homeFragmentAddressList.hideIndexBar();
+                    homeFragmentAddressList.hideCurrentBigLetter();
                     isShowIndexBar = false;
                 }
 
@@ -209,6 +273,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
                 homeBottomTabIvMePressed.setImageAlpha((int) (255f * positionOffset));
                 homeBottomTabTvMeNormal.setAlpha(1 - positionOffset);
                 homeBottomTabTvMePressed.setAlpha(positionOffset);
+
                 break;
         }
     }
@@ -255,15 +320,76 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
                 showNewTaskPopupWindow();
                 break;
             case R.id.home_top_tab_search_iv:
-//                TODO 实现搜索功能
+//                隐藏主页面，显示搜索页面
+                showSearchPage();
                 break;
 
             case R.id.home_top_tab_new_task_popup_window_root:
-//                如果点击的是popupwindow的外部，就关闭popupWindow
+//                如果点击的是popupWindow的外部，就关闭popupWindow
                 popupWindow.dismiss();
                 popupWindow = null;
                 break;
+
+            case R.id.search_page_back_btn_rl:
+//                隐藏主搜索页面，显示主页面
+                hideSearchPage();
+                break;
+            case R.id.search_page_clear_edit_text_btn_iv:
+//                清空输入框
+                searchPageInputEt.getText().clear();
+                break;
         }
+    }
+
+    /**
+     * 隐藏主页面，显示搜索页面
+     */
+    private void showSearchPage() {
+        homeActivityRootLl.setVisibility(View.GONE);
+        homeSearchPage.setVisibility(View.VISIBLE);
+
+//                页面弹出的动画效果
+        AnimatorSet animatorSet = new AnimatorSet();//组合动画
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(homeSearchPage, "scaleX", 0.9f, 1f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(homeSearchPage, "scaleY", 0.9f, 1f);
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(homeSearchPage, "alpha", 0.5f, 1f);
+
+        animatorSet.setDuration(250);
+        animatorSet.setInterpolator(new DecelerateInterpolator());
+        animatorSet.play(scaleX).with(scaleY).with(alpha);//动画同时开始
+        animatorSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                searchAppointContentRoot.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+        animatorSet.start();
+
+        isHomeSearchPageOpened = true;
+    }
+
+    /**
+     * 隐藏搜索页面，显示主页面
+     */
+    private void hideSearchPage() {
+        searchAppointContentRoot.setVisibility(View.GONE);
+        homeSearchPage.setVisibility(View.GONE);
+        homeActivityRootLl.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -299,7 +425,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
 //                创建popupWindow，并指定其显示位置
         popupWindow = new PopupWindow(popupWindowLayout, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-//        设置popupWindow动画(放大弹出和缩小消失) TODO popupWindow弹出和收回的动画效果无效，且效果的时长等属性值需更改
+//        设置popupWindow动画(放大弹出和缩小消失,并伴随透明度的变化)
         popupWindow.setAnimationStyle(R.style.custom_popup_window_anim_style);
         popupWindow.showAtLocation(homeActivityRootLl, Gravity.END, 0, 0);
         popupWindow.update();
@@ -316,16 +442,20 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         clearSelection();
         switch (position) {
             case 0:
-                setBottomTabSelect(homeBottomTabIvWechatNormal, homeBottomTabIvWechatPressed, homeBottomTabTvWechatNormal, homeBottomTabTvWechatPressed);
+                setBottomTabSelect(homeBottomTabIvWechatNormal, homeBottomTabIvWechatMiddle,
+                        homeBottomTabIvWechatPressed, homeBottomTabTvWechatNormal, homeBottomTabTvWechatPressed);
                 break;
             case 1:
-                setBottomTabSelect(homeBottomTabIvAddressListNormal, homeBottomTabIvAddressListPressed, homeBottomTabTvAddressListNormal, homeBottomTabTvAddressListPressed);
+                setBottomTabSelect(homeBottomTabIvAddressListNormal, homeBottomTabIvAddressListMiddle,
+                        homeBottomTabIvAddressListPressed, homeBottomTabTvAddressListNormal, homeBottomTabTvAddressListPressed);
                 break;
             case 2:
-                setBottomTabSelect(homeBottomTabIvFoundNormal, homeBottomTabIvFoundPressed, homeBottomTabTvFoundNormal, homeBottomTabTvFoundPressed);
+                setBottomTabSelect(homeBottomTabIvFoundNormal, homeBottomTabIvFoundMiddle,
+                        homeBottomTabIvFoundPressed, homeBottomTabTvFoundNormal, homeBottomTabTvFoundPressed);
                 break;
             case 3:
-                setBottomTabSelect(homeBottomTabIvMeNormal, homeBottomTabIvMePressed, homeBottomTabTvMeNormal, homeBottomTabTvMePressed);
+                setBottomTabSelect(homeBottomTabIvMeNormal, homeBottomTabIvMeMiddle,
+                        homeBottomTabIvMePressed, homeBottomTabTvMeNormal, homeBottomTabTvMePressed);
                 break;
         }
     }
@@ -333,14 +463,18 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     /**
      * 设置底部的导航按钮为选中状态
      *
-     * @param normalView  未选中的图标
+     * @param normalView  未选中状态的图标
+     * @param pressedView 滑到一半时候的图标
      * @param pressedView 选中的图标
      * @param normalText  未选中的文字
      * @param pressedText 选中的文字
      */
-    private void setBottomTabSelect(ImageView normalView, ImageView pressedView, TextView normalText, TextView pressedText) {
+    private void setBottomTabSelect(ImageView normalView, ImageView middleView, ImageView pressedView, TextView normalText, TextView pressedText) {
+//        如果选中页面，页面底部标签的颜色应该是显示绿色，灰色则完全透明
         normalView.setImageAlpha(0);
         pressedView.setImageAlpha(255);
+        middleView.setImageAlpha(255);
+
         normalText.setAlpha(0f);
         pressedText.setAlpha(1f);
     }
@@ -350,23 +484,27 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      */
     private void clearSelection() {
         homeBottomTabIvWechatNormal.setImageAlpha(255);
-        homeBottomTabIvWechatPressed.setImageAlpha(0);
         homeBottomTabTvWechatNormal.setAlpha(1f);
+        homeBottomTabIvWechatPressed.setImageAlpha(0);
+        homeBottomTabIvWechatMiddle.setImageAlpha(0);
         homeBottomTabTvWechatPressed.setAlpha(0f);
 
         homeBottomTabIvAddressListNormal.setImageAlpha(255);
-        homeBottomTabIvAddressListPressed.setImageAlpha(0);
         homeBottomTabTvAddressListNormal.setAlpha(1f);
+        homeBottomTabIvAddressListPressed.setImageAlpha(0);
+        homeBottomTabIvAddressListMiddle.setImageAlpha(0);
         homeBottomTabTvAddressListPressed.setAlpha(0f);
 
         homeBottomTabIvFoundNormal.setImageAlpha(255);
-        homeBottomTabIvFoundPressed.setImageAlpha(0);
         homeBottomTabTvFoundNormal.setAlpha(1f);
+        homeBottomTabIvFoundPressed.setImageAlpha(0);
+        homeBottomTabIvFoundMiddle.setImageAlpha(0);
         homeBottomTabTvFoundPressed.setAlpha(0f);
 
         homeBottomTabIvMeNormal.setImageAlpha(255);
-        homeBottomTabIvMePressed.setImageAlpha(0);
         homeBottomTabTvMeNormal.setAlpha(1f);
+        homeBottomTabIvMePressed.setImageAlpha(0);
+        homeBottomTabIvMeMiddle.setImageAlpha(0);
         homeBottomTabTvMePressed.setAlpha(0f);
     }
 
@@ -379,6 +517,11 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             popupWindow.dismiss();
             popupWindow = null;
         } else {
+//            如果当前搜索页面是打开状态，隐藏主搜索页面，显示主页面
+            if(isHomeSearchPageOpened){
+                hideSearchPage();
+                return;
+            }
             super.onBackPressed();
         }
     }
@@ -387,7 +530,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     public boolean onLongClick(View view) {
         switch (view.getId()) {
             case R.id.home_top_tab_search_iv:
-//                长按搜索按钮时的事件
+//                长按搜索按钮时的事件，震动并弹出Toast，并且制定Toast的位置
 
 //                弹出Toast，设置Toast的位置，高度是获取标题栏的高度
                 Toast toast = Toast.makeText(this, "搜索", Toast.LENGTH_SHORT);

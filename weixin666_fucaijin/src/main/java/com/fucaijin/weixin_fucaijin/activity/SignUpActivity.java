@@ -1,6 +1,5 @@
 package com.fucaijin.weixin_fucaijin.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,6 +21,8 @@ import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 import com.fucaijin.weixin_fucaijin.utils.Md5;
 
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
+
 /**
  * 注册页面
  * <p>
@@ -39,14 +40,11 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
     private Button sign_up_bt_sign_up;
     private ImageButton sign_up_ib_select_head_sculpture;
 
-    private Context mContext;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         initUI();
-        mContext = WeixinApplication.getmContext();
     }
 
     private void initUI() {

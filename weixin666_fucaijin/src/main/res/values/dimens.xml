@@ -33,4 +33,7 @@
     <!--通讯录列表的条目的文字大小-->
     <dimen name="address_list_nick_name_text_size">16sp</dimen>
 
+    <!--通讯录列表右侧快速检索栏的宽度-->
+    <dimen name="address_list_quick_index_bar_width">24dp</dimen>
+
 </resources>

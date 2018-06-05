@@ -1,16 +1,22 @@
 package com.fucaijin.weixin_fucaijin.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.adapter.AddressListAdapter;
 import com.fucaijin.weixin_fucaijin.view.QuickIndexBar;
+
+import java.util.Collections;
+
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mAddressListItem;
 
 /**
  * Created by fucaijin on 2018/5/9.
@@ -19,23 +25,45 @@ import com.fucaijin.weixin_fucaijin.view.QuickIndexBar;
 public class HomeFragmentAddressList extends Fragment {
 
     private QuickIndexBar quickIndexBar;
+    private TextView currentBigLetterTv;
+    private Handler handler = new Handler();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.home_fragment_address_list, container, false);
 
+        Collections.sort(mAddressListItem);//根据拼音来排序
         quickIndexBar = inflate.findViewById(R.id.home_fragment_address_list_quick_index_bar);
-        ListView addressListLv = inflate.findViewById(R.id.address_list_lv);
+        currentBigLetterTv = inflate.findViewById(R.id.address_list_quick_index_big_letter);
+
+        final ListView addressListLv = inflate.findViewById(R.id.address_list_lv);
         addressListLv.setAdapter(new AddressListAdapter());
 
         quickIndexBar.setOnTouchLetterListener(new QuickIndexBar.onTouchLetterListener() {
             @Override
             public void onTouchLetter(String letter) {
 //                TODO 快速检索逻辑未完成
+                for (int i = 0; i < mAddressListItem.size(); i++) {
+                    if(letter.equals(mAddressListItem.get(i).getNickNameFirstLetter())){
+                        addressListLv.setSelection(i);
+                        break;
+                    }
+                }
+                showCurrentLetter(letter);
+            }
+
+            @Override
+            public void onCancelTouch() {
+                currentBigLetterTv.setVisibility(View.GONE);
             }
         });
         return inflate;
+    }
+
+    private void showCurrentLetter(String letter) {
+        currentBigLetterTv.setVisibility(View.VISIBLE);
+        currentBigLetterTv.setText(letter);
     }
 
     /**
@@ -61,5 +89,9 @@ public class HomeFragmentAddressList extends Fragment {
 //        ObjectAnimator anim = ObjectAnimator.ofFloat(quickIndexBar, "alpha", 0f, 1f);
 //        anim.setDuration(500);// 动画持续时间
 //        anim.start();
+    }
+
+    public void hideCurrentBigLetter() {
+        currentBigLetterTv.setVisibility(View.GONE);
     }
 }

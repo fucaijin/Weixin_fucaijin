@@ -160,7 +160,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:textColorHint">@color/colorTextHintLightGray</item>
         <item name="android:background">@null</item>
-        <item name="android:textCursorDrawable">@drawable/edit_text_cursor_img</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_black_cursor_img</item>
         <item name="android:textColor">@color/colorTextDarkGray</item>
         <item name="android:textSize">@dimen/text_size</item>
     </style>
@@ -305,4 +305,21 @@
         <item name="android:windowExitAnimation">@anim/new_task_popup_window_hidden</item>
     </style>
 
+    <!--左上角搜索弹出的页面的下方可点击字体的样式-->
+    <style name="search_page_clickable_green_text" >
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorLineGreen</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--左上角搜索弹出的页面的下方可点击字体的浅灰色竖分割线样式-->
+    <style name="search_page_vertical_divider">
+        <item name="android:layout_width">2px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:background">@color/colorLightGray</item>
+    </style>
 </resources>
