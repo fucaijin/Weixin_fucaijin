@@ -1,5 +1,8 @@
 package com.fucaijin.weixin_fucaijin.adapter;
 
+import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,6 +15,7 @@ import com.fucaijin.weixin_fucaijin.R;
 
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mAddressListItem;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mAddressListOfficialItem;
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mAddressListOfficialItemSize;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
 /**
@@ -21,16 +25,25 @@ import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
 public class AddressListAdapter extends BaseAdapter implements View.OnLongClickListener, View.OnClickListener {
 
+    private int itemIndex;
+    private Handler handler;
+    private Drawable sexMale;
+    private Drawable sexFemale;
+
+    public AddressListAdapter(Handler mHandler) {
+        handler = mHandler;
+
+    }
 
     @Override
     public int getCount() {
-        return mAddressListItem.size();
+        return mAddressListItem.size() + mAddressListOfficialItemSize;
     }
 
     @Override
     public Object getItem(int i) {
-        if(i > mAddressListOfficialItem.size()){
-            return mAddressListItem.get(i - mAddressListOfficialItem.size() - 1 );
+        if(i >= mAddressListOfficialItemSize){
+            return mAddressListItem.get(i - mAddressListOfficialItemSize);
         }
         return mAddressListOfficialItem.get(i);
     }
@@ -42,6 +55,7 @@ public class AddressListAdapter extends BaseAdapter implements View.OnLongClickL
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
+        itemIndex = i;
         if(convertView == null){
             convertView = View.inflate(mContext, R.layout.home_fragment_address_list_item, null);
         }
@@ -49,44 +63,42 @@ public class AddressListAdapter extends BaseAdapter implements View.OnLongClickL
         ViewHolder holder = ViewHolder.getViewHolder(convertView);
 
         String nickName;
-        String nickNameFirstLetter = "";
+        String nickNameFirstLetter;
 
-        if(i < mAddressListOfficialItem.size()){
+        if(i < mAddressListOfficialItemSize){
             holder.firstWord.setVisibility(View.GONE);
             holder.headSculpture.setImageResource(mAddressListOfficialItem.get(i).getHeadSculpture());
             holder.nickName.setText(mAddressListOfficialItem.get(i).getNickName());
         }else {
-            //        从数据中获取昵称、昵称的首字母
-            nickName = mAddressListItem.get(i).getNickName();
-            nickNameFirstLetter = mAddressListItem.get(i).getNickNameFirstLetter();
+//            当前条目的索引
+            int AddressListItemIndex = i - mAddressListOfficialItemSize;
+            //        从数据中获取昵称、昵称的首字母、头像的引用
+            nickName = mAddressListItem.get(AddressListItemIndex).getNickName();
+            nickNameFirstLetter = mAddressListItem.get(AddressListItemIndex).getNickNameFirstLetter();
+            int headSculpture = mAddressListItem.get(AddressListItemIndex).getHeadSculpture();
 
-            holder.headSculpture.setImageResource(mAddressListItem.get(i).getHeadSculpture());
+            holder.headSculpture.setImageResource(headSculpture);
             holder.nickName.setText(nickName);
-
-            //        如果当前不是第一个条目，则判断当前条目的首字母是否和上一个的相同，如果相同就隐藏，不相同就显示
-            if(i > 0 ){
-                String lastNickNameFirstLetter = mAddressListItem.get(i - 1).getNickNameFirstLetter();//获取上一个条目的首字母
+            if(i == mAddressListOfficialItemSize){
+                // 如果是联系人的第一个人，就设置其首字母可见
+                holder.firstWord.setVisibility(View.VISIBLE);
+                holder.firstWord.setText(nickNameFirstLetter);
+            }else {
+                //判断是否和上个条目的首字母相同
+                String lastNickNameFirstLetter = mAddressListItem.get(AddressListItemIndex - 1).getNickNameFirstLetter();//获取上一个条目的首字母
                 if(nickNameFirstLetter.equals(lastNickNameFirstLetter)){
                     holder.firstWord.setVisibility(View.GONE);
                 }else {
                     holder.firstWord.setVisibility(View.VISIBLE);
                     holder.firstWord.setText(nickNameFirstLetter);
                 }
-
-                if(i == mAddressListOfficialItem.size()){
-                    holder.firstWord.setVisibility(View.VISIBLE);
-                    holder.firstWord.setText(nickNameFirstLetter);
-                }
-            }else {
-                holder.firstWord.setVisibility(View.VISIBLE);
-                holder.firstWord.setText(nickNameFirstLetter);
             }
         }
 
 //        原本应该给ListView设置点击和长按事件的，结果ListView没响应，只能在此处设置，
 //        TODO 但长按通讯录，弹出PopupWindow功能未实现
 //        holder.itemRoot.setOnLongClickListener(this);
-//        holder.itemRoot.setOnClickListener(this);
+        holder.itemRoot.setOnClickListener(this);//设置条目的点击事件 但有错乱的Bug, 暂停使用
 
 
         return convertView;
@@ -107,7 +119,10 @@ public class AddressListAdapter extends BaseAdapter implements View.OnLongClickL
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(mContext,"点击了 - 内部",Toast.LENGTH_SHORT).show();
+        Message message = handler.obtainMessage();
+        message.what = 1;
+        message.obj = view;
+        handler.sendMessage(message);
     }
 
     private static class ViewHolder{

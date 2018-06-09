@@ -24,8 +24,9 @@
     <!--ListView的分割线的Padding值，首次创建：用于发现页面的ListView的分割线-->
     <dimen name="list_view_divider_padding">14dp</dimen>
 
-    <!--ListView的Item如果与上面有间隔，则这个间隔的距离是20dp-->
-    <dimen name="list_view_item_margin_top_size">20dp</dimen>
+    <!--ListView的Item如果与上面有间隔，则这个间隔的距离是20dp,
+    发现、我、通讯录的打开页面等的条目之间的间隔距离也是-->
+    <dimen name="items_margin_top_size">20dp</dimen>
 
     <!--ListView的Item的高度-->
     <dimen name="list_view_item_height">48dp</dimen>
@@ -36,4 +37,12 @@
     <!--通讯录列表右侧快速检索栏的宽度-->
     <dimen name="address_list_quick_index_bar_width">24dp</dimen>
 
+    <!--微信Fragment的ListView中的条目的右上角的时间字体大小-->
+    <dimen name="last_message_time_text_size">11sp</dimen>
+
+    <!--圆形按钮的尺寸(宽度和高度)，用于聊天页面下方的圆形按钮-->
+    <dimen name="oval_btn_size">32dp</dimen>
+
+    <!--朋友详细资料的黑色字体大小-->
+    <dimen name="personal_main_text_size">16sp</dimen>
 </resources>

@@ -15,7 +15,7 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
 
     public HomeFragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
-        mFragments=fragments;
+        mFragments = fragments;
     }
 
     @Override

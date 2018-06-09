@@ -350,7 +350,7 @@
             <TextView
                 style="@style/w_h_double_wrap_content"
                 android:text="搜索指定内容"
-                android:textColor="@color/colorHomeWeChatFragmentRecentMessage"
+                android:textColor="@color/colorHomeGrayText"
                 android:layout_gravity="center_horizontal"/>
 
             <!--第一行：朋友圈 文章 公众号-->

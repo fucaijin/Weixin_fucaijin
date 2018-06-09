@@ -7,13 +7,13 @@
     <LinearLayout
         android:layout_height="80dp"
         style="@style/home_list_margin_view_style">
-        
+
         <ImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginStart="14dp"
             android:src="@drawable/head_sculpture_27"/>
-        
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -21,20 +21,20 @@
             android:orientation="vertical"
             android:layout_marginStart="17dp"
             android:gravity="center_vertical">
-            
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="符才锦吃..."
                 android:textSize="@dimen/weixin_main_text_size"
                 android:textColor="@color/colorTextDarkGray"/>
-            
+
             <TextView
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="微信号：fcj945188951"
-                android:textColor="@color/colorDarkGray"
+                android:textColor="@color/colorHomeGrayText"
                 android:textSize="13sp"/>
 
         </LinearLayout>
@@ -45,14 +45,14 @@
             android:layout_marginEnd="25dp"
             android:src="@drawable/me_frag_item_qr_code_micro"
             />
-        
+
     </LinearLayout>
 
     <!--钱包-->
     <RelativeLayout
         android:id="@+id/home_me_fragment_item_wallet"
         style="@style/home_list_view_style"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="@dimen/items_margin_top_size">
 
         <ImageView
             android:src="@drawable/me_frag_wallet"
@@ -68,7 +68,7 @@
     <RelativeLayout
         android:id="@+id/home_me_fragment_item_collection"
         style="@style/home_list_view_style"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="@dimen/items_margin_top_size">
 
         <ImageView
             android:src="@drawable/me_frag_collection"
@@ -138,7 +138,7 @@
     <RelativeLayout
         android:id="@+id/home_me_fragment_item_setting"
         style="@style/home_list_view_style"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="@dimen/items_margin_top_size">
 
         <ImageView
             android:src="@drawable/me_frag_setting"

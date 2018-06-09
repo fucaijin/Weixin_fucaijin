@@ -10,6 +10,7 @@ import com.fucaijin.weixin_fucaijin.data.AddressListItemData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by fucaijin on 2018/5/1.
@@ -33,6 +34,8 @@ public class WeixinApplication extends Application {
 
 //    官方的头像和昵称
     public static List<AddressListItemData> mAddressListOfficialItem = new ArrayList<>();
+
+    public static int mAddressListOfficialItemSize = 0;
 
 //    模拟的用户头像
     private int[] headSculptureList = {R.drawable.head_sculpture_1, R.drawable.head_sculpture_2,
@@ -91,14 +94,18 @@ public class WeixinApplication extends Application {
                 addressListItemData.setNickName(OfficialNickNameList[i]);
                 mAddressListOfficialItem.add(addressListItemData);
             }
+
+            mAddressListOfficialItemSize = mAddressListOfficialItem.size();
         }
 
+        Random random = new Random();//随机数，用于生成随机数来生成随机的性别
 //        把通讯录的条目数据封装到addressListItemData里面，然后再把所有条目信息装到mAddressListItem
         if(nickNameList.length == headSculptureList.length){
             for (int i = 0 ; i < nickNameList.length ; i++){
                 AddressListItemData addressListItemData = new AddressListItemData();
                 addressListItemData.setHeadSculpture(headSculptureList[i]);
                 addressListItemData.setNickName(nickNameList[i]);
+                addressListItemData.setMan(random.nextBoolean());
                 mAddressListItem.add(addressListItemData);
             }
         }

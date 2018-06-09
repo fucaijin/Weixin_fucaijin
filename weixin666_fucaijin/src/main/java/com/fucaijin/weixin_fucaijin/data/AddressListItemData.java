@@ -10,6 +10,7 @@ public class AddressListItemData implements Comparable<AddressListItemData> {
     private int headSculpture;
     private String nickName;
     private String nickNameFirstLetter;
+    private boolean isMan;
 
     public String getNickName() {
         return nickName;
@@ -31,6 +32,14 @@ public class AddressListItemData implements Comparable<AddressListItemData> {
 
     public void setHeadSculpture(int headSculpture) {
         this.headSculpture = headSculpture;
+    }
+
+    public boolean isMan() {
+        return isMan;
+    }
+
+    public void setMan(boolean man) {
+        isMan = man;
     }
 
     @Override

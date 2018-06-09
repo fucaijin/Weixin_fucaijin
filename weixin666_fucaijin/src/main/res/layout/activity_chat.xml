@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_chat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorMainBackGroundLightGray"
+    tools:context="com.fucaijin.weixin_fucaijin.activity.ChatActivity">
+
+    <!--顶部标题栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/colorTabTopDarkGray">
+
+        <!--回退/关闭按钮-->
+        <RelativeLayout
+            android:id="@+id/chat_activity_top_bar_back_btn_rl"
+            style="@style/rl_top_bar_close_back"
+            android:layout_marginEnd="17dp">
+
+            <!--图片-->
+            <ImageView
+                style="@style/iv_top_bar_go_back"
+                android:src="@drawable/img_back"/>
+
+            <!--深灰色竖直分割线-->
+            <ImageView
+                style="@style/top_bar_divider"/>
+
+        </RelativeLayout>
+
+        <!--标题（昵称）-->
+        <TextView
+            android:id="@+id/chat_activity_top_bar_nick_name"
+            android:text="@string/nick_name"
+            android:layout_toEndOf="@id/chat_activity_top_bar_back_btn_rl"
+            style="@style/top_bar_text"/>
+
+        <!--对方个人信息-->
+        <ImageView
+            android:id="@+id/chat_activity_top_bar_personal_info_iv"
+            android:clickable="true"
+            android:layout_height="@dimen/top_bar_height"
+            android:layout_width="@dimen/top_bar_height"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="14dp"
+            android:src="@drawable/chat_activity_personal_info"
+            android:background="@drawable/bt_sl_bg_top_tab_back"/>
+
+    </RelativeLayout>
+
+    <!--中间的聊天内容-->
+    <ListView
+        android:id="@+id/chat_activity_message_content_lv"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1">
+
+    </ListView>
+
+    <!--浅灰色分割线-->
+    <ImageView
+        style="@style/home_list_view_divider_style"
+        android:layout_height="2px"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"/>
+
+    <!--底部输入栏-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F4F4F4"
+        android:orientation="horizontal">
+
+        <!--语音/文字 输入切换 根布局-->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_gravity="bottom">
+            
+            <!--语音按钮-->
+            <ImageView
+                android:id="@+id/chat_activity_use_voice_input_iv"
+                android:src="@drawable/chat_activity_voice_input"
+                android:layout_marginStart="12dp"
+                style="@style/chat_activity_oval_btn_style" />
+            
+            <!--键盘按钮-->
+            <ImageView
+                android:id="@+id/chat_activity_use_key_board_input_iv"
+                android:src="@drawable/chat_activity_key_board_input"
+                android:layout_marginStart="12dp"
+                style="@style/chat_activity_oval_btn_style"
+                android:visibility="invisible" />
+            
+        </FrameLayout>
+
+        <!--语音输入按钮/文字输入框 根布局-->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <!--语音输入按钮-->
+            <Button
+                android:id="@+id/chat_activity_use_voice_input_bt"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:text="@string/press_to_say"
+                android:textColor="@color/colorChatActivityDarkGray"
+                android:background="@drawable/chat_activity_btn_press_to_say"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="invisible"
+                android:textSize="16sp"/>
+
+            <!--消息输入框-->
+            <RelativeLayout
+                android:id="@+id/chat_activity_use_key_board_input_et_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:id="@+id/chat_activity_message_input_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:textColor="@color/colorTextDarkGray"
+                    android:textSize="16sp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:maxHeight="111dp"
+                    android:minHeight="47dp"
+                    android:paddingBottom="8dp"
+                    android:textCursorDrawable="@drawable/edit_text_green_cursor_img"
+                    />
+
+                <!--消息输入框的下划线-->
+                <ImageView
+                    android:id="@+id/chat_activity_message_input_et_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/colorLightGray"
+                    android:layout_alignBottom="@id/chat_activity_message_input_et"
+                    android:layout_marginBottom="8dp"/>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+        <!--表情-->
+        <ImageView
+            android:src="@drawable/chat_activity_emoji"
+            style="@style/chat_activity_oval_btn_style" />
+
+        <!--更多 / 发送-->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_gravity="bottom">
+
+            <!--更多功能按钮-->
+            <ImageView
+                android:id="@+id/chat_activity_more_function_iv_btn"
+                android:layout_gravity="bottom"
+                android:src="@drawable/chat_activity_more"
+                android:layout_marginEnd="12dp"
+                style="@style/chat_activity_oval_btn_style" />
+
+            <!--发送按钮-->
+            <Button
+                android:id="@+id/chat_activity_send_message_btn"
+                android:layout_height="32dp"
+                android:layout_width="44dp"
+                android:text="@string/send_message"
+                style="@style/top_bar_green_small_button"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="6dp"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+        
+
+    </LinearLayout>
+
+    <!--底部更多功能栏-->
+    <RelativeLayout
+        android:id="@+id/chat_activity_more_function_root_rl"
+        android:layout_width="match_parent"
+        android:layout_height="277dp"
+        android:visibility="gone">
+
+        <!--浅灰色分割线-->
+        <ImageView
+            style="@style/home_list_view_divider_style"
+            android:layout_height="2px"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentTop="true"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/chat_activity_more_function_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="21dp">
+        </android.support.v4.view.ViewPager>
+        
+        <!--下方的指示小圆点-->
+        <LinearLayout
+            android:id="@+id/chat_activity_more_function_navigations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:gravity="center">
+            
+            <ImageView
+                android:id="@+id/chat_activity_more_function_navigation_one"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/chat_activity_more_function_navigation_pressed" />
+
+            <ImageView
+                android:id="@+id/chat_activity_more_function_navigation_two"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/chat_activity_more_function_navigation_normal" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -9,7 +9,7 @@
     <!--</style>-->
 
     <!--带有圆角的绿色背景按钮，白色字体，字体和按钮都带有selector-->
-    <style name="bt_green">
+    <style name="bt_green" parent="@style/Widget.AppCompat.Button.Borderless">
         <item name="android:layout_width">123dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:textSize">18sp</item>
@@ -18,7 +18,7 @@
     </style>
 
     <!--带有圆角的浅灰色背景按钮，黑色字体，字体和按钮都带有selector-->
-    <style name="bt_light_gray">
+    <style name="bt_light_gray" parent="@style/Widget.AppCompat.Button.Borderless">
         <item name="android:layout_width">123dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:textSize">18sp</item>
@@ -266,7 +266,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/list_view_item_height</item>
         <item name="android:background">@drawable/list_view_white_selector</item>
-        <item name="android:layout_marginTop">@dimen/list_view_item_margin_top_size</item>
+        <item name="android:layout_marginTop">@dimen/items_margin_top_size</item>
         <item name="android:clickable">true</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -322,4 +322,17 @@
         <item name="android:layout_marginBottom">12dp</item>
         <item name="android:background">@color/colorLightGray</item>
     </style>
+
+    <!--聊天页面的圆形按钮样式-->
+    <style name="chat_activity_oval_btn_style">
+        <item name="android:layout_width">@dimen/oval_btn_size</item>
+        <item name="android:layout_height">@dimen/oval_btn_size</item>
+        <item name="android:background">@drawable/oval_selector</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:clickable">true</item>
+    </style>
+
 </resources>

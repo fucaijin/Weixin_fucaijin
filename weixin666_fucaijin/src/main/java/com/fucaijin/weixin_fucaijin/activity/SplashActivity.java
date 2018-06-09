@@ -2,6 +2,7 @@ package com.fucaijin.weixin_fucaijin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
+
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
 public class SplashActivity extends BaseActivity implements View.OnClickListener{
     //    Sign up   注册
@@ -28,7 +31,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
         setStatusBarColor(0xFF000000); //设置沉浸式状态栏
         setContentView(R.layout.activity_splash);
 
-//        为了调试方便，暂时注销以下代码
+//        为了调试方便，暂时注销以下代码，因为后台还未开发，无法注册和登录
 //        if(WeixinApplication.isSignIn()){
 ////            TODO 已经登录，正常运行（闪屏页面3秒过后进入主页面）
 //        }else if(!WeixinApplication.isSignIn() && !WeixinApplication.isFirstRun()){
@@ -40,7 +43,18 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
 //            fl_splash_bt.setVisibility(View.VISIBLE);
 //        }
 
-        startActivity(new Intent(this,HomeActivity.class));
+//        startActivity(new Intent(this,HomeActivity.class));
+
+//        延迟三秒后打开主页面，并关闭闪屏页
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(mContext,HomeActivity.class));
+                finish();
+            }
+        },3000);
+
     }
 
     private void initUI() {
@@ -81,7 +95,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
                 String str = languageList[index];
                 tv_language.setText(str);
 
-                //如果是
+                //如果当前选择的是第一项(跟随系统)，则设置为语言
                 if(language.equals("0")){
                     tv_language.setText("语言");
                 }

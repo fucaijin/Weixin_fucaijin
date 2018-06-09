@@ -2,15 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+    android:background="@drawable/list_view_selector">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:paddingEnd="15dp"
-        android:paddingStart="14dp"
-        android:clickable="true"
-        android:background="@drawable/list_view_selector">
+        android:paddingStart="14dp">
 
         <!--头像-->
         <ImageView
@@ -23,9 +21,9 @@
         <!--聊天未读图标-->
         <TextView
             android:id="@+id/home_wechat_fragment_list_tv_item_unread_message"
-            android:layout_alignRight="@id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:layout_alignEnd="@id/home_wechat_fragment_list_iv_item_head_sculpture"
             android:layout_alignTop="@id/home_wechat_fragment_list_iv_item_head_sculpture"
-            android:layout_marginRight="-5dp"
+            android:layout_marginEnd="-5dp"
             android:layout_marginTop="-5dp"
             style="@style/home_bottom_tab_unit_unread_message"/>
 
@@ -43,14 +41,14 @@
 
         <!--昵称-->
         <TextView
-            android:text="昵称"
+            android:text="@string/nick_name"
             android:id="@+id/home_wechat_fragment_list_tv_item_nick_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/home_wechat_fragment_list_iv_item_head_sculpture"
-            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp"
             android:layout_marginTop="2dp"
-            android:layout_toRightOf="@id/home_wechat_fragment_list_iv_item_head_sculpture"
+            android:layout_toEndOf="@id/home_wechat_fragment_list_iv_item_head_sculpture"
             android:textColor="@color/colorTextDarkGray"
             android:textSize="@dimen/weixin_main_text_size" />
 
@@ -62,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/home_wechat_fragment_list_iv_item_head_sculpture"
-            android:textSize="11sp"
+            android:textSize="@dimen/last_message_time_text_size"
             android:textColor="@color/colorHomeWeChatFragmentLastMessageTime" />
 
         <!--群消息静音-->
@@ -87,7 +85,7 @@
             android:ellipsize="end"
             android:lines="1"
             android:layout_marginEnd="40dp"
-            android:textColor="@color/colorHomeWeChatFragmentRecentMessage"
+            android:textColor="@color/colorHomeGrayText"
             android:textSize="13sp" />
         <!--android:ellipsize="end" 是设置文字的最后有三个点的省略号-->
 

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="18dp"
+    android:paddingBottom="18dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:orientation="vertical">
+    <!--第一行：相册、拍摄、视频通话、位置-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="103dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/chat_activity_image"
+                android:padding="13dp"
+                android:background="@drawable/chat_activity_more_function_btn"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/album"
+                android:textColor="#898989"
+                android:layout_marginTop="7dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/chat_activity_shoot"
+                android:padding="13dp"
+                android:background="@drawable/chat_activity_more_function_btn"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shoot"
+                android:textColor="#898989"
+                android:layout_marginTop="7dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/chat_activity_video_chatting"
+                android:padding="13dp"
+                android:background="@drawable/chat_activity_more_function_btn"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/video_chatting"
+                android:textColor="#898989"
+                android:layout_marginTop="7dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/chat_activity_location"
+                android:padding="13dp"
+                android:background="@drawable/chat_activity_more_function_btn"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="位置"
+                android:textColor="#898989"
+                android:layout_marginTop="7dp"/>
+
+        </LinearLayout>
+
+        
+    </LinearLayout>
+
+    <!--第二行：红包、转账、语音输入、名片-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="103dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/chat_activity_red_packet"
+                android:padding="13dp"
+                android:background="@drawable/chat_activity_more_function_btn"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/red_packet"
+                android:textColor="#898989"
+                android:layout_marginTop="7dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/chat_activity_transfer_accounts"
+                android:padding="13dp"
+                android:background="@drawable/chat_activity_more_function_btn"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/transfer_accounts"
+                android:textColor="#898989"
+                android:layout_marginTop="7dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/chat_activity_more_voice_input"
+                android:padding="13dp"
+                android:background="@drawable/chat_activity_more_function_btn"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/voice_input"
+                android:textColor="#898989"
+                android:layout_marginTop="7dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/chat_activity_business_card"
+                android:padding="13dp"
+                android:background="@drawable/chat_activity_more_function_btn"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/business_card"
+                android:textColor="#898989"
+                android:layout_marginTop="7dp"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

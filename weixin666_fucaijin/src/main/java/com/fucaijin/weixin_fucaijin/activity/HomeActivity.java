@@ -32,8 +32,8 @@ import com.fucaijin.weixin_fucaijin.adapter.HomeFragmentAdapter;
 import com.fucaijin.weixin_fucaijin.adapter.HomeNewTaskPopupWindowAdapter;
 import com.fucaijin.weixin_fucaijin.data.HomeNewTaskPopulWindowData;
 import com.fucaijin.weixin_fucaijin.fragment.HomeFoundPageFragment;
-import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentAddressList;
-import com.fucaijin.weixin_fucaijin.fragment.HomeFragmentMe;
+import com.fucaijin.weixin_fucaijin.fragment.HomeAddressListFragment;
+import com.fucaijin.weixin_fucaijin.fragment.HomeMeFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment;
 import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
 
@@ -88,7 +88,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private String[] foundTextArray = {"朋友圈", "扫一扫", "摇一摇", "看一看",
             "搜一搜", "附近的人", "漂流瓶",
             "购物", "游戏", "小程序"};
-    private HomeFragmentAddressList homeFragmentAddressList;
+    private HomeAddressListFragment homeAddressListFragment;
     private boolean isShowIndexBar;
     private FrameLayout homeSearchPage;
     private boolean isHomeSearchPageOpened;
@@ -133,12 +133,12 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         foundFragmentBundle.putIntArray("foundIconArray", foundIconArray);
         foundFragmentBundle.putStringArray("foundTextArray", foundTextArray);
 
-        homeFragmentAddressList = new HomeFragmentAddressList();
+        homeAddressListFragment = new HomeAddressListFragment();
         fragmentList = new ArrayList<>();
         fragmentList.add(new HomeWechatFragment());
-        fragmentList.add(homeFragmentAddressList);
+        fragmentList.add(homeAddressListFragment);
         fragmentList.add(HomeFoundPageFragment.getInstance(foundIconArray, foundTextArray));
-        fragmentList.add(new HomeFragmentMe());
+        fragmentList.add(new HomeMeFragment());
         mPagerAdapter = new HomeFragmentAdapter(getSupportFragmentManager(), fragmentList);
 
         mViewPager.setAdapter(mPagerAdapter);
@@ -280,8 +280,8 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 //                在通讯录向微信页滑动过程中也会进入此代码块
                 if (isShowIndexBar) {
 //                    如果页面处于滑动状态，则隐藏侧边快速检索栏。记录显示或隐藏状态是避免滑动过程中过多调用隐藏方法影响性能
-                    homeFragmentAddressList.hideIndexBar();
-                    homeFragmentAddressList.hideCurrentBigLetter();
+                    homeAddressListFragment.hideIndexBar();
+                    homeAddressListFragment.hideCurrentBigLetter();
                     isShowIndexBar = false;
                 }
                 break;
@@ -300,12 +300,12 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
 //                如果当前页面是通讯录页(position为1)，并且页面滑动停止的时候，就显示右侧快速检索栏
                 if (positionOffset == 0) {
-                    homeFragmentAddressList.showIndexBar();
+                    homeAddressListFragment.showIndexBar();
                     isShowIndexBar = true;
                 } else if (isShowIndexBar) {
 //                    如果页面处于滑动状态，则隐藏右侧快速检索栏。记录显示或隐藏状态是避免滑动过程中过多调用隐藏方法影响性能
-                    homeFragmentAddressList.hideIndexBar();
-                    homeFragmentAddressList.hideCurrentBigLetter();
+                    homeAddressListFragment.hideIndexBar();
+                    homeAddressListFragment.hideCurrentBigLetter();
                     isShowIndexBar = false;
                 }
 
@@ -333,7 +333,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
 //        如果是滑到通讯录页面，则显示通讯录页的右侧快速检索栏
         if (position == 1) {
-            homeFragmentAddressList.showIndexBar();
+            homeAddressListFragment.showIndexBar();
             isShowIndexBar = true;
         }
     }

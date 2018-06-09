@@ -11,10 +11,11 @@ import com.fucaijin.weixin_fucaijin.data.MessageListItem;
 
 import java.util.List;
 
-import static com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment.PESONAL_CHAT_TYPE;
+import static com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment.PERSONAL_CHAT_TYPE;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
 /**
+ * 这是微信Fragment的ListView的适配器
  * Created by fucaijin on 2018/5/14.
  */
 public class RecentContactAdapter extends BaseAdapter {
@@ -40,7 +41,7 @@ public class RecentContactAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-//        TODO ListView复用优化未完成
+//        TODO ListView未复用优化
         View inflate = View.inflate(mContext, R.layout.home_fragment_wechat_recent_contact_list_item, null);
         ImageView headSculpture = inflate.findViewById(R.id.home_wechat_fragment_list_iv_item_head_sculpture);
         TextView unreadMessage = inflate.findViewById(R.id.home_wechat_fragment_list_tv_item_unread_message);
@@ -55,7 +56,7 @@ public class RecentContactAdapter extends BaseAdapter {
         recentMessage.setText(item.lastMessage);
         time.setText(item.time);
 
-        if(item.messageType == PESONAL_CHAT_TYPE){
+        if(item.messageType == PERSONAL_CHAT_TYPE){
             unreadMessage.setText("" + (35 - i));
             unreadMessage.setVisibility(View.VISIBLE);
             groupChatMute.setVisibility(View.INVISIBLE);

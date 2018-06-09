@@ -15,7 +15,7 @@
             <RelativeLayout
                 android:id="@+id/home_found_frag_lv_item_circle_of_friends"
                 style="@style/home_list_view_style"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="@dimen/items_margin_top_size">
 
                 <ImageView
                     android:src="@drawable/found_frag_circle_of_friends"
@@ -40,7 +40,7 @@
             <RelativeLayout
                 android:id="@+id/home_found_frag_lv_item_scan"
                 style="@style/home_list_view_style"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="@dimen/items_margin_top_size">
 
                 <ImageView
                     android:src="@drawable/found_frag_scan"
@@ -77,7 +77,7 @@
             <RelativeLayout
                 android:id="@+id/home_found_frag_lv_item_look"
                 style="@style/home_list_view_style"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="@dimen/items_margin_top_size">
 
                 <ImageView
                     android:src="@drawable/found_frag_look"
@@ -111,7 +111,7 @@
             <RelativeLayout
                 android:id="@+id/home_found_frag_lv_item_people_nearby"
                 style="@style/home_list_view_style"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="@dimen/items_margin_top_size">
 
                 <ImageView
                     android:src="@drawable/found_frag_people_nearby"
@@ -144,7 +144,7 @@
             <RelativeLayout
                 android:id="@+id/home_found_frag_lv_item_shopping"
                 style="@style/home_list_view_style"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="@dimen/items_margin_top_size">
 
                 <ImageView
                     android:src="@drawable/found_frag_shoping"
@@ -178,7 +178,7 @@
             <RelativeLayout
                 android:id="@+id/home_found_frag_lv_item_mini_program"
                 style="@style/home_list_view_style"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/items_margin_top_size"
                 android:layout_marginBottom="20dp">
 
                 <ImageView

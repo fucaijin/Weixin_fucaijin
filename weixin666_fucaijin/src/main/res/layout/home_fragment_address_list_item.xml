@@ -3,15 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    
+
+    <!--android:background="@color/colorMainBackGroundLightGray"-->
+    <!--昵称首字母-->
     <TextView
         android:id="@+id/address_list_name_first_word"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:paddingStart="14dp"
         android:textColor="#787878"
-        android:background="@color/colorMainBackGroundLightGray"/>
+        android:clickable="false"/>
 
+    <!--android:background="@drawable/list_view_white_selector"-->
     <RelativeLayout
         android:id="@+id/address_list_item_root"
         android:layout_width="match_parent"
@@ -19,6 +22,7 @@
         android:clickable="true"
         android:background="@drawable/list_view_white_selector">
 
+        <!--头像-->
         <ImageView
             android:id="@+id/address_list_head_sculpture"
             android:layout_width="36dp"
@@ -26,6 +30,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="14dp"/>
 
+        <!--昵称-->
         <TextView
             android:layout_marginStart="13dp"
             android:id="@+id/address_list_nick_name_tv"
