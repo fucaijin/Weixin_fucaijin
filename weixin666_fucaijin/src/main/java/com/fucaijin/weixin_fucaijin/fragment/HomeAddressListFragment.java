@@ -57,7 +57,7 @@ public class HomeAddressListFragment extends Fragment implements AdapterView.OnI
 ////                    将输入流转换为Byte数组，便于传输
 //                    byte[] imageBytes = byteArrayOutputStream.toByteArray();
 
-                    byte[] imageBytes = ConvertUtils.drawable2ByteArray(headSculpture.getDrawable(), mContext);
+                    byte[] imageBytes = ConvertUtils.drawable2byteArray(headSculpture.getDrawable(), mContext);
 
 //                    将昵称和图像传给要打开的PersonalActivity页面
                     Intent intent = new Intent(mContext, PersonalActivity.class);

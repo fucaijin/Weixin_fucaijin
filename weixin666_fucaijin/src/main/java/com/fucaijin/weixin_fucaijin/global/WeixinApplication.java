@@ -18,10 +18,6 @@ import java.util.Random;
 
 public class WeixinApplication extends Application {
 
-    //    Sign up   注册
-    //    Sign in   登录
-    //    Sign out  退出
-
     public static Context mContext;
     private static Handler mHandler;
     private static int mainThreadId;

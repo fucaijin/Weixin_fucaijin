@@ -2,7 +2,6 @@ package com.fucaijin.weixin_fucaijin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -10,8 +9,6 @@ import android.widget.TextView;
 
 import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
-
-import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
 public class SplashActivity extends BaseActivity implements View.OnClickListener{
     //    Sign up   注册
@@ -39,33 +36,33 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
 //
 //        }else if(WeixinApplication.isFirstRun()){
 ////            首次登录，进入登录/注册页面
-//            initUI();
-//            fl_splash_bt.setVisibility(View.VISIBLE);
+            initUI();
+            fl_splash_bt.setVisibility(View.VISIBLE);
 //        }
 
 //        startActivity(new Intent(this,HomeActivity.class));
 
 //        延迟三秒后打开主页面，并关闭闪屏页
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(mContext,HomeActivity.class));
-                finish();
-            }
-        },3000);
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                startActivity(new Intent(mContext,HomeActivity.class));
+//                finish();
+//            }
+//        },2000);
 
     }
 
     private void initUI() {
         fl_splash_bt = (FrameLayout) findViewById(R.id.fl_splash_bt);
         tv_language = (TextView) findViewById(R.id.tv_titile);
-        Button bt_sign_in = (Button) findViewById(R.id.bt_sign_in_splash_activity);
-        Button bt_sign_up = (Button) findViewById(R.id.bt_sign_up);
+        Button bt_login = (Button) findViewById(R.id.bt_login_splash_activity);
+        Button bt_register = (Button) findViewById(R.id.bt_register);
 
         tv_language.setOnClickListener(this);
-        bt_sign_in.setOnClickListener(this);
-        bt_sign_up.setOnClickListener(this);
+        bt_login.setOnClickListener(this);
+        bt_register.setOnClickListener(this);
     }
 
     @Override
@@ -74,11 +71,11 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
             case R.id.tv_titile:
                 startActivity(new Intent(this,SelectLanguageActivity.class));
                 break;
-            case R.id.bt_sign_in_splash_activity:
-                startActivity(new Intent(this,SignInActivity.class));
+            case R.id.bt_login_splash_activity:
+                startActivity(new Intent(this,LoginActivity.class));
                 break;
-            case R.id.bt_sign_up:
-                startActivity(new Intent(this,SignUpActivity.class));
+            case R.id.bt_register:
+                startActivity(new Intent(this,RegisterActivity.class));
                 break;
         }
     }

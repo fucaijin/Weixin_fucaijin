@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_height="170dp"
+    android:layout_margin="40dp"
+    android:paddingStart="25dp"
+    android:paddingTop="29dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="16dp"
+    android:orientation="vertical"
+    android:background="@color/colorWhite">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手机号码错误"
+        android:textSize="19sp"
+        android:textColor="@color/colorDarkGray"/>
+
+    <TextView
+        android:id="@+id/login_dialog_message"
+        android:textSize="16sp"
+        android:layout_marginTop="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="你输入的是一个无效的手机号码"
+        android:textColor="#757575"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bt_login_error_phone_positive"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_gravity="end"
+            android:layout_width="64dp"
+            android:layout_height="30dp"
+            android:text="确定"
+            android:textSize="16sp"
+            android:layout_marginTop="22dp"
+            android:textColor="@color/colorTextGreen"
+            android:background="@drawable/btn_bg_login_phone_error" />
+    </LinearLayout>
+
+
+</LinearLayout>

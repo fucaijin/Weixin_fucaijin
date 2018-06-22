@@ -45,4 +45,8 @@
 
     <!--朋友详细资料的黑色字体大小-->
     <dimen name="personal_main_text_size">16sp</dimen>
+
+    <!--注册页面的头像大小-->
+    <dimen name="register_select_head_sculpture_size">64dp</dimen>
+
 </resources>

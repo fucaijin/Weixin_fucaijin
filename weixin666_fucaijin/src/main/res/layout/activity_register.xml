@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ll_base_root_style"
     android:background="@color/colorWhite"
-    tools:context="com.fucaijin.weixin_fucaijin.activity.SignUpActivity">
+    tools:context="com.fucaijin.weixin_fucaijin.activity.RegisterActivity">
 
     <!--顶部标题栏-->
     <RelativeLayout
@@ -13,7 +13,7 @@
 
         <!--回退/关闭按钮-->
         <RelativeLayout
-            android:id="@+id/sign_up_rl_bt_back"
+            android:id="@+id/register_rl_bt_back"
             style="@style/rl_top_bar_close_back">
 
             <!--图片-->
@@ -30,7 +30,7 @@
         <!--标题-->
         <TextView
             android:text="@string/input_phone_number"
-            android:layout_toEndOf="@id/sign_up_rl_bt_back"
+            android:layout_toEndOf="@id/register_rl_bt_back"
             style="@style/top_bar_text"/>
 
     </RelativeLayout>
@@ -46,7 +46,7 @@
             android:layout_height="64dp">
 
             <TextView
-                android:id="@+id/sign_up_tv_nick_name"
+                android:id="@+id/register_tv_nick_name"
                 android:text="@string/nick_name"
                 style="@style/edit_text_left_text"
                 android:layout_alignParentBottom="true"
@@ -54,33 +54,33 @@
                 android:layout_marginStart="9dp"/>
 
             <EditText
-                android:id="@+id/sign_up_et_nick_name"
+                android:id="@+id/register_et_nick_name"
                 android:hint="例如：陈晨"
-                android:layout_toEndOf="@id/sign_up_tv_nick_name"
-                android:layout_alignBottom="@id/sign_up_tv_nick_name"
+                android:layout_toEndOf="@id/register_tv_nick_name"
+                android:layout_alignBottom="@id/register_tv_nick_name"
                 style="@style/edit_text_style"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"/>
 
             <ImageView
-                android:id="@+id/sign_up_nickname_divider"
+                android:id="@+id/register_nickname_divider"
                 style="@style/h_line_light_gray"
                 android:layout_alignParentBottom="true"
                 android:layout_width="262dp"/>
 
             <ImageButton
-                android:id="@+id/sign_up_ib_select_head_sculpture"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
+                android:id="@+id/register_ib_select_head_sculpture"
+                android:layout_width="@dimen/register_select_head_sculpture_size"
+                android:layout_height="@dimen/register_select_head_sculpture_size"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/sign_up_bt_bg_head_sculpture"/>
+                android:background="@drawable/register_bt_bg_head_sculpture"/>
 
         </RelativeLayout>
 
         <!--选择国家/地区条目，内含下划线-->
         <LinearLayout
-            android:id="@+id/sign_up_ll_select_country"
+            android:id="@+id/register_ll_area"
             style="@style/ll_edit_text_root"
             android:clickable="true"
             android:background="@drawable/item_bg_selector"
@@ -123,7 +123,7 @@
 
             <!--手机号输入框-->
             <EditText
-                android:id="@+id/sign_up_et_phone"
+                android:id="@+id/register_et_phone"
                 android:hint="@string/please_input_phone_number"
                 style="@style/edit_text_style"/>
 
@@ -131,7 +131,7 @@
 
         <!--手机号的下划线-->
         <ImageView
-            android:id="@+id/sign_up_phone_divider"
+            android:id="@+id/register_phone_divider"
             style="@style/h_line_light_gray"/>
 
 
@@ -144,34 +144,34 @@
 
             <!--手机号输入框-->
             <EditText
-                android:id="@+id/sign_up_et_password"
+                android:id="@+id/register_et_password"
                 android:hint="@string/input_password"
                 style="@style/edit_text_style"
                 android:inputType="textPassword"/>
 
             <ImageView
-                android:id="@+id/sign_up_iv_password_visibility_mode"
+                android:id="@+id/register_iv_password_visibility_mode"
                 android:clickable="true"
                 android:layout_width="23dp"
                 android:layout_height="@dimen/item_height"
-                android:src="@drawable/sign_up_iv_bg_hide_password"/>
+                android:src="@drawable/register_iv_bg_hide_password"/>
 
         </LinearLayout>
 
         <!--密码的下划线-->
         <ImageView
-            android:id="@+id/sign_up_password_divider"
+            android:id="@+id/register_password_divider"
             style="@style/h_line_light_gray"/>
 
         <Button
-            android:id="@+id/sign_up_bt_sign_up"
+            android:id="@+id/register_bt_register"
             android:layout_marginTop="22dp"
             style="@style/bt_green_can_enable"
-            android:text="@string/sign_up"
+            android:text="@string/register"
             android:layout_width="match_parent"/>
 
         <TextView
-            android:id="@+id/sign_up_tv_agreement"
+            android:id="@+id/register_tv_agreement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"

@@ -4,8 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * 转换工具类，例如px和sp、dp之间的转换等
@@ -51,7 +54,7 @@ public class ConvertUtils {
      * @param context 上下文环境
      * @return 转换完成后的byte[]
      */
-    public static byte[] drawable2ByteArray(Drawable drawable,Context context){
+    public static byte[] drawable2byteArray(Drawable drawable, Context context){
 //        先将drawable转换成Bitmap
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -61,5 +64,33 @@ public class ConvertUtils {
         byte[] imageBytes = byteArrayOutputStream.toByteArray();
 
         return imageBytes;
+    }
+
+    /**
+     * 将字符串转换成md5
+     * @param string 要转化成md5的值
+     * @return md5后的32位字符的值 例如：8a37d6ac928e7336d43ed13ab823ccf6
+     */
+    public static String string2md5(String string){
+        if (TextUtils.isEmpty(string)) {
+            return "";
+        }
+        MessageDigest md5 = null;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+            byte[] bytes = md5.digest(string.getBytes());
+            String result = "";
+            for (byte b : bytes) {
+                String temp = Integer.toHexString(b & 0xff);
+                if (temp.length() == 1) {
+                    temp = "0" + temp;
+                }
+                result += temp;
+            }
+            return result;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

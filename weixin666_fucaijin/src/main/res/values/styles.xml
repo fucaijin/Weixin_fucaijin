@@ -13,8 +13,8 @@
         <item name="android:layout_width">123dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@drawable/bt_sl_tx_sign_in_splash</item>
-        <item name="android:background">@drawable/bt_sl_bg_sign_in_splash</item>
+        <item name="android:textColor">@drawable/bt_sl_tx_login_splash</item>
+        <item name="android:background">@drawable/bt_sl_bg_login_splash</item>
     </style>
 
     <!--带有圆角的浅灰色背景按钮，黑色字体，字体和按钮都带有selector-->
@@ -22,8 +22,8 @@
         <item name="android:layout_width">123dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@drawable/bt_sl_tx_sign_up_splash</item>
-        <item name="android:background">@drawable/bt_sl_bg_sign_up_splash</item>
+        <item name="android:textColor">@drawable/bt_sl_tx_register_splash</item>
+        <item name="android:background">@drawable/bt_sl_bg_register_splash</item>
     </style>
 
     <!--width和height都是match_parent-->
@@ -108,7 +108,7 @@
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_alignParentEnd">true</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:background">@drawable/bt_sl_bg_sign_in_splash</item>
+        <item name="android:background">@drawable/bt_sl_bg_login_splash</item>
         <item name="android:layout_marginEnd">8dp</item>
     </style>
 
@@ -130,7 +130,7 @@
     </style>
 
     <!--登录页面顶部的大标题:手机号登录、微信号/QQ/邮箱登录的样式-->
-    <style name="text_sign_in_title">
+    <style name="text_login_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">32dp</item>
@@ -177,14 +177,14 @@
     <!--可点击的蓝色文字样式-->
     <style name="text_blue_can_clickable" parent="w_h_double_wrap_content">
         <item name="android:clickable">true</item>
-        <item name="android:textColor">@drawable/sign_in_text_blue</item>
+        <item name="android:textColor">@drawable/login_text_blue</item>
         <item name="android:textSize">17sp</item>
     </style>
 
     <!--可点击的蓝色文字样式(小字)，用于"底部的找回密码、紧急冻结、微信安全中心等"-->
     <style name="text_blue_small_can_clickable" parent="w_h_double_wrap_content">
         <item name="android:clickable">true</item>
-        <item name="android:textColor">@drawable/sign_in_text_blue</item>
+        <item name="android:textColor">@drawable/login_text_blue</item>
         <item name="android:textSize">14sp</item>
     </style>
 

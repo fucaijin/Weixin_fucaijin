@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">微信</string>
     <string name="language">语言</string>
-    <string name="sign_in">登录</string>
-    <string name="sign_up">注册</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
     <string name="selectLanguage">多语言</string>
     <string name="save_select_language">保存</string>
-    <string name="use_phone_sign_in">手机号登录</string>
-    <string name="other_ways_sign_in">微信号/QQ/邮箱登录</string>
+    <string name="use_phone_login">手机号登录</string>
+    <string name="other_ways_login">微信号/QQ/邮箱登录</string>
     <string name="phone">手机号</string>
     <string name="input_phone_number">填写手机号</string>
     <string name="please_input_phone_number">请填写手机号</string>
@@ -18,7 +18,7 @@
     <string name="nick_name">昵称</string>
     <string name="input_password">填写密码</string>
     <string name="password">密码</string>
-    <string name="use_wechat_id_or_qq_or_email_sign_in">用微信号/QQ号/邮箱登录</string>
+    <string name="use_wechat_id_or_qq_or_email_login">用微信号/QQ号/邮箱登录</string>
 
     <string name="action_bar_search">搜索</string>
     <string name="action_bar_new_group_chat">发起群聊</string>
@@ -60,4 +60,7 @@
     <string name="area">地区</string>
     <string name="personal_album">个人相册</string>
     <string name="friend_more_info">更多</string>
+    <string name="please_waiting">请稍候...</string>
+    <string name="please_input_weixin_password">请填写微信密码</string>
+    <string name="use_short_message_identifying_code_login">用短信验证码登录</string>
 </resources>

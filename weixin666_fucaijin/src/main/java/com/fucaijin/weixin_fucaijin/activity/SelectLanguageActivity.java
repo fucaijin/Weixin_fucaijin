@@ -42,7 +42,7 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
     }
 
     private void initUI() {
-        RelativeLayout rl_bt_back = (RelativeLayout) findViewById(R.id.sign_up_rl_bt_back);
+        RelativeLayout rl_bt_back = (RelativeLayout) findViewById(R.id.register_rl_bt_back);
         Button bt_save_select_language = (Button) findViewById(R.id.bt_save_select_language);
         lv_selectLanguage = (ListView) findViewById(R.id.lv_selectLanguage);
 
@@ -57,7 +57,7 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.sign_up_rl_bt_back:
+            case R.id.register_rl_bt_back:
 //                TODO 返回按钮的selector遮罩效果(前景变灰)未完成
                 finish();
                 break;

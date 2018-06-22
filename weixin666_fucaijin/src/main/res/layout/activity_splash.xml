@@ -27,13 +27,13 @@
             android:layout_margin="20dp">
 
             <Button
-                android:id="@+id/bt_sign_in_splash_activity"
-                android:text="@string/sign_in"
+                android:id="@+id/bt_login_splash_activity"
+                android:text="@string/login"
                 style="@style/bt_green"/>
 
             <Button
-                android:id="@+id/bt_sign_up"
-                android:text="@string/sign_up"
+                android:id="@+id/bt_register"
+                android:text="@string/register"
                 android:layout_alignParentEnd="true"
                 style="@style/bt_light_gray"/>
 

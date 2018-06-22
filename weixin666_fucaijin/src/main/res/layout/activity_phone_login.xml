@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ll_base_root_style"
+    android:background="@color/colorWhite"
+    tools:context="com.fucaijin.weixin_fucaijin.activity.LoginActivity">
+
+    <!--顶部状态栏的关闭页面按钮-->
+    <ImageView
+        android:id="@+id/iv_phone_login_finish"
+        style="@style/iv_top_bar_close"
+        android:padding="5dp"
+        android:src="@drawable/top_bar_close_bt"/>
+
+    <!--手机号登录页面-->
+    <LinearLayout
+        android:id="@+id/login_ll_use_phone_ui"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <!--使用手机登录的标题-->
+        <TextView
+            android:text="@string/use_phone_login"
+            style="@style/text_login_title" />
+
+        <!--选择国家/地区条目，内含下划线-->
+        <RelativeLayout
+            android:id="@+id/login_rl_select_country"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            android:layout_marginTop="33dp"
+            android:background="@drawable/item_sl_bg"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tv_country"
+                android:text="@string/phone"
+                android:textColor="@color/colorBlack"
+                android:layout_centerVertical="true"
+                style="@style/edit_text_left_text"
+                android:layout_marginStart="9dp"/>
+
+            <TextView
+                android:id="@+id/login_phone_login_phone"
+                style="@style/w_h_double_wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/tv_country"
+                android:textColor="@color/colorHomeGrayText"
+                android:textSize="16sp" />
+
+            <!--下划线-->
+            <ImageView
+                android:layout_alignParentBottom="true"
+                style="@style/h_line_light_gray"
+                android:layout_height="1px"/>
+        </RelativeLayout>
+
+        <!--手机号输入框根布局-->
+        <LinearLayout
+            style="@style/ll_edit_text_root">
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:text="@string/password"
+                style="@style/edit_text_left_text"/>
+
+            <!--密码输入框-->
+            <EditText
+                android:id="@+id/et_phone_login_password"
+                android:hint="@string/please_input_weixin_password"
+                style="@style/edit_text_style"
+                android:inputType="textPassword"
+                android:maxLength="11"/>
+
+            <!--清除手机号输入框的按钮-->
+            <ImageView
+                android:id="@+id/iv_login_clean_phone_password"
+                style="@style/edit_text_clear_bt_style"/>
+
+        </LinearLayout>
+
+        <!--输入框下方的下划线-->
+        <ImageView
+            style="@style/h_line_light_gray"
+            android:background="@color/colorLineGreen" />
+
+        <!--“用短信验证码登录”-->
+        <TextView
+            android:text="@string/use_short_message_identifying_code_login"
+            android:layout_marginStart="9dp"
+            android:layout_marginBottom="39dp"
+            android:layout_marginTop="23dp"
+            style="@style/text_blue_can_clickable"/>
+
+        <!--手机号登录按钮-->
+        <Button
+            android:id="@+id/login_btn_phone_login"
+            android:text="登录"
+            android:enabled="true"
+            style="@style/bt_green_can_enable"/>
+
+    </LinearLayout>
+
+    <!--底部的：找回密码|紧急冻结|微信安全中心-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!--找回密码-->
+        <TextView
+            android:id="@+id/login_tv_get_back_password"
+            android:text="@string/get_back_password"
+            style="@style/text_blue_small_can_clickable"/>
+
+        <ImageView
+            style="@style/light_gray_vertical_divider"/>
+
+        <!--紧急冻结-->
+        <TextView
+            android:id="@+id/login_tv_emergency_freezing"
+            android:text="@string/emergency_freezing"
+            style="@style/text_blue_small_can_clickable"/>
+
+        <ImageView
+            style="@style/light_gray_vertical_divider"/>
+
+        <!--微信安全中心-->
+        <TextView
+            android:id="@+id/login_tv_security_center"
+            android:text="@string/security_center"
+            style="@style/text_blue_small_can_clickable"/>
+
+    </LinearLayout>
+
+</LinearLayout>
