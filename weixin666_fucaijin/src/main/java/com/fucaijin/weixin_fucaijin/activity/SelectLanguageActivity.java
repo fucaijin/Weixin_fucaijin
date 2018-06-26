@@ -62,7 +62,7 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
                 finish();
                 break;
             case R.id.bt_save_select_language:
-                WeixinApplication.setConfig("language",nowSelectLanguageIndex + "");
+                WeixinApplication.setConfigString("language",nowSelectLanguageIndex + "");
                 finish();
                 break;
         }

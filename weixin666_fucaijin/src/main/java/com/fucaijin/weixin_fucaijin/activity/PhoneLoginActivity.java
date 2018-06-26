@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fucaijin.weixin_fucaijin.R;
+import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
 import com.fucaijin.weixin_fucaijin.utils.Http;
 
@@ -123,18 +124,22 @@ public class PhoneLoginActivity extends BaseActivity implements View.OnClickList
             try {
                 int code = (int) jsonObject.get("code");
                 String content = (String) jsonObject.get("content");
-
-                Toast.makeText(mContext, content, Toast.LENGTH_SHORT).show();
                 switch (code){
                     case HTTP_RESPONSE_TYPE_CODE_LOGIN_PHONE_NOT_EXIST:
 //                        该手机号未注册
-                        break;
                     case HTTP_RESPONSE_TYPE_CODE_LOGIN_PASSWORD_ERROR:
 //                        密码错误
+                        Toast.makeText(mContext, content, Toast.LENGTH_SHORT).show();
                         break;
                     case HTTP_RESPONSE_TYPE_CODE_LOGIN_SUCCESS:
 //                        登录成功，保存信息到本地，不是首次登录，还有账户密码，以便下次可以直接登录
 //                        关闭之前的所有Activity,然后打开主页面
+                        WeixinApplication.setConfigString("user_phone",phone);
+                        WeixinApplication.setConfigString("password",passwordMd5);
+
+                        WeixinApplication.setConfigBoolean("is_first_run",false);
+                        WeixinApplication.setConfigBoolean("is_logined",true);
+
                         Intent openHomeIntent = new Intent(this, HomeActivity.class);
                         openHomeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(openHomeIntent);

@@ -60,7 +60,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择头像
     private static final int PHOTO_REQUEST_CUT = 3;// 剪切完成的结果
 
-    private Bitmap customHeadSculptureBitmap;
     private String headPictureStr;
 
     @Override
@@ -173,9 +172,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     boolean registerSuccess = requestRegister(nickNameStr, phoneStr, passwordMd5, headPictureStr);
                     if (registerSuccess) {
 //                    如果注册成功，就把用户名和密码存到本地，然后打开登录页面
-                        WeixinApplication.setConfig("nick_name", nickNameStr);
-                        WeixinApplication.setConfig("account", phoneStr);
-                        WeixinApplication.setConfig("password", passwordMd5);
+                        WeixinApplication.setConfigString("nick_name", nickNameStr);
+                        WeixinApplication.setConfigString("account", phoneStr);
+                        WeixinApplication.setConfigString("password", passwordMd5);
                         Toast.makeText(mContext, "注册成功", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(this, LoginActivity.class));
                         finish();
@@ -328,7 +327,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         } else if (requestCode == PHOTO_REQUEST_CUT) {
             // 从剪切图片返回的数据
             if (data != null) {
-                customHeadSculptureBitmap = data.getParcelableExtra("data");
+                Bitmap customHeadSculptureBitmap = data.getParcelableExtra("data");
                 registerIbSelectHeadSculpture.setImageBitmap(customHeadSculptureBitmap);
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();//将Bitmap转成Byte[]

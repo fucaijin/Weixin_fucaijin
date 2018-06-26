@@ -16,10 +16,10 @@ import com.fucaijin.weixin_fucaijin.activity.ChatActivity;
 import com.fucaijin.weixin_fucaijin.adapter.RecentContactAdapter;
 import com.fucaijin.weixin_fucaijin.data.MessageListItem;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.lastMessageList;
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.lastMessageTimeList;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mAddressListItem;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
@@ -47,14 +47,16 @@ public class HomeWechatFragment extends Fragment implements AdapterView.OnItemCl
 
             item.headSculpture = mAddressListItem.get(i).getHeadSculpture();
             item.nickName = mAddressListItem.get(i).getNickName();
-            item.lastMessage = mAddressListItem.get(i).getNickName() + "给你发来了问候，祝你身体健康工作顺利，妹子多多，帅锅多多";
+            item.lastMessage = lastMessageList[i];
             item.messageType = PERSONAL_CHAT_TYPE;
 
-//        生成随机要减去/退回的毫秒数，并生成时间，然后格式化成字符串
-            long randomBackTime = (long) (Math.random() * 24 * 60 * 60 * 1000);
-            Date date = new Date(System.currentTimeMillis() - randomBackTime);
-            SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-            item.time = format.format(date);
+//        暂时注销随机生成的模拟时间：生成随机要减去/退回的毫秒数，并生成时间，然后格式化成字符串
+//            long randomBackTime = (long) (Math.random() * 24 * 60 * 60 * 1000);
+//            Date date = new Date(System.currentTimeMillis() - randomBackTime);
+//            SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+
+//            使用自定义的时间
+            item.time = lastMessageTimeList[i];
 
             list.add(item);
         }

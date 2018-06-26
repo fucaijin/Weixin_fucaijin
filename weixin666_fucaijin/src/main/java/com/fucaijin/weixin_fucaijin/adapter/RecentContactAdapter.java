@@ -20,6 +20,7 @@ import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
  */
 public class RecentContactAdapter extends BaseAdapter {
     List list;
+
     public RecentContactAdapter(List list) {
         this.list = list;
     }
@@ -56,16 +57,34 @@ public class RecentContactAdapter extends BaseAdapter {
         recentMessage.setText(item.lastMessage);
         time.setText(item.time);
 
-        if(item.messageType == PERSONAL_CHAT_TYPE){
-            unreadMessage.setText("" + (35 - i));
-            unreadMessage.setVisibility(View.VISIBLE);
+        if (item.messageType == PERSONAL_CHAT_TYPE) {
+//            unreadMessage.setText("" + (35 - i));
+//            unreadMessage.setVisibility(View.VISIBLE);
+//            隐藏了模拟的消息提醒
+            unreadMessage.setVisibility(View.INVISIBLE);
             groupChatMute.setVisibility(View.INVISIBLE);
-        }else {
+
+//            按10-1-10-1-10-1数量的未读消息
+//            if (i < 10) {
+//                unreadMessage.setText("" + (10 - i));
+//                unreadMessage.setVisibility(View.VISIBLE);
+//            }else if(9 < i && i < 19){
+//                unreadMessage.setText("" + (i - 10 + 2));
+//                unreadMessage.setVisibility(View.VISIBLE);
+//            }else if(18 < i && i < 28){
+//                unreadMessage.setText("" + (29 - i -1));
+//                unreadMessage.setVisibility(View.VISIBLE);
+//            }else if(27 < i){
+//                unreadMessage.setText("" + (i - 27 + 1));
+//                unreadMessage.setVisibility(View.VISIBLE);
+//            }
+
+        } else {
             unreadMessage.setVisibility(View.INVISIBLE);
         }
 
 //        TODO 未完成
-        if(i == 5 || i == 9 || i ==21){
+        if (i == 5 || i == 9 || i == 21) {
         }
 
         return inflate;
