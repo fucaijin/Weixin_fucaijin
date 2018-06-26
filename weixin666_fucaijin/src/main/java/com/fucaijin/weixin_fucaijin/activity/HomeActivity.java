@@ -36,6 +36,7 @@ import com.fucaijin.weixin_fucaijin.fragment.HomeAddressListFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeMeFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment;
 import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
+import com.fucaijin.weixin_fucaijin.utils.JudgementUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,6 +101,11 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initUI();
+        updateData();
+    }
+
+    private void updateData() {
+        boolean networkAvailable = JudgementUtils.isNetworkAvailable(this);
     }
 
     /**
