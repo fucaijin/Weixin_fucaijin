@@ -31,25 +31,30 @@ import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.adapter.HomeFragmentAdapter;
 import com.fucaijin.weixin_fucaijin.adapter.HomeNewTaskPopupWindowAdapter;
 import com.fucaijin.weixin_fucaijin.data.HomeNewTaskPopulWindowData;
-import com.fucaijin.weixin_fucaijin.fragment.HomeFoundPageFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeAddressListFragment;
+import com.fucaijin.weixin_fucaijin.fragment.HomeFoundPageFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeMeFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment;
+import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
+import com.fucaijin.weixin_fucaijin.utils.Http;
 import com.fucaijin.weixin_fucaijin.utils.JudgementUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.HTTP_HOST_URL;
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
+import static com.fucaijin.weixin_fucaijin.utils.Http.responseHashMap;
+
 public class HomeActivity extends BaseActivity implements ViewPager.OnPageChangeListener, View.OnClickListener, View.OnLongClickListener {
+    private static final String HTTP_POST_URL_GET_FRIENDS_INFO = HTTP_HOST_URL + "get_friends_info/";
+    public static final int HTTP_REQUEST_TYPE_CODE_GET_FRIENDS_INFO = 15;
 //    TODO 设置底部按钮滑动时候的渐变细节未完成：应该添加一个中间图层，在滑动到一半的时候边框完全显示，滑动比例超过一般，Pressed状态的图案才开始显示
 //    TODO 顶部标题栏的“微信”在有未读消息时候会显示消息数量，例如“微信（1）”
 //    TODO 下方按钮的消息提醒设置未开发
-//    TODO 标题栏的搜索功能未开发
 //    TODO 新建任务的点击事件未完成
-//    TODO 通讯录界面未开发
-//    TODO 发现界面未开发
-//    TODO 我界面未开发
 
     private ViewPager mViewPager;
     private List<Fragment> fragmentList;
@@ -106,6 +111,48 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
     private void updateData() {
         boolean networkAvailable = JudgementUtils.isNetworkAvailable(this);
+        if (!networkAvailable) {
+            Toast.makeText(mContext, "请连接网络...", Toast.LENGTH_SHORT).show();
+        } else if (WeixinApplication.isIsFirstRun()) {
+//            是首次登录就请求好友数据(头像，昵称)，以及之前好友发送自己未收到的消息
+
+            firstTimeRequest();
+//            把首次登录设置为False，下次再进来的时候就不需要请求好友头像和昵称这些了。
+            WeixinApplication.setConfigBoolean("is_first_run", false);
+            WeixinApplication.setConfigBoolean("is_logined", true);
+        } else {
+//            TODO 如果不是首次登录，就请求未接收到的数据即可
+
+        }
+
+    }
+
+    private void firstTimeRequest() {
+        requestFriendsInfo();//TODO 未完成 请求好友信息(头像，昵称，签名等)
+        updateUnReceiveMsg();//TODO 未完成 请求之前未收到的消息
+    }
+
+    /**
+     * 请求之前未收到的消息
+     */
+    private void updateUnReceiveMsg() {
+        //TODO 未完成 请求之前未收到的消息
+
+    }
+
+    /**
+     * 请求好友信息(头像，昵称，签名等)
+     */
+    private void requestFriendsInfo() {
+        //TODO 未完成 请求好友信息(头像，昵称，签名等)
+        HashMap<Object, Object> getFriendsInfoMap = new HashMap<>();
+        getFriendsInfoMap.put("url", HTTP_POST_URL_GET_FRIENDS_INFO);
+        getFriendsInfoMap.put("phone", WeixinApplication.getConfig("user_phone"));
+
+        HashMap hashMap = Http.postServer(HTTP_REQUEST_TYPE_CODE_GET_FRIENDS_INFO, getFriendsInfoMap);
+        responseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
+
+
     }
 
     /**
@@ -213,7 +260,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         RelativeLayout searchPageBack = (RelativeLayout) findViewById(R.id.search_page_back_btn_rl);
         searchPageBack.setOnClickListener(this);
         final ImageView searchPageVoiceSearch = (ImageView) findViewById(R.id.search_page_voice_btn_iv);
-        final ImageView searchPageClearEditText =  (ImageView) findViewById(R.id.search_page_clear_edit_text_btn_iv);
+        final ImageView searchPageClearEditText = (ImageView) findViewById(R.id.search_page_clear_edit_text_btn_iv);
         searchPageClearEditText.setOnClickListener(this);
 
 //        给输入框设置文本变化监听器
@@ -586,7 +633,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             popupWindow = null;
         } else {
 //            如果当前搜索页面是打开状态，隐藏主搜索页面，显示主页面
-            if(isHomeSearchPageOpened){
+            if (isHomeSearchPageOpened) {
                 hideSearchPage();
                 return;
             }

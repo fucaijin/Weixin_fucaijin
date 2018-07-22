@@ -132,6 +132,8 @@ public class WeixinApplication extends Application {
     //    模拟的用户昵称
     private String[] OfficialNickNameList = {"新朋友", "群聊", "标签", "公众号"};
 
+    public static final String HTTP_HOST_URL = "http://192.168.1.105:8000/";//请求网络主机
+
     @Override
     public void onCreate() {
         super.onCreate();

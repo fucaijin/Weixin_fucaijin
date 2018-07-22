@@ -35,7 +35,9 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.HTTP_HOST_URL;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
+import static com.fucaijin.weixin_fucaijin.utils.Http.responseHashMap;
 
 /**
  * 注册页面
@@ -54,7 +56,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private EditText registerEtPhone;
     private Button registerBtRegister;
     private ImageButton registerIbSelectHeadSculpture;//TODO 注册域名需要改成实际的
-    public static final String HTTP_POST_URL_REGISTER = "http://192.168.1.105:8000/register/";
+    public static final String HTTP_POST_URL_REGISTER = HTTP_HOST_URL + "register/";
     public static final int HTTP_REQUEST_TYPE_CODE_REGISTER = 11;//注册请求码
 
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择头像
@@ -142,7 +144,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.register_ib_select_head_sculpture:
-//                TODO 打开相册选择，然后返回并显示
                 selectHeadSculpture();
                 break;
             case R.id.register_ll_area:
@@ -160,14 +161,13 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 registerEtPassword.setSelection(registerEtPassword.getText().length());//设置光标的位置到末尾
                 break;
             case R.id.register_bt_register:
-//                TODO 执行提交信息到服务器，由服务器判断是否已经注册，并给出相应结果，如果返回的是登录，就执行登录逻辑
 //                以下是模拟注册，把昵称、手机、密码（加密）存到本地文件中，然后开启登录界面，然后销毁当前界面
                 String nickNameStr = registerEtNickName.getText().toString().trim();
                 String phoneStr = registerEtPhone.getText().toString().trim();
                 String passwordStr = registerEtPassword.getText().toString().trim();
                 String passwordMd5 = ConvertUtils.string2md5(passwordStr);
-//                TODO 未完成国家/地区的获取，以及头像的获取和传输
 
+//                如果有头像，就注册。姓名、手机、密码等之前已经检查，以上项目都填了，注册按钮才可使用，不然就是灰色的
                 if (headPictureStr != null) {
                     boolean registerSuccess = requestRegister(nickNameStr, phoneStr, passwordMd5, headPictureStr);
                     if (registerSuccess) {
@@ -205,6 +205,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         registerInfoMap.put("headPicture", headPictureStr);
 
         HashMap resultHashMap = Http.postServer(HTTP_REQUEST_TYPE_CODE_REGISTER, registerInfoMap);
+        responseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
 
 //        请求结束后结果的处理
         if (resultHashMap != null) {

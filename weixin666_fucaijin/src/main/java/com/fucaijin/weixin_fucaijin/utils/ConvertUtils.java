@@ -5,8 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -92,5 +96,36 @@ public class ConvertUtils {
             e.printStackTrace();
         }
         return "";
+    }
+
+    /**
+     * 用于将Base64的String转换为图片并保存
+     * @param imgStr 需要解码的图片的Base64的String
+     * @param path 存储图片的位置
+     * @return 返回存储结果，存储成功返回true，否则返回false
+     */
+    public static boolean base64StrToImage(String imgStr, String path) {
+        if (imgStr == null){
+            return false;
+        }
+
+        try {
+            // 解密
+            byte[] bytes = Base64.decode(imgStr, Base64.URL_SAFE);
+
+            //文件夹不存在则自动创建
+            File tempFile = new File(path);
+            if (!tempFile.getParentFile().exists()) {
+                tempFile.getParentFile().mkdirs();
+            }
+
+            OutputStream out = new FileOutputStream(tempFile);
+            out.write(bytes);
+            out.flush();
+            out.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

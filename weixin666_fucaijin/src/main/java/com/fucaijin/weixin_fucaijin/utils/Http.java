@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
+import static com.fucaijin.weixin_fucaijin.activity.HomeActivity.HTTP_REQUEST_TYPE_CODE_GET_FRIENDS_INFO;
 import static com.fucaijin.weixin_fucaijin.activity.PhoneLoginActivity.HTTP_REQUEST_TYPE_CODE_PHONE_LOGIN;
 import static com.fucaijin.weixin_fucaijin.activity.RegisterActivity.HTTP_REQUEST_TYPE_CODE_REGISTER;
 
@@ -26,22 +27,53 @@ import static com.fucaijin.weixin_fucaijin.activity.RegisterActivity.HTTP_REQUES
 public class Http {
     private static HttpURLConnection connection;
     private static URL url;
-    private static HashMap responseHashMap;
+    public static HashMap responseHashMap;
 
     /**
      * 用来向发送服务器post请求的
-     *  @param type 请求类型，例如是注册，还是登录，或者是聊天什么的
+     *
+     * @param type 请求类型，例如是注册，还是登录，或者是聊天什么的
      * @param info 请求的信息
      */
     public static HashMap postServer(int type, HashMap info) {
         switch (type) {
             case HTTP_REQUEST_TYPE_CODE_REGISTER:
                 //注册请求
-                return requestRegister(type,info);
+                return requestRegister(type, info);
             case HTTP_REQUEST_TYPE_CODE_PHONE_LOGIN:
                 //登录请求
-                return requestLogin(type,info);
+                return requestLogin(type, info);
+            case HTTP_REQUEST_TYPE_CODE_GET_FRIENDS_INFO:
+                return requestFriendsInfo(type, info);
+        }
+        return null;
+    }
 
+    /**
+     * @param type 请求类型码
+     * @param info 要提交的信息
+     * @return 从服务器得到的所有好友的昵称、微信号、前面、头像等信息
+     */
+    private static HashMap requestFriendsInfo(int type, HashMap info) {
+        String phone = (String) info.get("phone");
+        String urlStr = (String) info.get("url");
+
+//        拼接要发送的信息
+        String sendInfoStr;
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("type", type);
+            jsonObject.put("phone", phone);
+            sendInfoStr = jsonObject.toString();
+
+//            向服务器发送请求
+            requestServer(urlStr, sendInfoStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (responseHashMap != null) {
+            return responseHashMap;
         }
         return null;
     }
@@ -73,6 +105,7 @@ public class Http {
 
     /**
      * 请求注册
+     *
      * @param type
      * @param info 注册需要的信息集合HashMap
      */
@@ -108,6 +141,7 @@ public class Http {
 
     /**
      * 向服务器发送请求
+     *
      * @param urlStr      请求的地址
      * @param sendInfoStr 请求的信息
      * @return 返回一个HashMap，HashMap的“responseCode”有请求的结果，
@@ -167,10 +201,10 @@ public class Http {
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e("HttpRequestServer Error", "IOException 1:" + e.getMessage());
-                } catch (JSONException e){
+                } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("JSONException Error", "IOException 1:" + e.getMessage());
-                }finally {
+                } finally {
                     if (connection != null) {
                         connection.disconnect();
                     }

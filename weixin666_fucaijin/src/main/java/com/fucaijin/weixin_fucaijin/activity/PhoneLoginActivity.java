@@ -21,7 +21,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.HTTP_HOST_URL;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
+import static com.fucaijin.weixin_fucaijin.utils.Http.responseHashMap;
 
 /**
  * 使用手机登录页面(就是输入了手机号，然后点击下一步打开的那个页面)
@@ -30,7 +32,7 @@ import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
 public class PhoneLoginActivity extends BaseActivity implements View.OnClickListener, TextWatcher {
 
-    private static final String HTTP_POST_URL_LOGIN = "http://192.168.1.105:8000/login/";
+    private static final String HTTP_POST_URL_LOGIN = HTTP_HOST_URL + "login/";//完整的应该是这样："http://192.168.1.105:8000/login/";
     private static final int HTTP_RESPONSE_TYPE_CODE_LOGIN_PHONE_NOT_EXIST = 16; //请求登录，但手机号尚未注册
     private static final int HTTP_RESPONSE_TYPE_CODE_LOGIN_PASSWORD_ERROR = 18;
     private static final int HTTP_RESPONSE_TYPE_CODE_LOGIN_SUCCESS = 20;
@@ -116,6 +118,7 @@ public class PhoneLoginActivity extends BaseActivity implements View.OnClickList
 
 //        将信息提交到服务器
         HashMap hashMap = Http.postServer(HTTP_REQUEST_TYPE_CODE_PHONE_LOGIN, loginInfoMap);
+        responseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
 
 //        根据网络请求，判断是否成功，如果网络请求成功，则判断是否用户名不存在，或者秘密错误或者登录成功
         int responseCode = (int) hashMap.get("responseCode");
@@ -136,9 +139,6 @@ public class PhoneLoginActivity extends BaseActivity implements View.OnClickList
 //                        关闭之前的所有Activity,然后打开主页面
                         WeixinApplication.setConfigString("user_phone",phone);
                         WeixinApplication.setConfigString("password",passwordMd5);
-
-                        WeixinApplication.setConfigBoolean("is_first_run",false);
-                        WeixinApplication.setConfigBoolean("is_logined",true);
 
                         Intent openHomeIntent = new Intent(this, HomeActivity.class);
                         openHomeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

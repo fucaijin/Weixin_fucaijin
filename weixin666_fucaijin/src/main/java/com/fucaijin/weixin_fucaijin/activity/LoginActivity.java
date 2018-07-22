@@ -305,13 +305,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     Toast.makeText(this, "请连接网络", Toast.LENGTH_SHORT).show();
                 }
 
-//                因为使用了上面的请求网络，因此此处暂时注销
-//                if (account.equals(WeixinApplication.getConfig("account")) && md5Password.equals(WeixinApplication.getConfig("password"))) {
-//                    startActivity(new Intent(this, HomeActivity.class));
-//                } else {
-//                    Toast.makeText(mContext, "账号或密码有误，请重新输入", Toast.LENGTH_SHORT).show();
-//                }
-
                 break;
 
 //            以下三个都是在登录界面点击清除按钮以后，清除输入框，并隐藏清除按钮
@@ -375,8 +368,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     //设置请求头
                     connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                     connection.setRequestProperty("Content-Length", String.valueOf(data.length()));
-//                    connection.setRequestProperty("Content-Length", String.valueOf(data.getBytes().length));//不知道和上一行哪个对，所以暂时注销
-//                    connection.setRequestProperty("Charset", "utf-8");//不知道能不能用到此行，暂时注销
 
                     //拿到输出流
                     OutputStream os = connection.getOutputStream();
