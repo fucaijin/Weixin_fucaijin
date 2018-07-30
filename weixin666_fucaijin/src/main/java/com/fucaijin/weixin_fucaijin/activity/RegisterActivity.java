@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
+import com.fucaijin.weixin_fucaijin.utils.HandleResponseCode;
 import com.fucaijin.weixin_fucaijin.utils.Http;
 
 import org.json.JSONException;
@@ -34,6 +35,10 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.options.RegisterOptionalUserInfo;
+import cn.jpush.im.api.BasicCallback;
 
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.HTTP_HOST_URL;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
@@ -163,9 +168,30 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.register_bt_register:
 //                以下是模拟注册，把昵称、手机、密码（加密）存到本地文件中，然后开启登录界面，然后销毁当前界面
                 String nickNameStr = registerEtNickName.getText().toString().trim();
-                String phoneStr = registerEtPhone.getText().toString().trim();
+                final String phoneStr = registerEtPhone.getText().toString().trim();
                 String passwordStr = registerEtPassword.getText().toString().trim();
-                String passwordMd5 = ConvertUtils.string2md5(passwordStr);
+                final String passwordMd5 = ConvertUtils.string2md5(passwordStr);
+
+//                调用极光im SDK进行注册
+//                JMessageClient.register(String username, String password, BasicCallback callback);
+                RegisterOptionalUserInfo registerOptionalUserInfo = new RegisterOptionalUserInfo();
+                registerOptionalUserInfo.setNickname(nickNameStr);
+                JMessageClient.register(phoneStr, passwordMd5, registerOptionalUserInfo, new BasicCallback() {
+                    @Override
+                    public void gotResult(int statusCode, String s) {
+//                        TODO 尚未保存头像图片
+//                        注册成功
+                        if (statusCode == 0) {
+                            WeixinApplication.setConfigString("account", phoneStr);
+                            WeixinApplication.setConfigString("password", passwordMd5);
+                            Toast.makeText(mContext, "注册成功", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            finish();
+                        } else {
+                            HandleResponseCode.onHandle(mContext, statusCode);
+                        }
+                    }
+                });
 
 //                如果有头像，就注册。姓名、手机、密码等之前已经检查，以上项目都填了，注册按钮才可使用，不然就是灰色的
                 if (headPictureStr != null) {
@@ -182,6 +208,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 } else {
                     Toast.makeText(mContext, "请选择头像", Toast.LENGTH_SHORT).show();
                 }
+
+
+
                 break;
         }
     }
