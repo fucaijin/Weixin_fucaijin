@@ -49,10 +49,10 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initUI() {
-        fl_splash_bt = (FrameLayout) findViewById(R.id.fl_splash_bt);
-        tv_language = (TextView) findViewById(R.id.tv_titile);
-        Button bt_login = (Button) findViewById(R.id.bt_login_splash_activity);
-        Button bt_register = (Button) findViewById(R.id.bt_register);
+        fl_splash_bt = findViewById(R.id.fl_splash_bt);
+        tv_language = findViewById(R.id.tv_titile);
+        Button bt_login = findViewById(R.id.bt_login_splash_activity);
+        Button bt_register = findViewById(R.id.bt_register);
 
         tv_language.setOnClickListener(this);
         bt_login.setOnClickListener(this);

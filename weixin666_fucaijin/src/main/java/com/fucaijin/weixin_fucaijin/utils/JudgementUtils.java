@@ -8,6 +8,9 @@ import android.net.NetworkInfo;
 import android.text.TextUtils;
 import android.widget.EditText;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * 这是一个判断工具类，用来判断输入框是否为空等功能
  * Created by fucaijin on 2018/5/12.
@@ -47,4 +50,13 @@ public class JudgementUtils {
         return false;
     }
 
+    /**
+     * @param str 要判断的字符串
+     * @return 返回字符串是否包含英文字母的结果
+     */
+    public static boolean containLetter(String str) {
+        Pattern pattern = Pattern.compile("^[a-zA-Z]$");
+        Matcher matcher = pattern.matcher(str);
+        return matcher.find();
+    }
 }

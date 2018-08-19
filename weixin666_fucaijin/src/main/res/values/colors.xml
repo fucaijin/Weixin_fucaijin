@@ -36,5 +36,6 @@
     <color name="colorChatActivityMoreFunctionBgPressed">#E7E7E7</color>//聊天页面的底部更多功能的按钮的按下的背景颜色
     <color name="colorChatActivityMoreFunctionStroke">#D6D6D6</color>//聊天页面的底部更多功能的按钮的边框颜色
     <color name="colorPersonalPhoneNumber">#576b95</color>//通讯录先联系人的详细资料页面的电话号码颜色
+    <color name="colorTextLightGray">#C5C5C5</color>//添加朋友Activity页面的Hint字体颜色
 
 </resources>

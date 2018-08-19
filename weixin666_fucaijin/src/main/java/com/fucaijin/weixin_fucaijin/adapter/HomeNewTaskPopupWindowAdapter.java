@@ -1,5 +1,6 @@
 package com.fucaijin.weixin_fucaijin.adapter;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,16 +12,16 @@ import com.fucaijin.weixin_fucaijin.data.HomeNewTaskPopulWindowData;
 
 import java.util.ArrayList;
 
-import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
-
 /**
  * Created by fucaijin on 2018/5/15.
  */
 
 public class HomeNewTaskPopupWindowAdapter extends BaseAdapter {
 
+    Context context;
     ArrayList<HomeNewTaskPopulWindowData> datasList;
-    public HomeNewTaskPopupWindowAdapter(ArrayList<HomeNewTaskPopulWindowData> populWindowDatas) {
+    public HomeNewTaskPopupWindowAdapter(Context mContext, ArrayList<HomeNewTaskPopulWindowData> populWindowDatas) {
+        context = mContext;
         datasList = populWindowDatas;
     }
 
@@ -41,7 +42,7 @@ public class HomeNewTaskPopupWindowAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View inflate = View.inflate(mContext, R.layout.home_new_task_popup_window_item_layout, null);
+        View inflate = View.inflate(context, R.layout.home_new_task_popup_window_item_layout, null);
         ImageView newTaskImage = inflate.findViewById(R.id.home_top_tab_new_task_popup_window_iv);
         TextView newTaskText = inflate.findViewById(R.id.home_top_tab_new_task_popup_window_tv);
         newTaskImage.setImageResource(datasList.get(i).drawableId);

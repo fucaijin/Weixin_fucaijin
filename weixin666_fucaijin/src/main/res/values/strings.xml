@@ -37,7 +37,7 @@
     <string name="shopping">购物</string>
     <string name="drift_bottle">漂流瓶</string>
     <string name="people_nearby">附近的人</string>
-    <string name="search">搜一搜</string>
+    <string name="search_search">搜一搜</string>
     <string name="look">看一看</string>
     <string name="scan">扫一扫</string>
     <string name="collection">收藏</string>
@@ -63,4 +63,7 @@
     <string name="please_waiting">请稍候...</string>
     <string name="please_input_weixin_password">请填写微信密码</string>
     <string name="use_short_message_identifying_code_login">用短信验证码登录</string>
+    <string name="add_friend">添加朋友</string>
+    <string name="add_to_address_list">添加到通讯录</string>
+    <string name="search">搜索</string>
 </resources>

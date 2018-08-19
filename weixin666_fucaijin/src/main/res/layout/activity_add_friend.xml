@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AddFriendActivity"
+    android:orientation="vertical"
+    android:background="@color/colorMainBackGroundLightGray">
+
+    <!--顶部标题栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/colorTabTopDarkGray">
+
+        <!--回退/关闭按钮-->
+        <RelativeLayout
+            android:id="@+id/add_friend_activity_top_bar_back_btn_rl"
+            style="@style/rl_top_bar_close_back"
+            android:layout_marginEnd="17dp">
+
+            <!--图片-->
+            <ImageView
+                style="@style/iv_top_bar_go_back"
+                android:src="@drawable/img_back"/>
+
+            <!--深灰色竖直分割线-->
+            <ImageView
+                style="@style/top_bar_divider"/>
+
+        </RelativeLayout>
+
+        <!--标题（添加朋友）-->
+        <TextView
+            android:text="@string/add_friend"
+            android:layout_toEndOf="@id/add_friend_activity_top_bar_back_btn_rl"
+            style="@style/top_bar_text"/>
+
+    </RelativeLayout>
+
+    <!--搜索条(框)-->
+    <RelativeLayout
+        android:id="@+id/add_friend_search_friend_rl"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorWhite"
+        android:clickable="true"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:background="@drawable/add_friend_search_new_friend"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_marginEnd="17dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信号/QQ号/手机号"
+                android:textColor="@color/colorTextLightGray"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="12dp"
+            android:background="@color/colorLineGreen"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <!--我的微信号-->
+    <TextView
+        android:id="@+id/add_friend_myself_id"
+        android:layout_marginTop="14dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我的微信号:"
+        android:textSize="13sp"
+        android:textColor="@color/colorTextSignUpPress"/>
+
+    <ListView
+        android:layout_marginTop="30dp"
+        android:id="@+id/add_friend_more_function_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+    </ListView>
+
+</LinearLayout>

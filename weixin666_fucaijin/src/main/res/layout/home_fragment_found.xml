@@ -102,7 +102,7 @@
                     style="@style/home_found_fragment_item_iv" />
 
                 <TextView
-                    android:text="@string/search"
+                    android:text="@string/search_search"
                     style="@style/home_found_fragment_item_tv" />
 
             </RelativeLayout>

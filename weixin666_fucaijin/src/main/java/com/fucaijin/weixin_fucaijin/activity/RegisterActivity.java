@@ -27,7 +27,6 @@ import android.widget.Toast;
 import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
-import com.fucaijin.weixin_fucaijin.utils.HandleResponseCode;
 import com.fucaijin.weixin_fucaijin.utils.Http;
 
 import org.json.JSONException;
@@ -36,13 +35,9 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
-import cn.jpush.im.android.api.JMessageClient;
-import cn.jpush.im.android.api.options.RegisterOptionalUserInfo;
-import cn.jpush.im.api.BasicCallback;
-
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.HTTP_HOST_URL;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
-import static com.fucaijin.weixin_fucaijin.utils.Http.responseHashMap;
+import static com.fucaijin.weixin_fucaijin.utils.Http.postResponseHashMap;
 
 /**
  * 注册页面
@@ -68,6 +63,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private static final int PHOTO_REQUEST_CUT = 3;// 剪切完成的结果
 
     private String headPictureStr;
+    private Uri headSculptureUri;
+    private int EXCUSE_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,17 +74,17 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initUI() {
-        RelativeLayout registerRlBtBack = (RelativeLayout) findViewById(R.id.register_rl_bt_back);
-        registerEtNickName = (EditText) findViewById(R.id.register_et_nick_name);
-        registerIbSelectHeadSculpture = (ImageButton) findViewById(R.id.register_ib_select_head_sculpture);
-        LinearLayout registerLlArea = (LinearLayout) findViewById(R.id.register_ll_area);
-        registerEtPhone = (EditText) findViewById(R.id.register_et_phone);
-        registerEtPassword = (EditText) findViewById(R.id.register_et_password);
-        registerIvPasswordVisibilityMode = (ImageView) findViewById(R.id.register_iv_password_visibility_mode);
-        registerBtRegister = (Button) findViewById(R.id.register_bt_register);
-        registerNicknameDivider = (ImageView) findViewById(R.id.register_nickname_divider);
-        registerPhoneDivider = (ImageView) findViewById(R.id.register_phone_divider);
-        registerPasswordDivider = (ImageView) findViewById(R.id.register_password_divider);
+        RelativeLayout registerRlBtBack = findViewById(R.id.register_rl_bt_back);
+        registerEtNickName = findViewById(R.id.register_et_nick_name);
+        registerIbSelectHeadSculpture = findViewById(R.id.register_ib_select_head_sculpture);
+        LinearLayout registerLlArea = findViewById(R.id.register_ll_area);
+        registerEtPhone = findViewById(R.id.register_et_phone);
+        registerEtPassword = findViewById(R.id.register_et_password);
+        registerIvPasswordVisibilityMode = findViewById(R.id.register_iv_password_visibility_mode);
+        registerBtRegister = findViewById(R.id.register_bt_register);
+        registerNicknameDivider = findViewById(R.id.register_nickname_divider);
+        registerPhoneDivider = findViewById(R.id.register_phone_divider);
+        registerPasswordDivider = findViewById(R.id.register_password_divider);
 
         registerRlBtBack.setOnClickListener(this);
         registerIbSelectHeadSculpture.setOnClickListener(this);
@@ -113,7 +110,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
      * 设置注册页面底部的协议部分文字添加链接，可以直接转跳到浏览器打开页面
      */
     private void agreementTextBindUrl() {
-        TextView tv_agreement = (TextView) findViewById(R.id.register_tv_agreement);
+        TextView tv_agreement = findViewById(R.id.register_tv_agreement);
 //        拼接html = （指定颜色）普通文字 + (指定颜色)链接文字
 //        拼接html，生成带链接的TextView
         StringBuilder stringBuilder = new StringBuilder();
@@ -172,27 +169,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 String passwordStr = registerEtPassword.getText().toString().trim();
                 final String passwordMd5 = ConvertUtils.string2md5(passwordStr);
 
-//                调用极光im SDK进行注册
-//                JMessageClient.register(String username, String password, BasicCallback callback);
-                RegisterOptionalUserInfo registerOptionalUserInfo = new RegisterOptionalUserInfo();
-                registerOptionalUserInfo.setNickname(nickNameStr);
-                JMessageClient.register(phoneStr, passwordMd5, registerOptionalUserInfo, new BasicCallback() {
-                    @Override
-                    public void gotResult(int statusCode, String s) {
-//                        TODO 尚未保存头像图片
-//                        注册成功
-                        if (statusCode == 0) {
-                            WeixinApplication.setConfigString("account", phoneStr);
-                            WeixinApplication.setConfigString("password", passwordMd5);
-                            Toast.makeText(mContext, "注册成功", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                            finish();
-                        } else {
-                            HandleResponseCode.onHandle(mContext, statusCode);
-                        }
-                    }
-                });
-
 //                如果有头像，就注册。姓名、手机、密码等之前已经检查，以上项目都填了，注册按钮才可使用，不然就是灰色的
                 if (headPictureStr != null) {
                     boolean registerSuccess = requestRegister(nickNameStr, phoneStr, passwordMd5, headPictureStr);
@@ -208,9 +184,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 } else {
                     Toast.makeText(mContext, "请选择头像", Toast.LENGTH_SHORT).show();
                 }
-
-
-
                 break;
         }
     }
@@ -234,7 +207,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         registerInfoMap.put("headPicture", headPictureStr);
 
         HashMap resultHashMap = Http.postServer(HTTP_REQUEST_TYPE_CODE_REGISTER, registerInfoMap);
-        responseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
+        postResponseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
 
 //        请求结束后结果的处理
         if (resultHashMap != null) {
@@ -243,16 +216,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
             if (responseCode == 200) {
                 String content = "";
-                int code = -12;
                 try {
                     content = (String) jsonObject.get("content");
-                    code = (int) jsonObject.get("code");
+                    EXCUSE_CODE = (int) jsonObject.get("excuseCode");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-
-                switch (code) {
+                switch (EXCUSE_CODE) {
                     case HTTP_RESPONSE_TYPE_CODE_REGISTER_SUCCESS:
                         //注册成功
                         Toast.makeText(mContext, content, Toast.LENGTH_SHORT).show();
@@ -350,8 +321,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             // 从相册返回的数据
             if (data != null) {
                 // 得到图片的全路径
-                Uri uri = data.getData();
-                crop(uri);
+                headSculptureUri = data.getData();
+                cropImage(headSculptureUri);//裁剪图片
             }
 
         } else if (requestCode == PHOTO_REQUEST_CUT) {
@@ -373,11 +344,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
      *
      * @param uri 要裁剪的图片地址
      */
-    private void crop(Uri uri) {
+    private void cropImage(Uri uri) {
         // 裁剪图片意图
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true");
+        intent.putExtra("cropImage", "true");
         intent.putExtra("aspectX", 1);// 裁剪框的比例，1：1，如果没有设置，则自由裁剪模式
         intent.putExtra("aspectY", 1);
 

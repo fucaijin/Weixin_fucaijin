@@ -2,11 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fucaijin.weixin_fucaijin">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />    //读取外部文件权限
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />     //写入外部文件权限
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> //允许装载和卸载文件系统权限
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />      //获取网络状态权限
-    <uses-permission android:name="android.permission.INTERNET"/>                   //加载网络权限
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    //读取外部文件权限
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    //写入外部文件权限
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    //允许装载和卸载文件系统权限
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    //获取网络状态权限
+    <uses-permission android:name="android.permission.INTERNET" />
+    //加载网络权限
 
     <!-- 震动权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -34,6 +39,9 @@
         <activity android:name=".activity.ChatActivity" />
         <activity android:name=".activity.PersonalActivity" />
         <activity android:name=".activity.PhoneLoginActivity" />
+        <activity android:name=".activity.AddFriendActivity" />
+        <activity android:name=".activity.SearchFriendActivity" />
+        <activity android:name=".activity.SearchUserDetailInfoActivity"></activity>
     </application>
 
 </manifest>

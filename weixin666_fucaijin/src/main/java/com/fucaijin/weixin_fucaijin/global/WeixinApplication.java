@@ -24,6 +24,7 @@ public class WeixinApplication extends Application {
     private static boolean isLogined = true;       //设定默认是已登录状态
     private static boolean isFirstRun = false;    //设定默认不是第一次登录
     private static SharedPreferences user;
+    private int MyTIMSdkAppId = 1400116435;        //我的腾讯im sdk AppId
 
     //    模拟的用户信息（头像和昵称）
     public static List<AddressListItemData> mAddressListItem = new ArrayList<>();
@@ -132,11 +133,13 @@ public class WeixinApplication extends Application {
     //    模拟的用户昵称
     private String[] OfficialNickNameList = {"新朋友", "群聊", "标签", "公众号"};
 
-    public static final String HTTP_HOST_URL = "http://192.168.1.105:8000/";//请求网络主机
+//    public static final String HTTP_HOST_URL = "http://192.168.1.105:8000/";//请求网络主机
+    public static final String HTTP_HOST_URL = "http://www.fucaijin.cn/";//请求网络主机
 
     @Override
     public void onCreate() {
         super.onCreate();
+//        initTIMSdk();
         initVirtualData();
         mContext = getApplicationContext();
         mHandler = new Handler();

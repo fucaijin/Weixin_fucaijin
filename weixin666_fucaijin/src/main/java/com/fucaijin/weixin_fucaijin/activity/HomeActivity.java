@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -46,7 +48,7 @@ import java.util.List;
 
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.HTTP_HOST_URL;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
-import static com.fucaijin.weixin_fucaijin.utils.Http.responseHashMap;
+import static com.fucaijin.weixin_fucaijin.utils.Http.postResponseHashMap;
 
 public class HomeActivity extends BaseActivity implements ViewPager.OnPageChangeListener, View.OnClickListener, View.OnLongClickListener {
     private static final String HTTP_POST_URL_GET_FRIENDS_INFO = HTTP_HOST_URL + "get_friends_info/";
@@ -150,7 +152,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         getFriendsInfoMap.put("phone", WeixinApplication.getConfig("user_phone"));
 
         HashMap hashMap = Http.postServer(HTTP_REQUEST_TYPE_CODE_GET_FRIENDS_INFO, getFriendsInfoMap);
-        responseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
+        postResponseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
 
 
     }
@@ -160,7 +162,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      */
     private void initUI() {
 //        获取主页面的根布局
-        homeActivityRootLl = (LinearLayout) findViewById(R.id.activity_home);
+        homeActivityRootLl = findViewById(R.id.activity_home);
 
 //        获取标题栏,以及标题栏的文字，搜索按钮，新建任务按钮
         initHomeTopTabUi();
@@ -180,7 +182,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      * （包含了往ViewPager填充四个Fragment，并且给ViewPager设置滑动监听、设置指定的默认页面）
      */
     private void initCenterViewPagerUi() {
-        mViewPager = (ViewPager) findViewById(R.id.home_view_pager);
+        mViewPager = findViewById(R.id.home_view_pager);
 
         Bundle foundFragmentBundle = new Bundle();
         foundFragmentBundle.putIntArray("foundIconArray", foundIconArray);
@@ -206,10 +208,10 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      * 然后获取每个按钮的三张不同状态的图片，以及两种不同状态的文字）
      */
     private void initBottomTabButtonUi() {
-        LinearLayout homeBottomTabLlWechat = (LinearLayout) findViewById(R.id.home_bottom_tab_ll_wechat);
-        LinearLayout homeBottomTabLlAddressList = (LinearLayout) findViewById(R.id.home_bottom_tab_ll_address_list);
-        LinearLayout homeBottomTabLlFound = (LinearLayout) findViewById(R.id.home_bottom_tab_ll_found);
-        LinearLayout homeBottomTabLlMe = (LinearLayout) findViewById(R.id.home_bottom_tab_ll_me);
+        LinearLayout homeBottomTabLlWechat = findViewById(R.id.home_bottom_tab_ll_wechat);
+        LinearLayout homeBottomTabLlAddressList = findViewById(R.id.home_bottom_tab_ll_address_list);
+        LinearLayout homeBottomTabLlFound = findViewById(R.id.home_bottom_tab_ll_found);
+        LinearLayout homeBottomTabLlMe = findViewById(R.id.home_bottom_tab_ll_me);
 
         homeBottomTabLlWechat.setOnClickListener(this);
         homeBottomTabLlAddressList.setOnClickListener(this);
@@ -217,34 +219,34 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         homeBottomTabLlMe.setOnClickListener(this);
 
 //        获取下方导航栏的图片(每张图片包含点击和正常两张的叠加)
-        homeBottomTabIvWechatNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_wechat_normal);
-        homeBottomTabIvWechatMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_wechat_middle);
-        homeBottomTabIvWechatPressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_wechat_pressed);
+        homeBottomTabIvWechatNormal = findViewById(R.id.home_bottom_tab_iv_wechat_normal);
+        homeBottomTabIvWechatMiddle = findViewById(R.id.home_bottom_tab_iv_wechat_middle);
+        homeBottomTabIvWechatPressed = findViewById(R.id.home_bottom_tab_iv_wechat_pressed);
 
-        homeBottomTabIvAddressListNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_address_list_normal);
-        homeBottomTabIvAddressListMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_address_list_middle);
-        homeBottomTabIvAddressListPressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_address_list_pressed);
+        homeBottomTabIvAddressListNormal = findViewById(R.id.home_bottom_tab_iv_address_list_normal);
+        homeBottomTabIvAddressListMiddle = findViewById(R.id.home_bottom_tab_iv_address_list_middle);
+        homeBottomTabIvAddressListPressed = findViewById(R.id.home_bottom_tab_iv_address_list_pressed);
 
-        homeBottomTabIvFoundNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_found_normal);
-        homeBottomTabIvFoundMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_found_middle);
-        homeBottomTabIvFoundPressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_found_pressed);
+        homeBottomTabIvFoundNormal = findViewById(R.id.home_bottom_tab_iv_found_normal);
+        homeBottomTabIvFoundMiddle = findViewById(R.id.home_bottom_tab_iv_found_middle);
+        homeBottomTabIvFoundPressed = findViewById(R.id.home_bottom_tab_iv_found_pressed);
 
-        homeBottomTabIvMeNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_me_normal);
-        homeBottomTabIvMeMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_me_middle);
-        homeBottomTabIvMePressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_me_pressed);
+        homeBottomTabIvMeNormal = findViewById(R.id.home_bottom_tab_iv_me_normal);
+        homeBottomTabIvMeMiddle = findViewById(R.id.home_bottom_tab_iv_me_middle);
+        homeBottomTabIvMePressed = findViewById(R.id.home_bottom_tab_iv_me_pressed);
 
 //        获取下方导航栏的文字(每段文字包含点击和正常两张的叠加)
-        homeBottomTabTvWechatNormal = (TextView) findViewById(R.id.home_bottom_tab_tv_wechat_normal);
-        homeBottomTabTvWechatPressed = (TextView) findViewById(R.id.home_bottom_tab_tv_wechat_pressed);
+        homeBottomTabTvWechatNormal = findViewById(R.id.home_bottom_tab_tv_wechat_normal);
+        homeBottomTabTvWechatPressed = findViewById(R.id.home_bottom_tab_tv_wechat_pressed);
 
-        homeBottomTabTvAddressListNormal = (TextView) findViewById(R.id.home_bottom_tab_tv_address_list_normal);
-        homeBottomTabTvAddressListPressed = (TextView) findViewById(R.id.home_bottom_tab_tv_address_list_pressed);
+        homeBottomTabTvAddressListNormal = findViewById(R.id.home_bottom_tab_tv_address_list_normal);
+        homeBottomTabTvAddressListPressed = findViewById(R.id.home_bottom_tab_tv_address_list_pressed);
 
-        homeBottomTabTvFoundNormal = (TextView) findViewById(R.id.home_bottom_tab_tv_found_normal);
-        homeBottomTabTvFoundPressed = (TextView) findViewById(R.id.home_bottom_tab_tv_found_pressed);
+        homeBottomTabTvFoundNormal = findViewById(R.id.home_bottom_tab_tv_found_normal);
+        homeBottomTabTvFoundPressed = findViewById(R.id.home_bottom_tab_tv_found_pressed);
 
-        homeBottomTabTvMeNormal = (TextView) findViewById(R.id.home_bottom_tab_tv_me_normal);
-        homeBottomTabTvMePressed = (TextView) findViewById(R.id.home_bottom_tab_tv_me_pressed);
+        homeBottomTabTvMeNormal = findViewById(R.id.home_bottom_tab_tv_me_normal);
+        homeBottomTabTvMePressed = findViewById(R.id.home_bottom_tab_tv_me_pressed);
     }
 
     /**
@@ -254,13 +256,13 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      * 并为返回按钮、清空输入框按钮设置点击事件，给输入框添加内容变化监听事件）
      */
     private void initSearchPageUi() {
-        homeSearchPage = (FrameLayout) findViewById(R.id.home_search_page_ll);
-        searchAppointContentRoot = (LinearLayout) findViewById(R.id.search_appoint_content_root);
-        searchPageInputEt = (EditText) findViewById(R.id.search_page_input_et);
-        RelativeLayout searchPageBack = (RelativeLayout) findViewById(R.id.search_page_back_btn_rl);
+        homeSearchPage = findViewById(R.id.home_search_page_ll);
+        searchAppointContentRoot = findViewById(R.id.search_appoint_content_root);
+        searchPageInputEt = findViewById(R.id.search_page_input_et);
+        RelativeLayout searchPageBack = findViewById(R.id.search_page_back_btn_rl);
         searchPageBack.setOnClickListener(this);
-        final ImageView searchPageVoiceSearch = (ImageView) findViewById(R.id.search_page_voice_btn_iv);
-        final ImageView searchPageClearEditText = (ImageView) findViewById(R.id.search_page_clear_edit_text_btn_iv);
+        final ImageView searchPageVoiceSearch = findViewById(R.id.search_page_voice_btn_iv);
+        final ImageView searchPageClearEditText = findViewById(R.id.search_page_clear_edit_text_btn_iv);
         searchPageClearEditText.setOnClickListener(this);
 
 //        给输入框设置文本变化监听器
@@ -292,10 +294,10 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      * 初始化顶部标题栏（顶部标题栏的根布局、标题、搜索按钮、新建任务按钮）
      */
     private void initHomeTopTabUi() {
-        homeTopTabRootRl = (RelativeLayout) findViewById(R.id.home_top_tab_root_rl);
-        homeTopTabTitleTv = (TextView) findViewById(R.id.home_top_tab_title_tv);
-        homeTopTabSearchIv = (ImageView) findViewById(R.id.home_top_tab_search_iv);
-        homeTopTabNewTaskIv = (ImageView) findViewById(R.id.home_top_tab_new_task_iv);
+        homeTopTabRootRl = findViewById(R.id.home_top_tab_root_rl);
+        homeTopTabTitleTv = findViewById(R.id.home_top_tab_title_tv);
+        homeTopTabSearchIv = findViewById(R.id.home_top_tab_search_iv);
+        homeTopTabNewTaskIv = findViewById(R.id.home_top_tab_new_task_iv);
 
 //        给搜索按钮设置点击和长按事件，给新任务按钮设置点击事件
         homeTopTabSearchIv.setOnClickListener(this);
@@ -530,8 +532,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             homeNewTaskPopulWindowData.drawableId = homeNewTaskImageId[i];
             populWindowDatas.add(homeNewTaskPopulWindowData);
         }
-        popupWindowListView.setAdapter(new HomeNewTaskPopupWindowAdapter(populWindowDatas));
-
+        popupWindowListView.setAdapter(new HomeNewTaskPopupWindowAdapter(this, populWindowDatas));
 //        找到popupWindow的(填充屏幕)根布局的id，并给根布局设置点击事件，
 //        如果不是点击popupWindow中的ListView的话，就让popupWindow消失
 //        (让popupWindow充满屏幕原因1.实现点击外部消失 2.点击外部时候禁止外部的其他不相关控件响应)
@@ -545,11 +546,35 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         popupWindow.showAtLocation(homeActivityRootLl, Gravity.END, 0, 0);
         popupWindow.update();
 
+        popupWindowListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+//                        发起群聊
+                        break;
+                    case 1:
+//                        添加朋友
+//                        打开添加朋友页面
+                        HomeActivity.this.startActivity(new Intent(HomeActivity.this, AddFriendActivity.class));
+                        break;
+                    case 2:
+//                        扫一扫
+                        break;
+                    case 3:
+//                        收付款
+                        break;
+                    case 4:
+//                        帮助与反馈
+                        break;
+                }
+                popupWindow.dismiss();
+            }
+        });
     }
 
     /**
-     * 根据当前选中的页面，来改变底部的导航栏按钮颜色
-     *
+     * 底部导航栏选中状态的切换，根据当前选中的页面，来改变底部的导航栏按钮颜色
      * @param position 当前选中的页面
      */
     private void setTabSelection(int position) {
@@ -651,7 +676,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
                 toast.show();
 
 //                设置震动
-                Vibrator vibrator = (Vibrator) this.getSystemService(this.VIBRATOR_SERVICE);
+                Vibrator vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
                 vibrator.vibrate(50);
                 break;
         }

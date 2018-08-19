@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.HTTP_HOST_URL;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
-import static com.fucaijin.weixin_fucaijin.utils.Http.responseHashMap;
+import static com.fucaijin.weixin_fucaijin.utils.Http.postResponseHashMap;
 
 /**
  * 使用手机登录页面(就是输入了手机号，然后点击下一步打开的那个页面)
@@ -56,22 +56,22 @@ public class PhoneLoginActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initUi() {
-        ImageView finishIv =  (ImageView) findViewById(R.id.iv_phone_login_finish);
+        ImageView finishIv = findViewById(R.id.iv_phone_login_finish);
         finishIv.setOnClickListener(this);
 
-        phoneTv = (TextView) findViewById(R.id.login_phone_login_phone);
-        phoneLoginBtn = (Button) findViewById(R.id.login_btn_phone_login);
+        phoneTv = findViewById(R.id.login_phone_login_phone);
+        phoneLoginBtn = findViewById(R.id.login_btn_phone_login);
         phoneLoginBtn.setOnClickListener(this);
 
-        passwordEt = (EditText) findViewById(R.id.et_phone_login_password);
+        passwordEt = findViewById(R.id.et_phone_login_password);
         passwordEt.addTextChangedListener(this);
 
-        cleanPasswordIv = (ImageView) findViewById(R.id.iv_login_clean_phone_password);
+        cleanPasswordIv = findViewById(R.id.iv_login_clean_phone_password);
         cleanPasswordIv.setOnClickListener(this);
 
-        TextView loginTvTetBackPassword = (TextView) findViewById(R.id.login_tv_get_back_password);
-        TextView loginTvEmergencyFreezing = (TextView) findViewById(R.id.login_tv_emergency_freezing);
-        TextView loginTvSecurityCenter = (TextView) findViewById(R.id.login_tv_security_center);
+        TextView loginTvTetBackPassword = findViewById(R.id.login_tv_get_back_password);
+        TextView loginTvEmergencyFreezing = findViewById(R.id.login_tv_emergency_freezing);
+        TextView loginTvSecurityCenter = findViewById(R.id.login_tv_security_center);
 
         loginTvTetBackPassword.setOnClickListener(this);
         loginTvEmergencyFreezing.setOnClickListener(this);
@@ -118,7 +118,7 @@ public class PhoneLoginActivity extends BaseActivity implements View.OnClickList
 
 //        将信息提交到服务器
         HashMap hashMap = Http.postServer(HTTP_REQUEST_TYPE_CODE_PHONE_LOGIN, loginInfoMap);
-        responseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
+        postResponseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
 
 //        根据网络请求，判断是否成功，如果网络请求成功，则判断是否用户名不存在，或者秘密错误或者登录成功
         int responseCode = (int) hashMap.get("responseCode");

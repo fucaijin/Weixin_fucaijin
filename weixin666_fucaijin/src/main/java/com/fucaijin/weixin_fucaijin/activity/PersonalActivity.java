@@ -31,10 +31,10 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initUi() {
-        RelativeLayout backBtnRl = (RelativeLayout) findViewById(R.id.personal_activity_top_bar_back_btn_rl);
+        RelativeLayout backBtnRl = findViewById(R.id.personal_activity_top_bar_back_btn_rl);
         backBtnRl.setOnClickListener(this);
 
-        TextView personalNickName = (TextView) findViewById(R.id.personal_activity_nick_name);
+        TextView personalNickName = findViewById(R.id.personal_activity_nick_name);
         personalNickName.setText(nickName);
 //        随机设置性别(图像)图像
         int sexImageSize = ConvertUtils.dp2px(this, 14);
@@ -47,10 +47,10 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
         drawable.setBounds(0, 0, sexImageSize,sexImageSize);
         personalNickName.setCompoundDrawables(null, null, drawable,null);
 
-        ImageView personalHeadSulptureIv  = (ImageView) findViewById(R.id.personal_activity_head_sulpture);
+        ImageView personalHeadSulptureIv  = findViewById(R.id.personal_activity_head_sulpture);
         personalHeadSulptureIv.setImageBitmap(headSculptureBitmap);
 
-        TextView wechatIdTv = (TextView) findViewById(R.id.personal_activity_wechat_id);
+        TextView wechatIdTv = findViewById(R.id.personal_activity_wechat_id);
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("微信号:");

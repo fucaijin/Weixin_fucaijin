@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="14dp"
+    android:layout_marginEnd="14dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/add_friend_more_item_iv"
+            android:layout_width="36dp"
+            android:layout_height="36dp" />
+
+        <TextView
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/add_friend_more_item_iv"
+            android:id="@+id/add_friend_more_item_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextDarkGray"
+            android:textSize="16sp"
+            android:layout_alignTop="@id/add_friend_more_item_iv"
+            android:layout_marginTop="-7dp"/>
+
+        <TextView
+            android:layout_marginStart="12dp"
+            android:layout_alignBottom="@id/add_friend_more_item_iv"
+            android:layout_toEndOf="@id/add_friend_more_item_iv"
+            android:id="@+id/add_friend_more_item_des_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/colorTextLightGray"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorMainBackGroundLightGray"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

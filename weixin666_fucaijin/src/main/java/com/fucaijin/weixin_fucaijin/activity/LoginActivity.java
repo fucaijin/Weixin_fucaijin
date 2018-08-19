@@ -72,18 +72,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void initUI() {
 
 //        顶部的关闭按钮
-        ImageView login_iv_finish = (ImageView) findViewById(R.id.login_iv_finish);
+        ImageView login_iv_finish = findViewById(R.id.login_iv_finish);
         login_iv_finish.setOnClickListener(this);
 
-        login_ll_use_phone_ui = (LinearLayout) findViewById(R.id.login_ll_use_phone_ui);
-        login_ll_use_other_way_ui = (LinearLayout) findViewById(R.id.login_ll_use_other_way_ui);
+        login_ll_use_phone_ui = findViewById(R.id.login_ll_use_phone_ui);
+        login_ll_use_other_way_ui = findViewById(R.id.login_ll_use_other_way_ui);
 
 //        手机号登录页面-------------------------------------
-        RelativeLayout login_rl_select_country = (RelativeLayout) findViewById(R.id.login_rl_select_country);
-        login_et_phone = (EditText) findViewById(R.id.login_et_phone);
-        TextView login_tv_others_way_login = (TextView) findViewById(R.id.login_tv_others_way_login);
-        login_bt_next_step = (Button) findViewById(R.id.login_bt_next_step);
-        login_iv_clean_phone_number = (ImageView) findViewById(R.id.login_iv_clean_phone_number);
+        RelativeLayout login_rl_select_country = findViewById(R.id.login_rl_select_country);
+        login_et_phone = findViewById(R.id.login_et_phone);
+        TextView login_tv_others_way_login = findViewById(R.id.login_tv_others_way_login);
+        login_bt_next_step = findViewById(R.id.login_bt_next_step);
+        login_iv_clean_phone_number = findViewById(R.id.login_iv_clean_phone_number);
 
         login_rl_select_country.setOnClickListener(this);
         login_tv_others_way_login.setOnClickListener(this);
@@ -114,14 +114,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //        ----------------------------------------------------
 
 //        其他方式登录页面------------------------------------
-        login_et_account = (EditText) findViewById(R.id.login_et_account);
-        login_et_password = (EditText) findViewById(R.id.login_et_password);
-        TextView login_tv_phone = (TextView) findViewById(R.id.login_tv_phone);
-        login_bt_login = (Button) findViewById(R.id.login_bt_login);
-        login_iv_clean_account = (ImageView) findViewById(R.id.login_iv_clean_account);
-        login_iv_clean_password = (ImageView) findViewById(R.id.login_iv_clean_password);
-        login_iv_account_editor_divider = (ImageView) findViewById(R.id.login_iv_account_editor_divider);
-        login_iv_password_editor_divider = (ImageView) findViewById(R.id.login_iv_password_editor_divider);
+        login_et_account = findViewById(R.id.login_et_account);
+        login_et_password = findViewById(R.id.login_et_password);
+        TextView login_tv_phone = findViewById(R.id.login_tv_phone);
+        login_bt_login = findViewById(R.id.login_bt_login);
+        login_iv_clean_account = findViewById(R.id.login_iv_clean_account);
+        login_iv_clean_password = findViewById(R.id.login_iv_clean_password);
+        login_iv_account_editor_divider = findViewById(R.id.login_iv_account_editor_divider);
+        login_iv_password_editor_divider = findViewById(R.id.login_iv_password_editor_divider);
 
         login_tv_phone.setOnClickListener(this);
         login_bt_login.setOnClickListener(this);
@@ -220,9 +220,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         });
 //        ----------------------------------------------------
 
-        TextView loginTvTetBackPassword = (TextView) findViewById(R.id.login_tv_get_back_password);
-        TextView loginTvEmergencyFreezing = (TextView) findViewById(R.id.login_tv_emergency_freezing);
-        TextView loginTvSecurityCenter = (TextView) findViewById(R.id.login_tv_security_center);
+        TextView loginTvTetBackPassword = findViewById(R.id.login_tv_get_back_password);
+        TextView loginTvEmergencyFreezing = findViewById(R.id.login_tv_emergency_freezing);
+        TextView loginTvSecurityCenter = findViewById(R.id.login_tv_security_center);
 
         loginTvTetBackPassword.setOnClickListener(this);
         loginTvEmergencyFreezing.setOnClickListener(this);

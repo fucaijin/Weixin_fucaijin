@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SearchFriendActivity"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:id="@+id/search_friend_root_ll"
+    android:background="@color/colorWhite">
+
+    <!--顶部标题栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/colorTabTopDarkGray">
+
+        <!--回退/关闭按钮-->
+        <RelativeLayout
+            android:id="@+id/search_friend_activity_top_bar_back_btn_rl"
+            style="@style/rl_top_bar_close_back"
+            android:layout_marginEnd="12dp">
+
+            <!--图片-->
+            <ImageView
+                style="@style/iv_top_bar_go_back"
+                android:src="@drawable/img_back"/>
+
+            <!--深灰色竖直分割线-->
+            <ImageView
+                style="@style/top_bar_divider"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_toEndOf="@id/search_friend_activity_top_bar_back_btn_rl"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/home_top_tab_search"/>
+
+            <EditText
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/edit_text_gray_cursor_img"
+                android:id="@+id/search_friend_input_et"
+                android:layout_height="32dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:hint="@string/search"
+                android:textSize="15sp"
+                android:background="@null"
+                android:textColor="@color/colorWhite"/>
+
+            <ImageView
+                android:visibility="invisible"
+                android:clickable="true"
+                android:id="@+id/search_friend_clear_input_iv"
+                android:alpha="0.3"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginStart="9dp"
+                android:background="@drawable/image_close_white"/>
+
+        </LinearLayout>
+
+        <!--绿线-->
+        <ImageView
+            android:layout_toEndOf="@id/search_friend_activity_top_bar_back_btn_rl"
+            style="@style/h_line_light_gray"
+            android:background="@color/colorLineGreen"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"/>
+
+    </RelativeLayout>
+
+    <!--底部信息条-->
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/search_friend_item_ll"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        android:clickable="true"
+        android:background="@drawable/search_friend_item_bg">
+        
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/search_friend_item"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="15sp"
+            android:text="搜索:"
+            android:textColor="@color/colorTextDarkGray"/>
+        <TextView
+            android:id="@+id/search_friend_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/colorLineGreen"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/not_find_user_view_root_ll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="106dp"
+            android:text="该用户不存在"
+            android:textColor="@color/colorHomeGrayText"
+            android:textSize="14sp"
+            android:gravity="center"/>
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="14dp"
+            android:background="@color/colorMainBackGroundLightGray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:orientation="horizontal">
+            
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:background="@drawable/found_frag_search"
+                android:layout_marginStart="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="18dp"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="搜一搜"
+                        android:textColor="@color/colorTextDarkGray"/>
+                    <TextView
+                        android:id="@+id/other_way_search_green_tv"
+                        android:layout_marginStart="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorTextGreen"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="小程序、公众号、文章、朋友圈和表情等"
+                    android:textColor="@color/colorHomeGrayText"/>
+
+
+            </LinearLayout>
+            
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="13dp"
+            android:background="@color/colorMainBackGroundLightGray"/>
+    </LinearLayout>
+
+</LinearLayout>

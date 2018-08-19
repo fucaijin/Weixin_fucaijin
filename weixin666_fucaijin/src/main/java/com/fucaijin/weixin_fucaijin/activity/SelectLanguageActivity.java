@@ -42,9 +42,9 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
     }
 
     private void initUI() {
-        RelativeLayout rl_bt_back = (RelativeLayout) findViewById(R.id.register_rl_bt_back);
-        Button bt_save_select_language = (Button) findViewById(R.id.bt_save_select_language);
-        lv_selectLanguage = (ListView) findViewById(R.id.lv_selectLanguage);
+        RelativeLayout rl_bt_back = findViewById(R.id.register_rl_bt_back);
+        Button bt_save_select_language = findViewById(R.id.bt_save_select_language);
+        lv_selectLanguage = findViewById(R.id.lv_selectLanguage);
 
         rl_bt_back.setOnClickListener(this);
         bt_save_select_language.setOnClickListener(this);
