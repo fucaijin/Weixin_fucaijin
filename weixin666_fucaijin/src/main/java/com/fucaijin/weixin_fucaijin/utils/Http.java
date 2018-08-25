@@ -1,5 +1,7 @@
 package com.fucaijin.weixin_fucaijin.utils;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -13,12 +15,14 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 import static com.fucaijin.weixin_fucaijin.activity.HomeActivity.HTTP_REQUEST_TYPE_CODE_GET_FRIENDS_INFO;
 import static com.fucaijin.weixin_fucaijin.activity.PhoneLoginActivity.HTTP_REQUEST_TYPE_CODE_PHONE_LOGIN;
 import static com.fucaijin.weixin_fucaijin.activity.RegisterActivity.HTTP_REQUEST_TYPE_CODE_REGISTER;
 import static com.fucaijin.weixin_fucaijin.activity.SearchFriendActivity.HTTP_REQUEST_TYPE_CODE_GET_SEARCH_FRIEND_INFO;
+import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.HTTP_HOST_URL;
 
 /**
  * 请求网络的类
@@ -31,6 +35,10 @@ public class Http {
     public static HashMap postResponseHashMap;
     public static HashMap getResponseHashMap;
     private static URL url;
+    public final static int HTTP_REQUEST_TYPE_CODE_TEST = 999;
+    public static String HTTP_POST_URL_TEST = HTTP_HOST_URL + "test/";
+    public static String HTTP_GET_URL_GET_USER_HEAD_SCULPTURE = HTTP_HOST_URL + "get_head_sculpture/";
+
 
     /**
      * 用来向发送服务器post请求的
@@ -48,6 +56,12 @@ public class Http {
                 return requestLogin(type, info);
             case HTTP_REQUEST_TYPE_CODE_GET_FRIENDS_INFO:
                 return requestFriendsInfo(type, info); //获取好友的头像，昵称等信息
+            case HTTP_REQUEST_TYPE_CODE_TEST:
+                long currentTimeMillis = System.currentTimeMillis();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String timeStr = format.format(currentTimeMillis);
+                requestPostServer(HTTP_POST_URL_TEST,"testServer = " + timeStr);
+                return postResponseHashMap;
         }
         return null;
     }
@@ -250,7 +264,6 @@ public class Http {
             jsonObject.put("type", type);
             jsonObject.put("info_type", infoType);
             jsonObject.put("search_info", searchInfo);
-            jsonObject.put("url", url);
             String sendInfo = jsonObject.toString();
 //            向服务器发送请求
             requestGetServer(url, sendInfo);
@@ -258,8 +271,8 @@ public class Http {
             e.printStackTrace();
         }
 
-        if (postResponseHashMap != null) {
-            return postResponseHashMap;
+        if (getResponseHashMap != null) {
+            return getResponseHashMap;
         }
 
         return null;
@@ -308,6 +321,7 @@ public class Http {
                         JSONObject jsonObject = new JSONObject(responseContent);
                         //将接收到的消息装到hashMap中
                         getResponseHashMap.put("jsonObject", jsonObject);
+                        Log.v("json in Http","jsonObject" + jsonObject);
 
                         //关闭流数据 节约内存消耗
                         is.close();
@@ -341,4 +355,52 @@ public class Http {
         }
     }
 
+    public static Bitmap getHeadSculpture(final String phone){
+        final Bitmap[] bm = new Bitmap[1];
+        Thread requestThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //根据地址创建URL对象(网络访问的url)
+                    url = new URL(HTTP_GET_URL_GET_USER_HEAD_SCULPTURE);
+
+                    //打开网络链接
+                    getConnection = (HttpURLConnection) url.openConnection();
+                    getConnection.setRequestMethod("GET");
+                    getConnection.setConnectTimeout(8000);
+                    getConnection.setReadTimeout(8000);
+                    getConnection.setDoOutput(true);//因为post是通过流往服务器提交数据的，所以我们需要设置允许输出,然后就可以使用conn.getOutputStream().write()
+                    getConnection.setDoInput(true);//接收数据的时候是需要获取流再转成我们要的数据，所以设置为允许输入，然后就可以使用conn.getInputStream().read();
+
+                    OutputStream os = getConnection.getOutputStream();//拿到输出流
+                    os.write(phone.getBytes());//使用输出流向服务器提交数据
+                    os.flush();
+                    if (getConnection.getResponseCode() == 200) {
+//                        如果请求成功，读取结果流
+                        InputStream is = getConnection.getInputStream();
+                        //把流里的数据读取出来，并构造成图片
+                        bm[0] = BitmapFactory.decodeStream(is);
+                        is.close();
+                        getConnection.disconnect();
+                    }
+                } catch (MalformedURLException e) {
+                    Log.e("HttpRequestServer Error", "url form wrong.Error type: MalformedURLException");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e("HttpRequestServer Error", "IOException 1:" + e.getMessage());
+                } finally {
+                    if (getConnection != null) {
+                        getConnection.disconnect();
+                    }
+                }
+            }
+        });
+        requestThread.start();
+        try {
+            requestThread.join();//执行了此方法thread.join()后，只有在thread执行完成后，在此行之后的代码才能继续往下执行
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return bm[0];
+    }
 }

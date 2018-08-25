@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ import com.fucaijin.weixin_fucaijin.fragment.HomeFoundPageFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeMeFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
+import com.fucaijin.weixin_fucaijin.test.TestServer;
 import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
 import com.fucaijin.weixin_fucaijin.utils.Http;
 import com.fucaijin.weixin_fucaijin.utils.JudgementUtils;
@@ -566,6 +568,9 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
                         break;
                     case 4:
 //                        帮助与反馈
+//                        此处用于测试网络，如果网络连接成功，就会返回服务器的信息
+                        Toast.makeText(mContext, TestServer.testServer(), Toast.LENGTH_SHORT).show();
+                        Log.v("test","Test result = " + TestServer.testServer());
                         break;
                 }
                 popupWindow.dismiss();
@@ -602,9 +607,8 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
     /**
      * 设置底部的导航按钮为选中状态
-     *
      * @param normalView  未选中状态的图标
-     * @param pressedView 滑到一半时候的图标
+     * @param middleView 滑到一半时候的图标
      * @param pressedView 选中的图标
      * @param normalText  未选中的文字
      * @param pressedText 选中的文字

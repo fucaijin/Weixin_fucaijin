@@ -171,6 +171,7 @@
             android:textColor="@color/colorTextDarkGray"/>
 
         <TextView
+            android:layout_marginEnd="15dp"
             android:layout_toEndOf="@id/search_user_detail_info_activity_personality_signature_title"
             android:id="@+id/search_user_detail_info_activity_personality_signature"
             android:layout_width="wrap_content"

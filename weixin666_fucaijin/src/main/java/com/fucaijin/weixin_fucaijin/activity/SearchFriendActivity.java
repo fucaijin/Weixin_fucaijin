@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,8 +30,8 @@ public class SearchFriendActivity extends AppCompatActivity implements View.OnCl
 
     public static final int HTTP_REQUEST_TYPE_CODE_GET_SEARCH_FRIEND_INFO = 17;
     public static final String HTTP_GET_URL_SEARCH_USER_INFO = HTTP_HOST_URL + "search_user_info/";
-    public static final int HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_INFO_SUCCESS = 26;
-    public static final int HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_INFO_NO_USER = 28;
+    public static final int HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_FOUND = 26;
+    public static final int HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_NOT_FOUND = 28;
     public static final int NETWORK_ERROR = 1011;//网络错误
     private boolean etEmpty;
     private EditText inputEt;
@@ -88,6 +89,7 @@ public class SearchFriendActivity extends AppCompatActivity implements View.OnCl
                     itemLl.setVisibility(View.VISIBLE);
                     searchInfoTv.setText(editable);
                 }
+                notFindUserViewRootLl.setVisibility(View.GONE);
             }
         });
 
@@ -108,6 +110,8 @@ public class SearchFriendActivity extends AppCompatActivity implements View.OnCl
                 if (!etEmpty) {
                     inputEt.getText().clear();
                 }
+                itemLl.setVisibility(View.GONE);
+                notFindUserViewRootLl.setVisibility(View.GONE);
                 break;
             case R.id.search_friend_item_ll:
 //                TODO 网络请求搜索用户信息，并返回，如果有返回，则显示在新的页面，如果没有返回则提示该用户不存在
@@ -143,23 +147,27 @@ public class SearchFriendActivity extends AppCompatActivity implements View.OnCl
 //            获取响应码，以及json对象
             int responseCode = (int) responseHashMap.get("responseCode");
             JSONObject jsonObject = (JSONObject) responseHashMap.get("jsonObject");
+            Log.v("json", jsonObject.toString());
 
 //            如果相应成功，就获取json里面的数据
             if (responseCode == 200) {
                 try {
-                    int EXCUSE_CODE = (int) jsonObject.get("EXCUSE_CODE");
-                    String nickName = (String) jsonObject.get("nick_name");
-                    String headSculpture = (String) jsonObject.get("head_sculpture");
-                    String area = (String) jsonObject.get("area");
-                    String personalitySignature = (String) jsonObject.get("personality_signature");
-
-                    switch (EXCUSE_CODE) {
-                        case HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_INFO_SUCCESS:
+                    int resultCode = (int) jsonObject.get("code");
+                    switch (resultCode) {
+                        case HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_FOUND:
 //                            查询成功
+                            JSONObject jContent = (JSONObject) jsonObject.get("content");
+
+                            String nickName = (String) jContent.get("nick_name");
+                            String phone = (String) jContent.get("phone");
+                            String area = (String) jContent.get("area");
+                            String personalitySignature = (String) jContent.get("personality_signature");
+                            String sex = (String) jContent.get("sex");
+
 //                            TODO 打开新的资料页面，把昵称，头像，签名，地区显示出来
-                            showSearchUserInfo(nickName, headSculpture, area ,personalitySignature);
+                            showSearchUserInfo(nickName, phone, area, personalitySignature, sex);
                             break;
-                        case HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_INFO_NO_USER:
+                        case HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_NOT_FOUND:
 //                            没有查到用户
 //                            TODO 显示该用户不存在
                             showSearchNoUser();
@@ -183,18 +191,22 @@ public class SearchFriendActivity extends AppCompatActivity implements View.OnCl
         otherWaySearchTv.setText(inputEt.getText().toString().trim());
     }
 
-    /** 如果搜索到用户，就执行此方法，跳到用户信息页面
-     * @param nickName 从服务器获取到的昵称
-     * @param headSculpture 从服务器获取到的头像base64 String格式，需要按需转换成bitmap或drawable
-     * @param area 从服务器获取到的区域
+    /**
+     * 如果搜索到用户，就执行此方法，跳到用户信息页面
+     *
+     * @param nickName             从服务器获取到的昵称
+     * @param headSculpture        从服务器获取到的头像base64 String格式，需要按需转换成bitmap或drawable
+     * @param area                 从服务器获取到的区域
      * @param personalitySignature 从服务器获取到的个性签名
+     * @param sex
      */
-    private void showSearchUserInfo(String nickName, String headSculpture, String area, String personalitySignature) {
+    private void showSearchUserInfo(String nickName, String phone, String area, String personalitySignature, String sex) {
         Intent intent = new Intent(this, SearchUserDetailInfoActivity.class);
-        intent.putExtra("nickName",nickName);
-        intent.putExtra("headSculpture",headSculpture);
-        intent.putExtra("area",area);
-        intent.putExtra("personalitySignature",personalitySignature);
+        intent.putExtra("nickName", nickName);
+        intent.putExtra("phone", phone);
+        intent.putExtra("area", area);
+        intent.putExtra("personalitySignature", personalitySignature);
+        intent.putExtra("sex", sex);
         startActivity(intent);
     }
 
