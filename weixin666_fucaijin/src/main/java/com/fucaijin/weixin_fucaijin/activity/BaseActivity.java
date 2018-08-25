@@ -3,20 +3,22 @@ package com.fucaijin.weixin_fucaijin.activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Created by fucaijin on 2018/5/2.
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends SwipeBackActivity {
 //    TODO 侧滑关闭，以及打开/关闭的过渡动画做改变，效果未完成
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStatusBarColor(-1);//传入-1则表示使用默认值
+        setSwipeBackEnable(false);//默认设置了不可侧滑返回
     }
 
     /**
