@@ -9,6 +9,7 @@
         style="@style/home_list_margin_view_style">
 
         <ImageView
+            android:id="@+id/home_me_fragment_my_head_sculpture"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginStart="14dp"
@@ -23,6 +24,7 @@
             android:gravity="center_vertical">
 
             <TextView
+                android:id="@+id/home_me_fragment_my_nick_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="符才锦吃..."
@@ -30,6 +32,7 @@
                 android:textColor="@color/colorTextDarkGray"/>
 
             <TextView
+                android:id="@+id/home_me_fragment_my_wechat_id"
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -335,4 +335,9 @@
         <item name="android:clickable">true</item>
     </style>
 
+    <!--侧滑返回SwipeBackLayout要求要添加下面的item-->
+    <style name="SwipeBackTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
 </resources>

@@ -22,7 +22,7 @@
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/SwipeBackTheme">
 
         <!-- 取消标题栏 ↑ -->
         <activity android:name=".activity.SplashActivity">

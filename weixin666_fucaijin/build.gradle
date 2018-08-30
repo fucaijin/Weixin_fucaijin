@@ -28,5 +28,6 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.0.0-beta1'
     implementation 'com.android.support:recyclerview-v7:26.0.0-beta1'
     implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
+    implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
     testImplementation 'junit:junit:4.12'
 }
