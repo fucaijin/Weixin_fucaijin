@@ -48,6 +48,7 @@ public class ChatActivity extends BaseActivity implements TextWatcher, View.OnFo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         initUI();
+        setSwipeBackEnable(true);//开启可以侧滑返回
     }
 
     private void initUI() {
@@ -61,16 +62,16 @@ public class ChatActivity extends BaseActivity implements TextWatcher, View.OnFo
      * 初始化底部可展开/收起的更多功能栏
      */
     private void initMoreFunctionBarUi() {
-        moreFunctionRootRl = findViewById(R.id.chat_activity_more_function_root_rl);
+        moreFunctionRootRl = (RelativeLayout) findViewById(R.id.chat_activity_more_function_root_rl);
 
 //        底下展开的更多功能的页面
-        ViewPager moreFunctionPager = findViewById(R.id.chat_activity_more_function_view_pager);
+        ViewPager moreFunctionPager = (ViewPager) findViewById(R.id.chat_activity_more_function_view_pager);
         moreFunctionPager.setAdapter(new MoreFunctionPagerAdapter(getSupportFragmentManager()));
         moreFunctionPager.addOnPageChangeListener(this);
 
 //        最底部两个指示器点
-        navigationOne = findViewById(R.id.chat_activity_more_function_navigation_one);
-        navigationTwo = findViewById(R.id.chat_activity_more_function_navigation_two);
+        navigationOne = (ImageView) findViewById(R.id.chat_activity_more_function_navigation_one);
+        navigationTwo = (ImageView) findViewById(R.id.chat_activity_more_function_navigation_two);
     }
 
     /**
@@ -78,21 +79,21 @@ public class ChatActivity extends BaseActivity implements TextWatcher, View.OnFo
      */
     private void initBottomBarUi() {
 //        文字/语音 输入按钮
-        keyBoardInputBtnIv = findViewById(R.id.chat_activity_use_key_board_input_iv);
-        voiceInputBtnIv = findViewById(R.id.chat_activity_use_voice_input_iv);
+        keyBoardInputBtnIv = (ImageView) findViewById(R.id.chat_activity_use_key_board_input_iv);
+        voiceInputBtnIv = (ImageView) findViewById(R.id.chat_activity_use_voice_input_iv);
         keyBoardInputBtnIv.setOnClickListener(this);
         voiceInputBtnIv.setOnClickListener(this);
 
 //        文字输入框
-        messageEtRootRl = findViewById(R.id.chat_activity_use_key_board_input_et_rl);
-        messageEt = findViewById(R.id.chat_activity_message_input_et);
+        messageEtRootRl = (RelativeLayout) findViewById(R.id.chat_activity_use_key_board_input_et_rl);
+        messageEt = (EditText) findViewById(R.id.chat_activity_message_input_et);
         messageEt.addTextChangedListener(this);
         messageEt.setOnFocusChangeListener(this);
-        messageEtDivider = findViewById(R.id.chat_activity_message_input_et_divider);
+        messageEtDivider = (ImageView) findViewById(R.id.chat_activity_message_input_et_divider);
 
 
 //        语音输入按钮，及长按事件的监听
-        voiceInputBtn = findViewById(R.id.chat_activity_use_voice_input_bt);
+        voiceInputBtn = (Button) findViewById(R.id.chat_activity_use_voice_input_bt);
         voiceInputBtn.setLongClickable(true);
         voiceInputBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -102,8 +103,8 @@ public class ChatActivity extends BaseActivity implements TextWatcher, View.OnFo
         });
 
 //        发送消息/更多功能 按钮
-        sendMessageBtn = findViewById(R.id.chat_activity_send_message_btn);
-        moreFunctionBtn = findViewById(R.id.chat_activity_more_function_iv_btn);
+        sendMessageBtn = (Button) findViewById(R.id.chat_activity_send_message_btn);
+        moreFunctionBtn = (ImageView) findViewById(R.id.chat_activity_more_function_iv_btn);
         moreFunctionBtn.setOnClickListener(this);
 
 
@@ -113,16 +114,16 @@ public class ChatActivity extends BaseActivity implements TextWatcher, View.OnFo
      * 中间的聊天内容的ListView的初始化
      */
     private void initCenterUi() {
-        messageContent = findViewById(R.id.chat_activity_message_content_lv);
+        messageContent = (ListView) findViewById(R.id.chat_activity_message_content_lv);
     }
 
     /**
      * 顶部的标题栏的控件的初始化
      */
     private void initTopBarUi() {
-        finishChat = findViewById(R.id.chat_activity_top_bar_back_btn_rl);
+        finishChat = (RelativeLayout) findViewById(R.id.chat_activity_top_bar_back_btn_rl);
         finishChat.setOnClickListener(this);
-        nickNameTitle = findViewById(R.id.chat_activity_top_bar_nick_name);
+        nickNameTitle = (TextView) findViewById(R.id.chat_activity_top_bar_nick_name);
         String nickName = getIntent().getStringExtra("nickName");
         nickNameTitle.setText(nickName);
     }

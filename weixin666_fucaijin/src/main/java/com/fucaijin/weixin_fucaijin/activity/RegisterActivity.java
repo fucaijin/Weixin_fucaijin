@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -28,6 +29,7 @@ import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
 import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
 import com.fucaijin.weixin_fucaijin.utils.Http;
+import com.fucaijin.weixin_fucaijin.utils.JudgementUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,6 +67,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private String headPictureStr;
     private Uri headSculptureUri;
     private int EXCUSE_CODE = 0;
+    private Bitmap customHeadSculptureBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,17 +77,17 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initUI() {
-        RelativeLayout registerRlBtBack = findViewById(R.id.register_rl_bt_back);
-        registerEtNickName = findViewById(R.id.register_et_nick_name);
-        registerIbSelectHeadSculpture = findViewById(R.id.register_ib_select_head_sculpture);
-        LinearLayout registerLlArea = findViewById(R.id.register_ll_area);
-        registerEtPhone = findViewById(R.id.register_et_phone);
-        registerEtPassword = findViewById(R.id.register_et_password);
-        registerIvPasswordVisibilityMode = findViewById(R.id.register_iv_password_visibility_mode);
-        registerBtRegister = findViewById(R.id.register_bt_register);
-        registerNicknameDivider = findViewById(R.id.register_nickname_divider);
-        registerPhoneDivider = findViewById(R.id.register_phone_divider);
-        registerPasswordDivider = findViewById(R.id.register_password_divider);
+        RelativeLayout registerRlBtBack = (RelativeLayout) findViewById(R.id.register_rl_bt_back);
+        registerEtNickName = (EditText) findViewById(R.id.register_et_nick_name);
+        registerIbSelectHeadSculpture = (ImageButton) findViewById(R.id.register_ib_select_head_sculpture);
+        LinearLayout registerLlArea = (LinearLayout) findViewById(R.id.register_ll_area);
+        registerEtPhone = (EditText) findViewById(R.id.register_et_phone);
+        registerEtPassword = (EditText) findViewById(R.id.register_et_password);
+        registerIvPasswordVisibilityMode = (ImageView) findViewById(R.id.register_iv_password_visibility_mode);
+        registerBtRegister = (Button) findViewById(R.id.register_bt_register);
+        registerNicknameDivider = (ImageView) findViewById(R.id.register_nickname_divider);
+        registerPhoneDivider = (ImageView) findViewById(R.id.register_phone_divider);
+        registerPasswordDivider = (ImageView) findViewById(R.id.register_password_divider);
 
         registerRlBtBack.setOnClickListener(this);
         registerIbSelectHeadSculpture.setOnClickListener(this);
@@ -110,7 +113,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
      * 设置注册页面底部的协议部分文字添加链接，可以直接转跳到浏览器打开页面
      */
     private void agreementTextBindUrl() {
-        TextView tv_agreement = findViewById(R.id.register_tv_agreement);
+        TextView tv_agreement = (TextView) findViewById(R.id.register_tv_agreement);
 //        拼接html = （指定颜色）普通文字 + (指定颜色)链接文字
 //        拼接html，生成带链接的TextView
         StringBuilder stringBuilder = new StringBuilder();
@@ -169,6 +172,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 String passwordStr = registerEtPassword.getText().toString().trim();
                 final String passwordMd5 = ConvertUtils.string2md5(passwordStr);
 
+//                如果手机号位数不够，或者含有非数字
+                if(phoneStr.length() != 11 || !JudgementUtils.isNumeric(phoneStr)){
+                    Toast.makeText(mContext, "手机号码不正确", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 //                如果有头像，就注册。姓名、手机、密码等之前已经检查，以上项目都填了，注册按钮才可使用，不然就是灰色的
                 if (headPictureStr != null) {
                     boolean registerSuccess = requestRegister(nickNameStr, phoneStr, passwordMd5, headPictureStr);
@@ -207,7 +216,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         registerInfoMap.put("headPicture", headPictureStr);
 
         HashMap resultHashMap = Http.postServer(HTTP_REQUEST_TYPE_CODE_REGISTER, registerInfoMap);
-        postResponseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
 
 //        请求结束后结果的处理
         if (resultHashMap != null) {
@@ -218,7 +226,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 String content = "";
                 try {
                     content = (String) jsonObject.get("content");
-                    EXCUSE_CODE = (int) jsonObject.get("excuseCode");
+                    EXCUSE_CODE = (int) jsonObject.get("code");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -227,17 +235,25 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     case HTTP_RESPONSE_TYPE_CODE_REGISTER_SUCCESS:
                         //注册成功
                         Toast.makeText(mContext, content, Toast.LENGTH_SHORT).show();
+                        postResponseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
+//                        将头像图片保存到本地，在打开主页面时候会用到
+                        String savePath = Environment.getExternalStorageDirectory().getPath() + "/weixin_fucaijin/image/head_sculpture/" + phone + ".png";
+                        if(customHeadSculptureBitmap!=null){
+                           ConvertUtils.saveBitmap(savePath,customHeadSculptureBitmap);
+                        }
                         return true;
                     case HTTP_RESPONSE_TYPE_CODE_REGISTER_PHONE_REPEAT:
 //                    TODO 打开号码已注册界面，并根据返回来的头像，昵称显示出来
                         //该手机号码已注册
                         Toast.makeText(mContext, content, Toast.LENGTH_SHORT).show();
+                        postResponseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
                         return false;
                 }
             } else {
                 Toast.makeText(mContext, "注册失败，网络请求失败，responseCode = " + responseCode, Toast.LENGTH_SHORT).show();
             }
         }
+
         return false;
     }
 
@@ -328,7 +344,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         } else if (requestCode == PHOTO_REQUEST_CUT) {
             // 从剪切图片返回的数据
             if (data != null) {
-                Bitmap customHeadSculptureBitmap = data.getParcelableExtra("data");
+                customHeadSculptureBitmap = data.getParcelableExtra("data");
                 registerIbSelectHeadSculpture.setImageBitmap(customHeadSculptureBitmap);
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();//将Bitmap转成Byte[]

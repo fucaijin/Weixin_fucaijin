@@ -56,22 +56,22 @@ public class PhoneLoginActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initUi() {
-        ImageView finishIv = findViewById(R.id.iv_phone_login_finish);
+        ImageView finishIv = (ImageView) findViewById(R.id.iv_phone_login_finish);
         finishIv.setOnClickListener(this);
 
-        phoneTv = findViewById(R.id.login_phone_login_phone);
-        phoneLoginBtn = findViewById(R.id.login_btn_phone_login);
+        phoneTv = (TextView) findViewById(R.id.login_phone_login_phone);
+        phoneLoginBtn = (Button) findViewById(R.id.login_btn_phone_login);
         phoneLoginBtn.setOnClickListener(this);
 
-        passwordEt = findViewById(R.id.et_phone_login_password);
+        passwordEt = (EditText) findViewById(R.id.et_phone_login_password);
         passwordEt.addTextChangedListener(this);
 
-        cleanPasswordIv = findViewById(R.id.iv_login_clean_phone_password);
+        cleanPasswordIv = (ImageView) findViewById(R.id.iv_login_clean_phone_password);
         cleanPasswordIv.setOnClickListener(this);
 
-        TextView loginTvTetBackPassword = findViewById(R.id.login_tv_get_back_password);
-        TextView loginTvEmergencyFreezing = findViewById(R.id.login_tv_emergency_freezing);
-        TextView loginTvSecurityCenter = findViewById(R.id.login_tv_security_center);
+        TextView loginTvTetBackPassword = (TextView) findViewById(R.id.login_tv_get_back_password);
+        TextView loginTvEmergencyFreezing = (TextView) findViewById(R.id.login_tv_emergency_freezing);
+        TextView loginTvSecurityCenter = (TextView) findViewById(R.id.login_tv_security_center);
 
         loginTvTetBackPassword.setOnClickListener(this);
         loginTvEmergencyFreezing.setOnClickListener(this);
@@ -141,6 +141,7 @@ public class PhoneLoginActivity extends BaseActivity implements View.OnClickList
                         WeixinApplication.setConfigString("password",passwordMd5);
 
                         Intent openHomeIntent = new Intent(this, HomeActivity.class);
+                        openHomeIntent.putExtra("phone",phone);//把手机号传到主页面，然后开启主页面的时候请求网络获取网络上的头像
                         openHomeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(openHomeIntent);
                         break;

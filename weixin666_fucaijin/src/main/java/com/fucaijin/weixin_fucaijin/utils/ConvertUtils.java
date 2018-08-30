@@ -14,6 +14,7 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -163,4 +164,31 @@ public class ConvertUtils {
         }
         return result;
     }
+
+    /**
+     * 保存bitmap到本地
+     * @param savePath 要保存图片的目标路径
+     * @param mBitmap 要保存图片的Bitmap
+     * @return 返回保存文件的绝对路径
+     */
+    public static String saveBitmap(String savePath, Bitmap mBitmap) {
+        File filePic;
+        try {
+            filePic = new File(savePath);
+            if (!filePic.exists()) {
+                filePic.getParentFile().mkdirs();
+                filePic.createNewFile();
+            }
+            FileOutputStream fos = new FileOutputStream(filePic);
+            mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return filePic.getAbsolutePath();
+    }
+
 }

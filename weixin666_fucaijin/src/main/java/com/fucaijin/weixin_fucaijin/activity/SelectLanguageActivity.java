@@ -28,6 +28,7 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_language);
         initUI();
+        setSwipeBackEnable(true);//开启可以侧滑返回
 
 //        根据配置文件中记录的选择的语言位置，在开启选择语言节目的时候自动选择选项
         int index = 0;
@@ -42,9 +43,9 @@ public class SelectLanguageActivity extends BaseActivity implements View.OnClick
     }
 
     private void initUI() {
-        RelativeLayout rl_bt_back = findViewById(R.id.register_rl_bt_back);
-        Button bt_save_select_language = findViewById(R.id.bt_save_select_language);
-        lv_selectLanguage = findViewById(R.id.lv_selectLanguage);
+        RelativeLayout rl_bt_back = (RelativeLayout) findViewById(R.id.register_rl_bt_back);
+        Button bt_save_select_language = (Button) findViewById(R.id.bt_save_select_language);
+        lv_selectLanguage = (ListView) findViewById(R.id.lv_selectLanguage);
 
         rl_bt_back.setOnClickListener(this);
         bt_save_select_language.setOnClickListener(this);

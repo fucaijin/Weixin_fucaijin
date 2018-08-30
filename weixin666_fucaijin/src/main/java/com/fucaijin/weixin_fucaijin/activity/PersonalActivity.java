@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,7 +15,7 @@ import com.github.promeg.pinyinhelper.Pinyin;
 
 import java.util.Random;
 
-public class PersonalActivity extends AppCompatActivity implements View.OnClickListener {
+public class PersonalActivity extends BaseActivity implements View.OnClickListener {
 
     private String nickName;
     private boolean isMan;
@@ -28,13 +27,14 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_personal);
         initData();
         initUi();
+        setSwipeBackEnable(true);//开启可以侧滑返回
     }
 
     private void initUi() {
-        RelativeLayout backBtnRl = findViewById(R.id.personal_activity_top_bar_back_btn_rl);
+        RelativeLayout backBtnRl = (RelativeLayout) findViewById(R.id.personal_activity_top_bar_back_btn_rl);
         backBtnRl.setOnClickListener(this);
 
-        TextView personalNickName = findViewById(R.id.personal_activity_nick_name);
+        TextView personalNickName = (TextView) findViewById(R.id.personal_activity_nick_name);
         personalNickName.setText(nickName);
 //        随机设置性别(图像)图像
         int sexImageSize = ConvertUtils.dp2px(this, 14);
@@ -47,10 +47,10 @@ public class PersonalActivity extends AppCompatActivity implements View.OnClickL
         drawable.setBounds(0, 0, sexImageSize,sexImageSize);
         personalNickName.setCompoundDrawables(null, null, drawable,null);
 
-        ImageView personalHeadSulptureIv  = findViewById(R.id.personal_activity_head_sulpture);
+        ImageView personalHeadSulptureIv  = (ImageView) findViewById(R.id.personal_activity_head_sulpture);
         personalHeadSulptureIv.setImageBitmap(headSculptureBitmap);
 
-        TextView wechatIdTv = findViewById(R.id.personal_activity_wechat_id);
+        TextView wechatIdTv = (TextView) findViewById(R.id.personal_activity_wechat_id);
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("微信号:");

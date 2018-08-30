@@ -3,7 +3,6 @@ package com.fucaijin.weixin_fucaijin.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.utils.Http;
 
-public class SearchUserDetailInfoActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchUserDetailInfoActivity extends BaseActivity implements View.OnClickListener {
 
     private String nickName;
     private String phone;
@@ -31,6 +30,7 @@ public class SearchUserDetailInfoActivity extends AppCompatActivity implements V
         initUi();
         initData();
         showUi();
+        setSwipeBackEnable(true);//开启可以侧滑返回
     }
 
     private void showUi() {
@@ -57,9 +57,9 @@ public class SearchUserDetailInfoActivity extends AppCompatActivity implements V
     private void initUi() {
         backBtnRl = (RelativeLayout) findViewById(R.id.search_user_detail_info_activity_top_bar_back_btn_rl);
         backBtnRl.setOnClickListener(this);
-        headSculptureIv = findViewById(R.id.search_user_detail_info_activity_head_sculpture_iv);
-        nickNameTv = findViewById(R.id.search_user_detail_info_activity_nick_name);
-        personalitySignatureTv = findViewById(R.id.search_user_detail_info_activity_personality_signature);
+        headSculptureIv = (ImageView) findViewById(R.id.search_user_detail_info_activity_head_sculpture_iv);
+        nickNameTv = (TextView) findViewById(R.id.search_user_detail_info_activity_nick_name);
+        personalitySignatureTv = (TextView) findViewById(R.id.search_user_detail_info_activity_personality_signature);
     }
 
     @Override

@@ -44,10 +44,17 @@ import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
 import com.fucaijin.weixin_fucaijin.utils.Http;
 import com.fucaijin.weixin_fucaijin.utils.JudgementUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.fucaijin.weixin_fucaijin.activity.SearchFriendActivity.HTTP_GET_URL_SEARCH_USER_INFO;
+import static com.fucaijin.weixin_fucaijin.activity.SearchFriendActivity.HTTP_REQUEST_TYPE_CODE_GET_SEARCH_FRIEND_INFO;
+import static com.fucaijin.weixin_fucaijin.activity.SearchFriendActivity.HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_FOUND;
+import static com.fucaijin.weixin_fucaijin.activity.SearchFriendActivity.INFO_TYPE_PHONE;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.HTTP_HOST_URL;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 import static com.fucaijin.weixin_fucaijin.utils.Http.postResponseHashMap;
@@ -104,6 +111,8 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private boolean isHomeSearchPageOpened;
     private LinearLayout searchAppointContentRoot;
     private EditText searchPageInputEt;
+    private String nickName;
+    private HomeMeFragment homeMeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +120,62 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         setContentView(R.layout.activity_home);
         initUI();
         updateData();
+    }
+
+    /**
+     * 获取服务器上的我的信息，准备显示。如果获取成功，就用最新数据，
+     * 如果获取失败就用xml配置文件里的信息。
+     */
+    private void initData() {
+        getMyInfo();
+    }
+
+    /**
+     * 获取我的信息
+     */
+    private void getMyInfo() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int infoType = INFO_TYPE_PHONE;
+                HashMap info = new HashMap();
+                info.put("info_type", infoType);
+                String phone = getIntent().getStringExtra("phone");
+                info.put("search_info", phone);
+                info.put("url", HTTP_GET_URL_SEARCH_USER_INFO);
+                HashMap responseHashMap = Http.getServer(HTTP_REQUEST_TYPE_CODE_GET_SEARCH_FRIEND_INFO, info);
+
+                if (responseHashMap != null) {
+//            获取响应码，以及json对象
+                    int responseCode = (int) responseHashMap.get("responseCode");
+                    JSONObject jsonObject = (JSONObject) responseHashMap.get("jsonObject");
+                    Log.v("json", jsonObject.toString());
+
+//            如果相应成功，就获取json里面的数据
+                    if (responseCode == 200) {
+                        try {
+                            int resultCode = (int) jsonObject.get("code");
+                            switch (resultCode) {
+                                case HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_FOUND:
+//                            查询成功
+                                    JSONObject jContent = (JSONObject) jsonObject.get("content");
+                                    nickName = (String) jContent.get("nick_name");
+                                    String area = (String) jContent.get("area");
+                                    String personalitySignature = (String) jContent.get("personality_signature");
+                                    String sex = (String) jContent.get("sex");
+                                    break;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+//                        网络请求失败，使用本地的信息，TODO 需要定时进行请求，等请求到信息之后要替换当前的本地的旧信息
+                        nickName = WeixinApplication.getConfig("nike_name");
+                    }
+                    homeMeFragment.setMyNickName(nickName);
+                }
+            }
+        }).start();
     }
 
     private void updateData() {
@@ -125,7 +190,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             WeixinApplication.setConfigBoolean("is_first_run", false);
             WeixinApplication.setConfigBoolean("is_logined", true);
         } else {
-//            TODO 如果不是首次登录，就请求未接收到的数据即可
+//            TODO 如果不是首次登录，就请求未接收到的数据/消息即可
 
         }
 
@@ -137,7 +202,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     /**
-     * 请求之前未收到的消息
+     * 请求登录之前未收到的消息
      */
     private void updateUnReceiveMsg() {
         //TODO 未完成 请求之前未收到的消息
@@ -155,8 +220,6 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
         HashMap hashMap = Http.postServer(HTTP_REQUEST_TYPE_CODE_GET_FRIENDS_INFO, getFriendsInfoMap);
         postResponseHashMap = null;//得到返回的数据后，清空Http类的请求数据，以便判断下次是否请求到数据
-
-
     }
 
     /**
@@ -164,7 +227,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      */
     private void initUI() {
 //        获取主页面的根布局
-        homeActivityRootLl = findViewById(R.id.activity_home);
+        homeActivityRootLl = (LinearLayout) findViewById(R.id.activity_home);
 
 //        获取标题栏,以及标题栏的文字，搜索按钮，新建任务按钮
         initHomeTopTabUi();
@@ -184,7 +247,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      * （包含了往ViewPager填充四个Fragment，并且给ViewPager设置滑动监听、设置指定的默认页面）
      */
     private void initCenterViewPagerUi() {
-        mViewPager = findViewById(R.id.home_view_pager);
+        mViewPager = (ViewPager) findViewById(R.id.home_view_pager);
 
         Bundle foundFragmentBundle = new Bundle();
         foundFragmentBundle.putIntArray("foundIconArray", foundIconArray);
@@ -195,7 +258,9 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         fragmentList.add(new HomeWechatFragment());
         fragmentList.add(homeAddressListFragment);
         fragmentList.add(HomeFoundPageFragment.getInstance(foundIconArray, foundTextArray));
-        fragmentList.add(new HomeMeFragment());
+        homeMeFragment = (HomeMeFragment) HomeMeFragment.getInstance(getIntent().getStringExtra("phone"), nickName);
+        fragmentList.add(homeMeFragment);
+
         mPagerAdapter = new HomeFragmentAdapter(getSupportFragmentManager(), fragmentList);
 
         mViewPager.setAdapter(mPagerAdapter);
@@ -210,10 +275,10 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      * 然后获取每个按钮的三张不同状态的图片，以及两种不同状态的文字）
      */
     private void initBottomTabButtonUi() {
-        LinearLayout homeBottomTabLlWechat = findViewById(R.id.home_bottom_tab_ll_wechat);
-        LinearLayout homeBottomTabLlAddressList = findViewById(R.id.home_bottom_tab_ll_address_list);
-        LinearLayout homeBottomTabLlFound = findViewById(R.id.home_bottom_tab_ll_found);
-        LinearLayout homeBottomTabLlMe = findViewById(R.id.home_bottom_tab_ll_me);
+        LinearLayout homeBottomTabLlWechat = (LinearLayout) findViewById(R.id.home_bottom_tab_ll_wechat);
+        LinearLayout homeBottomTabLlAddressList = (LinearLayout) findViewById(R.id.home_bottom_tab_ll_address_list);
+        LinearLayout homeBottomTabLlFound = (LinearLayout) findViewById(R.id.home_bottom_tab_ll_found);
+        LinearLayout homeBottomTabLlMe = (LinearLayout) findViewById(R.id.home_bottom_tab_ll_me);
 
         homeBottomTabLlWechat.setOnClickListener(this);
         homeBottomTabLlAddressList.setOnClickListener(this);
@@ -221,34 +286,34 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         homeBottomTabLlMe.setOnClickListener(this);
 
 //        获取下方导航栏的图片(每张图片包含点击和正常两张的叠加)
-        homeBottomTabIvWechatNormal = findViewById(R.id.home_bottom_tab_iv_wechat_normal);
-        homeBottomTabIvWechatMiddle = findViewById(R.id.home_bottom_tab_iv_wechat_middle);
-        homeBottomTabIvWechatPressed = findViewById(R.id.home_bottom_tab_iv_wechat_pressed);
+        homeBottomTabIvWechatNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_wechat_normal);
+        homeBottomTabIvWechatMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_wechat_middle);
+        homeBottomTabIvWechatPressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_wechat_pressed);
 
-        homeBottomTabIvAddressListNormal = findViewById(R.id.home_bottom_tab_iv_address_list_normal);
-        homeBottomTabIvAddressListMiddle = findViewById(R.id.home_bottom_tab_iv_address_list_middle);
-        homeBottomTabIvAddressListPressed = findViewById(R.id.home_bottom_tab_iv_address_list_pressed);
+        homeBottomTabIvAddressListNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_address_list_normal);
+        homeBottomTabIvAddressListMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_address_list_middle);
+        homeBottomTabIvAddressListPressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_address_list_pressed);
 
-        homeBottomTabIvFoundNormal = findViewById(R.id.home_bottom_tab_iv_found_normal);
-        homeBottomTabIvFoundMiddle = findViewById(R.id.home_bottom_tab_iv_found_middle);
-        homeBottomTabIvFoundPressed = findViewById(R.id.home_bottom_tab_iv_found_pressed);
+        homeBottomTabIvFoundNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_found_normal);
+        homeBottomTabIvFoundMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_found_middle);
+        homeBottomTabIvFoundPressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_found_pressed);
 
-        homeBottomTabIvMeNormal = findViewById(R.id.home_bottom_tab_iv_me_normal);
-        homeBottomTabIvMeMiddle = findViewById(R.id.home_bottom_tab_iv_me_middle);
-        homeBottomTabIvMePressed = findViewById(R.id.home_bottom_tab_iv_me_pressed);
+        homeBottomTabIvMeNormal = (ImageView) findViewById(R.id.home_bottom_tab_iv_me_normal);
+        homeBottomTabIvMeMiddle = (ImageView) findViewById(R.id.home_bottom_tab_iv_me_middle);
+        homeBottomTabIvMePressed = (ImageView) findViewById(R.id.home_bottom_tab_iv_me_pressed);
 
 //        获取下方导航栏的文字(每段文字包含点击和正常两张的叠加)
-        homeBottomTabTvWechatNormal = findViewById(R.id.home_bottom_tab_tv_wechat_normal);
-        homeBottomTabTvWechatPressed = findViewById(R.id.home_bottom_tab_tv_wechat_pressed);
+        homeBottomTabTvWechatNormal = (TextView) findViewById(R.id.home_bottom_tab_tv_wechat_normal);
+        homeBottomTabTvWechatPressed = (TextView) findViewById(R.id.home_bottom_tab_tv_wechat_pressed);
 
-        homeBottomTabTvAddressListNormal = findViewById(R.id.home_bottom_tab_tv_address_list_normal);
-        homeBottomTabTvAddressListPressed = findViewById(R.id.home_bottom_tab_tv_address_list_pressed);
+        homeBottomTabTvAddressListNormal = (TextView) findViewById(R.id.home_bottom_tab_tv_address_list_normal);
+        homeBottomTabTvAddressListPressed = (TextView) findViewById(R.id.home_bottom_tab_tv_address_list_pressed);
 
-        homeBottomTabTvFoundNormal = findViewById(R.id.home_bottom_tab_tv_found_normal);
-        homeBottomTabTvFoundPressed = findViewById(R.id.home_bottom_tab_tv_found_pressed);
+        homeBottomTabTvFoundNormal = (TextView) findViewById(R.id.home_bottom_tab_tv_found_normal);
+        homeBottomTabTvFoundPressed = (TextView) findViewById(R.id.home_bottom_tab_tv_found_pressed);
 
-        homeBottomTabTvMeNormal = findViewById(R.id.home_bottom_tab_tv_me_normal);
-        homeBottomTabTvMePressed = findViewById(R.id.home_bottom_tab_tv_me_pressed);
+        homeBottomTabTvMeNormal = (TextView) findViewById(R.id.home_bottom_tab_tv_me_normal);
+        homeBottomTabTvMePressed = (TextView) findViewById(R.id.home_bottom_tab_tv_me_pressed);
     }
 
     /**
@@ -258,13 +323,13 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      * 并为返回按钮、清空输入框按钮设置点击事件，给输入框添加内容变化监听事件）
      */
     private void initSearchPageUi() {
-        homeSearchPage = findViewById(R.id.home_search_page_ll);
-        searchAppointContentRoot = findViewById(R.id.search_appoint_content_root);
-        searchPageInputEt = findViewById(R.id.search_page_input_et);
-        RelativeLayout searchPageBack = findViewById(R.id.search_page_back_btn_rl);
+        homeSearchPage = (FrameLayout) findViewById(R.id.home_search_page_ll);
+        searchAppointContentRoot = (LinearLayout) findViewById(R.id.search_appoint_content_root);
+        searchPageInputEt = (EditText) findViewById(R.id.search_page_input_et);
+        RelativeLayout searchPageBack = (RelativeLayout) findViewById(R.id.search_page_back_btn_rl);
         searchPageBack.setOnClickListener(this);
-        final ImageView searchPageVoiceSearch = findViewById(R.id.search_page_voice_btn_iv);
-        final ImageView searchPageClearEditText = findViewById(R.id.search_page_clear_edit_text_btn_iv);
+        final ImageView searchPageVoiceSearch = (ImageView) findViewById(R.id.search_page_voice_btn_iv);
+        final ImageView searchPageClearEditText = (ImageView) findViewById(R.id.search_page_clear_edit_text_btn_iv);
         searchPageClearEditText.setOnClickListener(this);
 
 //        给输入框设置文本变化监听器
@@ -296,10 +361,10 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
      * 初始化顶部标题栏（顶部标题栏的根布局、标题、搜索按钮、新建任务按钮）
      */
     private void initHomeTopTabUi() {
-        homeTopTabRootRl = findViewById(R.id.home_top_tab_root_rl);
-        homeTopTabTitleTv = findViewById(R.id.home_top_tab_title_tv);
-        homeTopTabSearchIv = findViewById(R.id.home_top_tab_search_iv);
-        homeTopTabNewTaskIv = findViewById(R.id.home_top_tab_new_task_iv);
+        homeTopTabRootRl = (RelativeLayout) findViewById(R.id.home_top_tab_root_rl);
+        homeTopTabTitleTv = (TextView) findViewById(R.id.home_top_tab_title_tv);
+        homeTopTabSearchIv = (ImageView) findViewById(R.id.home_top_tab_search_iv);
+        homeTopTabNewTaskIv = (ImageView) findViewById(R.id.home_top_tab_new_task_iv);
 
 //        给搜索按钮设置点击和长按事件，给新任务按钮设置点击事件
         homeTopTabSearchIv.setOnClickListener(this);
@@ -393,6 +458,10 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             homeAddressListFragment.showIndexBar();
             isShowIndexBar = true;
         }
+
+        if(position == 3){
+            initData();
+        }
     }
 
     @Override
@@ -402,7 +471,6 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
     /**
      * 当前Activit的点击事件
-     *
      * @param view 当前的点击的View
      */
     @Override
@@ -570,7 +638,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 //                        帮助与反馈
 //                        此处用于测试网络，如果网络连接成功，就会返回服务器的信息
                         Toast.makeText(mContext, TestServer.testServer(), Toast.LENGTH_SHORT).show();
-                        Log.v("test","Test result = " + TestServer.testServer());
+                        postResponseHashMap = null;
                         break;
                 }
                 popupWindow.dismiss();
@@ -607,8 +675,9 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
     /**
      * 设置底部的导航按钮为选中状态
+     *
      * @param normalView  未选中状态的图标
-     * @param middleView 滑到一半时候的图标
+     * @param middleView  滑到一半时候的图标
      * @param pressedView 选中的图标
      * @param normalText  未选中的文字
      * @param pressedText 选中的文字

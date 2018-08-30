@@ -2,7 +2,6 @@ package com.fucaijin.weixin_fucaijin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -26,7 +25,7 @@ import java.util.HashMap;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.HTTP_HOST_URL;
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
 
-public class SearchFriendActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchFriendActivity extends BaseActivity implements View.OnClickListener {
 
     public static final int HTTP_REQUEST_TYPE_CODE_GET_SEARCH_FRIEND_INFO = 17;
     public static final String HTTP_GET_URL_SEARCH_USER_INFO = HTTP_HOST_URL + "search_user_info/";
@@ -37,7 +36,7 @@ public class SearchFriendActivity extends AppCompatActivity implements View.OnCl
     private EditText inputEt;
     private ImageView clearEtIv;
     private int INFO_TYPE_WEXIN_ID = 0;
-    private int INFO_TYPE_PHONE = 1;
+    public static int INFO_TYPE_PHONE = 1;
     private int INFO_TYPE_QQ_ID = 2;
     private LinearLayout itemLl;
     private LinearLayout notFindUserViewRootLl;
@@ -48,23 +47,24 @@ public class SearchFriendActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_friend);
         initUi();
+        setSwipeBackEnable(true);//开启可以侧滑返回
     }
 
     private void initUi() {
 //        获取Activity根控件、返回键、给返回键设置点击事件，获取输入框控件，输入框清除按钮，获取搜索条，获取搜索条内的可变文本控件
-        LinearLayout rootLl = findViewById(R.id.search_friend_root_ll);
+        LinearLayout rootLl = (LinearLayout) findViewById(R.id.search_friend_root_ll);
         rootLl.setOnClickListener(this);
-        RelativeLayout backBtnRl = findViewById(R.id.search_friend_activity_top_bar_back_btn_rl);
+        RelativeLayout backBtnRl = (RelativeLayout) findViewById(R.id.search_friend_activity_top_bar_back_btn_rl);
         backBtnRl.setOnClickListener(this);
-        inputEt = findViewById(R.id.search_friend_input_et);
-        clearEtIv = findViewById(R.id.search_friend_clear_input_iv);
+        inputEt = (EditText) findViewById(R.id.search_friend_input_et);
+        clearEtIv = (ImageView) findViewById(R.id.search_friend_clear_input_iv);
         clearEtIv.setOnClickListener(this);
-        itemLl = findViewById(R.id.search_friend_item_ll);
+        itemLl = (LinearLayout) findViewById(R.id.search_friend_item_ll);
         itemLl.setOnClickListener(this);
-        final TextView searchInfoTv = findViewById(R.id.search_friend_info);
+        final TextView searchInfoTv = (TextView) findViewById(R.id.search_friend_info);
 
-        notFindUserViewRootLl = findViewById(R.id.not_find_user_view_root_ll);
-        otherWaySearchTv = findViewById(R.id.other_way_search_green_tv);
+        notFindUserViewRootLl = (LinearLayout) findViewById(R.id.not_find_user_view_root_ll);
+        otherWaySearchTv = (TextView) findViewById(R.id.other_way_search_green_tv);
 
         inputEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -114,7 +114,6 @@ public class SearchFriendActivity extends AppCompatActivity implements View.OnCl
                 notFindUserViewRootLl.setVisibility(View.GONE);
                 break;
             case R.id.search_friend_item_ll:
-//                TODO 网络请求搜索用户信息，并返回，如果有返回，则显示在新的页面，如果没有返回则提示该用户不存在
                 getSearchFriendInfo(inputEt.getText().toString().trim());
                 break;
         }
@@ -164,12 +163,10 @@ public class SearchFriendActivity extends AppCompatActivity implements View.OnCl
                             String personalitySignature = (String) jContent.get("personality_signature");
                             String sex = (String) jContent.get("sex");
 
-//                            TODO 打开新的资料页面，把昵称，头像，签名，地区显示出来
                             showSearchUserInfo(nickName, phone, area, personalitySignature, sex);
                             break;
                         case HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_NOT_FOUND:
 //                            没有查到用户
-//                            TODO 显示该用户不存在
                             showSearchNoUser();
                             break;
                     }
@@ -195,7 +192,7 @@ public class SearchFriendActivity extends AppCompatActivity implements View.OnCl
      * 如果搜索到用户，就执行此方法，跳到用户信息页面
      *
      * @param nickName             从服务器获取到的昵称
-     * @param headSculpture        从服务器获取到的头像base64 String格式，需要按需转换成bitmap或drawable
+     * @param phone        从服务器获取到的头像base64 String格式，需要按需转换成bitmap或drawable
      * @param area                 从服务器获取到的区域
      * @param personalitySignature 从服务器获取到的个性签名
      * @param sex

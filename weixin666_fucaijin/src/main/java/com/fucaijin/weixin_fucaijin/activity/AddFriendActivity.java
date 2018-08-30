@@ -24,21 +24,22 @@ public class AddFriendActivity extends BaseActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
+        setSwipeBackEnable(true);//开启可以侧滑返回
         initUi();
     }
 
     private void initUi() {
-        RelativeLayout backBtnRl= findViewById(R.id.add_friend_activity_top_bar_back_btn_rl);
+        RelativeLayout backBtnRl= (RelativeLayout) findViewById(R.id.add_friend_activity_top_bar_back_btn_rl);
         backBtnRl.setOnClickListener(this);
-        RelativeLayout searchFriendRl = findViewById(R.id.add_friend_search_friend_rl);
+        RelativeLayout searchFriendRl = (RelativeLayout) findViewById(R.id.add_friend_search_friend_rl);
         searchFriendRl.setOnClickListener(this);
 
-        myIdTv = findViewById(R.id.add_friend_myself_id);
+        myIdTv = (TextView) findViewById(R.id.add_friend_myself_id);
         Drawable microQrCodeDrawable = ContextCompat.getDrawable(mContext, R.drawable.me_frag_item_qr_code_micro);
         microQrCodeDrawable.setBounds(0,0, ConvertUtils.dp2px(mContext, 18), ConvertUtils.dp2px(mContext, 18));
         myIdTv.setCompoundDrawables(null, null, microQrCodeDrawable, null);
 
-        ListView moreFuncLv = findViewById(R.id.add_friend_more_function_lv);
+        ListView moreFuncLv = (ListView) findViewById(R.id.add_friend_more_function_lv);
         int[] moreFuncImage = {R.drawable.add_friend_radar_add_friend,
                 R.drawable.address_list_group_chat,
                 R.drawable.add_friend_activity_scan,

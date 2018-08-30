@@ -59,4 +59,14 @@ public class JudgementUtils {
         Matcher matcher = pattern.matcher(str);
         return matcher.find();
     }
+
+    /**
+     * 判断字符串是否是一串数字
+     * @param str 要判断的字符串
+     * @return 返回判断结果，如果是字符串就返回ture
+     */
+    public static boolean isNumeric(String str){
+        Pattern pattern = Pattern.compile("[0-9]*");
+        return pattern.matcher(str).matches();
+    }
 }

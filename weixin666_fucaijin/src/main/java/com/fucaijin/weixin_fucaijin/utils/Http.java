@@ -321,7 +321,6 @@ public class Http {
                         JSONObject jsonObject = new JSONObject(responseContent);
                         //将接收到的消息装到hashMap中
                         getResponseHashMap.put("jsonObject", jsonObject);
-                        Log.v("json in Http","jsonObject" + jsonObject);
 
                         //关闭流数据 节约内存消耗
                         is.close();
