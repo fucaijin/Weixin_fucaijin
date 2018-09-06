@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ll_base_root_style"
+    tools:context="com.fucaijin.weixin_fucaijin.activity.SelectLanguageActivity">
+
+    <!--顶部标题栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/colorTabTopDarkGray">
+
+        <!--回退/关闭按钮-->
+        <RelativeLayout
+            android:id="@+id/btn_rl_verification_application_back"
+            style="@style/rl_top_bar_close_back">
+
+            <!--图片-->
+            <ImageView
+                style="@style/iv_top_bar_go_back"
+                android:src="@drawable/img_back"/>
+
+            <!--深灰色竖直分割线-->
+            <ImageView
+                style="@style/top_bar_divider"/>
+
+        </RelativeLayout>
+
+        <!--标题-->
+        <TextView
+            android:text="@string/verification_application"
+            android:layout_toEndOf="@id/btn_rl_verification_application_back"
+            style="@style/top_bar_text"/>
+
+        <!--发送好友验证申请按钮-->
+        <Button
+            android:id="@+id/bt_send_verification_application"
+            android:text="@string/send_message"
+            style="@style/top_bar_green_small_button"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:background="@color/colorWhite"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="13dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/you_need_send_verification_application_and_wait_other_side_agree"
+            android:textColor="@color/colorHomeGrayText" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:theme="@style/GreenEditText"
+            android:textCursorDrawable="@drawable/edit_text_gray_cursor_img"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="123dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="12dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="13dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/you_need_send_verification_application_and_wait_other_side_agree"
+            android:textColor="@color/colorHomeGrayText"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="12dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="13dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/set_friend_moment_authority"
+            android:textColor="@color/colorHomeGrayText"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

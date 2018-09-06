@@ -158,12 +158,11 @@ public class SearchFriendActivity extends BaseActivity implements View.OnClickLi
                             JSONObject jContent = (JSONObject) jsonObject.get("content");
 
                             String nickName = (String) jContent.get("nick_name");
-                            String phone = (String) jContent.get("phone");
                             String area = (String) jContent.get("area");
                             String personalitySignature = (String) jContent.get("personality_signature");
                             String sex = (String) jContent.get("sex");
 
-                            showSearchUserInfo(nickName, phone, area, personalitySignature, sex);
+                            showSearchUserInfo(nickName, searchInfo, area, personalitySignature, sex);
                             break;
                         case HTTP_RESPONSE_TYPE_CODE_SEARCH_USER_NOT_FOUND:
 //                            没有查到用户

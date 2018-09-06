@@ -188,6 +188,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/bt_ask_for_add_user"
         style="@style/bt_green"
         android:layout_width="match_parent"
         android:text="@string/add_to_address_list"

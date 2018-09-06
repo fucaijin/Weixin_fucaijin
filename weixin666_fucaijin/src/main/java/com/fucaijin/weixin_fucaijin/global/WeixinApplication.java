@@ -18,6 +18,7 @@ import java.util.Random;
 
 public class WeixinApplication extends Application {
 
+    public static final int TENCENT_IM_SDK_APP_ID = 1400116236;
     public static Context mContext;
     private static Handler mHandler;
     private static int mainThreadId;

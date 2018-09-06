@@ -258,6 +258,7 @@
 
     <Button
         style="@style/bt_green"
+        android:id="@+id/btn_personal_activity_send_message"
         android:layout_width="match_parent"
         android:text="发消息"
         android:layout_marginStart="14dp"

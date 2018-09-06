@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private ImageView login_iv_password_editor_divider;
     private Button login_bt_next_step;
     private Button login_bt_login;
-    private String urlLogin = "http://192.168.1.105:8000/login/";//TODO 此域名未完成
+    private String urlLogin = "http://192.168.1.105:8000/TencentIm/";//TODO 此域名未完成
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

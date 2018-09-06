@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -60,6 +61,8 @@ public class SearchUserDetailInfoActivity extends BaseActivity implements View.O
         headSculptureIv = (ImageView) findViewById(R.id.search_user_detail_info_activity_head_sculpture_iv);
         nickNameTv = (TextView) findViewById(R.id.search_user_detail_info_activity_nick_name);
         personalitySignatureTv = (TextView) findViewById(R.id.search_user_detail_info_activity_personality_signature);
+        Button askForAddUserBtn= (Button) findViewById(R.id.bt_ask_for_add_user);
+        askForAddUserBtn.setOnClickListener(this);
     }
 
     @Override
@@ -67,6 +70,11 @@ public class SearchUserDetailInfoActivity extends BaseActivity implements View.O
         switch (view.getId()){
             case R.id.search_user_detail_info_activity_top_bar_back_btn_rl:
                 finish();
+                break;
+            case R.id.bt_ask_for_add_user:
+                Intent verificationApplicationActivityIntent = new Intent(this, VerificationApplicationActivity.class);
+                verificationApplicationActivityIntent.putExtra("phone",phone);
+                startActivity(verificationApplicationActivityIntent);
                 break;
         }
     }

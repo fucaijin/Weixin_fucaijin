@@ -66,4 +66,7 @@
     <string name="add_friend">添加朋友</string>
     <string name="add_to_address_list">添加到通讯录</string>
     <string name="search">搜索</string>
+    <string name="verification_application">验证申请</string>
+    <string name="you_need_send_verification_application_and_wait_other_side_agree">你需要发送验证申请，等对方通过</string>
+    <string name="set_friend_moment_authority">设置朋友圈权限</string>
 </resources>

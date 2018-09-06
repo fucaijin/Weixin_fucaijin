@@ -39,6 +39,7 @@ import com.fucaijin.weixin_fucaijin.fragment.HomeFoundPageFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeMeFragment;
 import com.fucaijin.weixin_fucaijin.fragment.HomeWechatFragment;
 import com.fucaijin.weixin_fucaijin.global.WeixinApplication;
+import com.fucaijin.weixin_fucaijin.tencent_im.TencentIm;
 import com.fucaijin.weixin_fucaijin.test.TestServer;
 import com.fucaijin.weixin_fucaijin.utils.ConvertUtils;
 import com.fucaijin.weixin_fucaijin.utils.Http;
@@ -120,6 +121,16 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         setContentView(R.layout.activity_home);
         initUI();
         updateData();
+        initTencentIm();
+    }
+
+    private void initTencentIm() {
+        TencentIm.init();//初始化腾讯im SDK
+        TencentIm.userConfig();//用户配置
+
+        String phone = getIntent().getStringExtra("phone");
+        String userSig = getIntent().getStringExtra("userSig");
+        TencentIm.login(phone,userSig);//登录
     }
 
     /**
@@ -196,6 +207,9 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
     }
 
+    /**
+     * 如果是刚安装，首次登录，则需要请求好友的信息、以及登录之前没收到的消息等
+     */
     private void firstTimeRequest() {
         requestFriendsInfo();//TODO 未完成 请求好友信息(头像，昵称，签名等)
         updateUnReceiveMsg();//TODO 未完成 请求之前未收到的消息
@@ -754,5 +768,11 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
                 break;
         }
         return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

@@ -340,4 +340,8 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <style name="GreenEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorLightGray</item>
+        <item name="colorControlActivated">@color/colorLineGreen</item>
+    </style>
 </resources>

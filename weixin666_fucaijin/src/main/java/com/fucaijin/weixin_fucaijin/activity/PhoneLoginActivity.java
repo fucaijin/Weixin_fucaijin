@@ -126,7 +126,8 @@ public class PhoneLoginActivity extends BaseActivity implements View.OnClickList
             JSONObject jsonObject = (JSONObject) hashMap.get("jsonObject");
             try {
                 int code = (int) jsonObject.get("code");
-                String content = (String) jsonObject.get("content");
+                JSONObject contentJson = jsonObject.getJSONObject("content");
+                String content = contentJson.getString("content");
                 switch (code){
                     case HTTP_RESPONSE_TYPE_CODE_LOGIN_PHONE_NOT_EXIST:
 //                        该手机号未注册
@@ -135,6 +136,7 @@ public class PhoneLoginActivity extends BaseActivity implements View.OnClickList
                         Toast.makeText(mContext, content, Toast.LENGTH_SHORT).show();
                         break;
                     case HTTP_RESPONSE_TYPE_CODE_LOGIN_SUCCESS:
+                        String usersig = contentJson.getString("usersig");
 //                        登录成功，保存信息到本地，不是首次登录，还有账户密码，以便下次可以直接登录
 //                        关闭之前的所有Activity,然后打开主页面
                         WeixinApplication.setConfigString("user_phone",phone);
@@ -142,6 +144,7 @@ public class PhoneLoginActivity extends BaseActivity implements View.OnClickList
 
                         Intent openHomeIntent = new Intent(this, HomeActivity.class);
                         openHomeIntent.putExtra("phone",phone);//把手机号传到主页面，然后开启主页面的时候请求网络获取网络上的头像
+                        openHomeIntent.putExtra("userSig",usersig);//把服务器传回来的usersig传到主页，用于登录腾讯Im
                         openHomeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(openHomeIntent);
                         break;

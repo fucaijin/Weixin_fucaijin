@@ -1,5 +1,6 @@
 package com.fucaijin.weixin_fucaijin.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +33,7 @@ import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
  */
 
 public class HomeAddressListFragment extends Fragment implements AdapterView.OnItemClickListener {
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -69,6 +71,7 @@ public class HomeAddressListFragment extends Fragment implements AdapterView.OnI
             super.handleMessage(msg);
         }
     };
+
     private QuickIndexBar quickIndexBar;
     private TextView currentBigLetterTv;
 

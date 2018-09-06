@@ -23,6 +23,7 @@ import com.fucaijin.weixin_fucaijin.R;
 import com.fucaijin.weixin_fucaijin.adapter.MoreFunctionPagerAdapter;
 
 import static com.fucaijin.weixin_fucaijin.global.WeixinApplication.mContext;
+import static com.fucaijin.weixin_fucaijin.tencent_im.TencentIm.sendMessage;
 
 public class ChatActivity extends BaseActivity implements TextWatcher, View.OnFocusChangeListener, View.OnClickListener, ViewPager.OnPageChangeListener {
 
@@ -225,13 +226,12 @@ public class ChatActivity extends BaseActivity implements TextWatcher, View.OnFo
 
     /**
      * 焦点变化的监听回调方法，此处根据焦点的变化来改变输入框下划线的颜色
-     *
      * @param view 当前获取焦点的View, 此处只给一个控件(消息输入框)设置了获取焦点监听，因此此处的View就是消息输入框
-     * @param b    是获得焦点还是失去焦点
+     * @param isFocus    是获得焦点还是失去焦点
      */
     @Override
-    public void onFocusChange(View view, boolean b) {
-        if (b) {
+    public void onFocusChange(View view, boolean isFocus) {
+        if (isFocus) {
 //            如果获得焦点则 1.输入框底部下划线变成绿色  2.如果底部更多功能栏已经展开，则闭合
             messageEtDivider.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorLineGreen));
             if(isMoreFunctionVisible){
@@ -320,8 +320,15 @@ public class ChatActivity extends BaseActivity implements TextWatcher, View.OnFo
                 } else {
                     //如果当前更多功能已经展开，则关闭即可
                     moreFunctionRootRl.setVisibility(View.GONE);
+
                 }
                 isMoreFunctionVisible = !isMoreFunctionVisible;
+                break;
+            case R.id.btn_personal_activity_send_message:
+//                按下发送消息按钮
+                String msg = messageEt.getText().toString().trim();
+                String id = "18510982669"; //TODO 此处要改成实际的手机号/微信号
+                sendMessage(msg,id);
                 break;
         }
     }
